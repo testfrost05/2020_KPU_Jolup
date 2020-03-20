@@ -1,0 +1,128 @@
+fileFormatVersion: 2
+guid: 311a2dc2682f14e4abe189c6216e3217
+timeCreated: 1479328904
+licenseType: Store
+ModelImporter:
+  serializedVersion: 19
+  fileIDToRecycleName:
+    100000: DMR_Body
+    100002: DMR_Bolt
+    100004: DMR_BoltRelease
+    100006: DMR_Bullet
+    100008: DMR_Handle
+    100010: DMR_MagFollow
+    100012: DMR_Maggazine
+    100014: DMR_MaggBullets
+    100016: DMR_MaggLach
+    100018: DMR_Rail
+    100020: DMR_Trigger
+    100022: //RootNode
+    400000: DMR_Body
+    400002: DMR_Bolt
+    400004: DMR_BoltRelease
+    400006: DMR_Bullet
+    400008: DMR_Handle
+    400010: DMR_MagFollow
+    400012: DMR_Maggazine
+    400014: DMR_MaggBullets
+    400016: DMR_MaggLach
+    400018: DMR_Rail
+    400020: DMR_Trigger
+    400022: //RootNode
+    2300000: DMR_Body
+    2300002: DMR_Bolt
+    2300004: DMR_BoltRelease
+    2300006: DMR_Bullet
+    2300008: DMR_Handle
+    2300010: DMR_MagFollow
+    2300012: DMR_Maggazine
+    2300014: DMR_MaggBullets
+    2300016: DMR_MaggLach
+    2300018: DMR_Rail
+    2300020: DMR_Trigger
+    3300000: DMR_Body
+    3300002: DMR_Bolt
+    3300004: DMR_BoltRelease
+    3300006: DMR_Bullet
+    3300008: DMR_Handle
+    3300010: DMR_MagFollow
+    3300012: DMR_Maggazine
+    3300014: DMR_MaggBullets
+    3300016: DMR_MaggLach
+    3300018: DMR_Rail
+    3300020: DMR_Trigger
+    4300000: DMR_Trigger
+    4300002: DMR_Body
+    4300004: DMR_BoltRelease
+    4300006: DMR_Maggazine
+    4300008: DMR_MaggBullets
+    4300010: DMR_MagFollow
+    4300012: DMR_Bullet
+    4300014: DMR_Bolt
+    4300016: DMR_Rail
+    4300018: DMR_MaggLach
+    4300020: DMR_Handle
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleRotations: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 0.022
+    meshCompression: 0
+    addColliders: 0
+    importBlendShapes: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    hasTranslationDoF: 0
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 0
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
