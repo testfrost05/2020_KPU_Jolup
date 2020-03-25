@@ -7,20 +7,20 @@ using System.Linq;
 public class FraggedController : MonoBehaviour
 {
     [Header("Fragments")]
-    public bool fragEnabled = true; //ÆÄÆíµéÀÌ ¶³¾îÁ® ³ª°¥¼öÀÖ´ÂÁö ¾ø´ÂÁö
-    public int forceMax = 250; //ÆÄÆíÀÌ ¶³¾îÁú‹š ÁÖ´Â ÃÖ´ë Èû			
-    public int forceMin = 50; //ÃÖ¼ÒÈû				
-    public float fragOffScale = 1.0f;					//¶³¾îÁ®³ª°£ ÆÄÆí ½ºÄÉÀÏ
-    public int rotateOnHit = 10; 					//´ë¹ÌÁö ¹Þ¾ÒÀ»‹š ·£´ýÀ¸·Î È¸ÀüÇÏ´Â Á¤µµ
+    public bool fragEnabled = true; //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ö´ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+    public int forceMax = 250; //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ö´ï¿½ ï¿½Ö´ï¿½ ï¿½ï¿½			
+    public int forceMin = 50; //ï¿½Ö¼ï¿½ï¿½ï¿½				
+    public float fragOffScale = 1.0f;					//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+    public int rotateOnHit = 10; 					//ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Þ¾ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ È¸ï¿½ï¿½ï¿½Ï´ï¿½ ï¿½ï¿½ï¿½ï¿½
     public float fragMass = 0.01f;
-    public float hitPointDecrease = .2f;            //°¢ ¸Þ½¬ÀÇ È÷Æ®Æ÷ÀÎÆ® Å©±â
-    public float limitFragmentSpeed = 25.0f;			//ÆÄÆí ³¯¶ó°¥ ¶§ ¼Óµµ Á¦ÇÑ
-    public bool fragAllOnDamage;                    //ºÎÀ§°¡ ´Ù ´ë¹ÌÁö ¹ÞÀ¸¸é ´Ù ºÎ¼û
+    public float hitPointDecrease = .2f;            //ï¿½ï¿½ ï¿½Þ½ï¿½ï¿½ï¿½ ï¿½ï¿½Æ®ï¿½ï¿½ï¿½ï¿½Æ® Å©ï¿½ï¿½
+    public float limitFragmentSpeed = 25.0f;			//ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½Óµï¿½ ï¿½ï¿½ï¿½ï¿½
+    public bool fragAllOnDamage;                    //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½Î¼ï¿½
 
 
     [Header("Collisions")]
-    public int collidefragMagnitude = 0; 				// Ãæµ¹½Ã ÆÄÆíµé Áøµ¿ (0 ÀÌ¸é ¾øÀ½, 5°¡ Àû´ç, 25 ÃÖ´ë)
-    public LayerMask collideMask;                   //·¹ÀÌ¾î¸¶½ºÅ©
+    public int collidefragMagnitude = 0; 				// ï¿½æµ¹ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ (0 ï¿½Ì¸ï¿½ ï¿½ï¿½ï¿½ï¿½, 5ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½, 25 ï¿½Ö´ï¿½)
+    public LayerMask collideMask;                   //ï¿½ï¿½ï¿½Ì¾î¸¶ï¿½ï¿½Å©
 
     [Header("Particles")]
     public Vector2 fragEmitMinMax = new Vector2(2.0f, 4.0f);
@@ -29,22 +29,22 @@ public class FraggedController : MonoBehaviour
     [Header("Connections")]
     public int stickyTop;
     public int stickyBottom;
-    public int connectedFragments = 3; 			//ÁÖÀ§°¡ ¾ø¾î¼­ ¾È¶³¾îÁö±â À§ÇÑ ÁÖÀ§ ÃÖ¼Ò ÆÄÆí¼ö
-    public float connectOverlapSphere = .5f; 		//OverlapSphere Å©±â ¼³Á¤
-    public LayerMask stickyMask = (LayerMask)1;             //·¹ÀÌ¾î¸¶½ºÅ© ¼³Á¤
+    public int connectedFragments = 3; 			//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½î¼­ ï¿½È¶ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ö¼ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½
+    public float connectOverlapSphere = .5f; 		//OverlapSphere Å©ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
+    public LayerMask stickyMask = (LayerMask)1;             //ï¿½ï¿½ï¿½Ì¾î¸¶ï¿½ï¿½Å© ï¿½ï¿½ï¿½ï¿½
 
     [Header("After Fragment")]
-    public LayerMask disableMask;					//´ë¹ÌÁö ¹ÞÀº ºÎºÐ ·¹ÀÌ¾î ¸¶½ºÅ©
-    public float disableDelay = 0.0f; 				//¾Èº¸ÀÌ´Â Á¤µµ
+    public LayerMask disableMask;					//ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Îºï¿½ ï¿½ï¿½ï¿½Ì¾ï¿½ ï¿½ï¿½ï¿½ï¿½Å©
+    public float disableDelay = 0.0f; 				//ï¿½Èºï¿½ï¿½Ì´ï¿½ ï¿½ï¿½ï¿½ï¿½
     public bool combineFrags = true;
     public int combineMeshesDelay = 3;
 
-    [HideInInspector] //ÀÎ½ºÆåÅÍÃ¢¿¡¼­ º¯¼ö ¼û±â±â
-    public Transform startMesh; 					//½ÃÀÛ ¸Þ½¬
+    [HideInInspector] //ï¿½Î½ï¿½ï¿½ï¿½ï¿½ï¿½Ã¢ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½
+    public Transform startMesh; 					//ï¿½ï¿½ï¿½ï¿½ ï¿½Þ½ï¿½
     [HideInInspector]
-    public ParticleSystem fragParticles; 			//ÆÄÆí ¶³¾îÁ® ³ª°¥ ¶§ ³ª¿À´Â ÆÄÆ¼Å¬
+    public ParticleSystem fragParticles; 			//ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Æ¼Å¬
     [HideInInspector]
-    public ParticleSystem dustParticles; 			//´ë¹ÌÁö ¹ÞÀ» ¶§¸¶´Ù ³ª¿À´Â ÆÄÆ¼Å¬
+    public ParticleSystem dustParticles; 			//ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Æ¼Å¬
     [HideInInspector]
     public int reCounter = 1;
     [HideInInspector]
@@ -58,7 +58,7 @@ public class FraggedController : MonoBehaviour
     public Material[] fragMaterials;
 
 
-    public void ResetFrags() //¸®¼Â ¿ÀºêÁ§Æ®
+    public void ResetFrags() //ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ®
     {
         if (startMesh != null)
         {
@@ -81,12 +81,12 @@ public class FraggedController : MonoBehaviour
 
     public void Start()
     {
-        fragParticles = transform.FindChild("Particles Fragment").GetComponent<ParticleSystem>();
+        fragParticles = transform.Find("Particles Fragment").GetComponent<ParticleSystem>();
         fragParticles.Stop();
-        dustParticles = transform.FindChild("Particles Dust").GetComponent<ParticleSystem>();
+        dustParticles = transform.Find("Particles Dust").GetComponent<ParticleSystem>();
         dustParticles.Stop();
-        startMesh = transform.FindChild("Original Mesh");
-        fragments = transform.FindChild("Fragments");
+        startMesh = transform.Find("Original Mesh");
+        fragments = transform.Find("Fragments");
         meshFilters = new MeshFilter[fragments.transform.childCount];
         meshFilters = fragments.transform.GetComponentsInChildren<MeshFilter>(true);
         FindSticky();
@@ -98,7 +98,7 @@ public class FraggedController : MonoBehaviour
         ChangeMaterials();
     }
 
-    public void ChangeMaterials() //¸¶Å×¸®¾ó º¯°æ
+    public void ChangeMaterials() //ï¿½ï¿½ï¿½×¸ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
     {
         for (int m = 0; m < fragMaterials.Length; m++)
         {
@@ -122,12 +122,12 @@ public class FraggedController : MonoBehaviour
         }
     }
 
-    public int Compare(float first, float second) //ºñ±³
+    public int Compare(float first, float second) //ï¿½ï¿½
     {
         return second.CompareTo(first);
     }
 
-    public void FragAll() //ÀÚ½Ä ÆÄÆíµé
+    public void FragAll() //ï¿½Ú½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½
     {
         for (int i = fragments.transform.childCount; i > 0; i--)
         {
@@ -136,7 +136,7 @@ public class FraggedController : MonoBehaviour
         }
     }
 
-    public void checkConnections() //¿¬°á È®ÀÎ
+    public void checkConnections() //ï¿½ï¿½ï¿½ï¿½ È®ï¿½ï¿½
     {
         if (stickyTop > 0 || stickyBottom > 0)
         {
@@ -170,7 +170,7 @@ public class FraggedController : MonoBehaviour
     }
 
 
-    public void FindSticky() //½ºÆ¼Å° ÇÁ·¹±×¸ÕÆ® Ã£À½
+    public void FindSticky() //ï¿½ï¿½Æ¼Å° ï¿½ï¿½ï¿½ï¿½ï¿½×¸ï¿½Æ® Ã£ï¿½ï¿½
     {
         if (stickyTop > 0 || stickyBottom > 0)
         {
@@ -202,14 +202,14 @@ public class FraggedController : MonoBehaviour
 
     public void EnableRenderers()
     {
-        foreach (Transform child in fragments) //ÀÚ½Ä ÆÄÆíµé ·£´õ¸µ
+        foreach (Transform child in fragments) //ï¿½Ú½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
         {
             child.GetComponent<Renderer>().enabled = true;
         }
     }
 
 
-    public void CombineFrags() //°áÇÕµÈ ÆÄÆí
+    public void CombineFrags() //ï¿½ï¿½ï¿½Õµï¿½ ï¿½ï¿½ï¿½ï¿½
     {
         if ((combinedFrags == null) && !this.startMesh.GetComponent<Renderer>().enabled)
         {
@@ -291,7 +291,7 @@ public class FraggedController : MonoBehaviour
         }
     }
 
-    public void ReleaseFrags(bool editor) //°áÇÕµÈ ÆÄÆí Á¦°Å
+    public void ReleaseFrags(bool editor) //ï¿½ï¿½ï¿½Õµï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
     {
         if (combinedFrags != null)
         {
@@ -303,7 +303,7 @@ public class FraggedController : MonoBehaviour
         }
     }
 
-    public void reCombine() //Àç°áÇÕ
+    public void reCombine() //ï¿½ï¿½ï¿½ï¿½ï¿½
     {
         if ((startMesh == null) || !startMesh.GetComponent<Renderer>().enabled)
         {
