@@ -84,10 +84,15 @@ namespace VrFps
 
             foreach (var col in cols)
             {
+
+                col.gameObject.SendMessage("Damage", 3f, SendMessageOptions.DontRequireReceiver); //3f 이상으로하면 벽 파괴된다..
+
                 if (col.attachedRigidbody != null && !rigidbodies.Contains(col.attachedRigidbody))
                 {
                     rigidbodies.Add(col.attachedRigidbody);
                 }
+
+                
 
                 if (detonateOtherExplosives)
                     if (col.tag == "Explosive")
@@ -95,8 +100,12 @@ namespace VrFps
                         Explosive tempExplosive = col.GetComponent<Explosive>();
 
                         if (tempExplosive)
+                        {
                             if (tempExplosive.DetonatedByOtherExplosives)
+                            {
                                 tempExplosive.ExplodeByOther(0.1f);
+                            }
+                        }
                     }
             }
 
