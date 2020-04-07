@@ -109,7 +109,10 @@ namespace VrFps
         {
             spent = true;
 
-            if (meshFltr && casingMesh) meshFltr.mesh = casingMesh;
+            if (meshFltr && casingMesh)
+            {
+                meshFltr.mesh = casingMesh;
+            }
 
             if (projectile)
             {
