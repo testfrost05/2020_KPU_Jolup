@@ -86,7 +86,9 @@ namespace VrFps
                 if (axis == TwitchExtension.Axis.x)
                 {
                     if (prevHand)
+                    {
                         previousDirection = hinge.up;
+                    }
 
                     RotateWithAroundLocalXAxis();
                 }
@@ -94,7 +96,9 @@ namespace VrFps
                 if (axis == TwitchExtension.Axis.z)
                 {
                     if (prevHand)
+                    {
                         previousDirection = hinge.right;
+                    }
 
                     RotateWithAroundLocalZAxis();
                 }
@@ -121,11 +125,15 @@ namespace VrFps
             }
 
             if (!temp)
+            {
                 if (locked)
                 {
                     if (_Close != null)
+                    {
                         _Close();
+                    }
                 }
+            }
 
             TwitchExtension.PlayRandomAudioClip(closeSounds, transform.position); //샷건 닫을때 소리
         }
@@ -155,7 +163,9 @@ namespace VrFps
             interactionVolume.restrained = false;
 
             if (_Open != null)
+            {
                 _Open();
+            }
 
             TwitchExtension.PlayRandomAudioClip(openSounds, transform.position); //더블배럴 샷건 그 뽁 하는 소리 넣으면 될듯
         }
@@ -204,15 +214,9 @@ namespace VrFps
             float dot = Vector3.Dot(cross, hinge.forward) * (inverseFreeSwing ? -1 : 1);
 
             if (dot > 0 && difference > angleDeltaThreshold && transform.localEulerAngles.z > 0)
-            {
-                transform.localEulerAngles = new Vector3(transform.localEulerAngles.x, transform.localEulerAngles.y,
-                    Mathf.Clamp(transform.localEulerAngles.z + (-difference * closeSpeed * dot * Time.deltaTime), 0, maxAngle));
-            }
+                transform.localEulerAngles = new Vector3(transform.localEulerAngles.x, transform.localEulerAngles.y, Mathf.Clamp(transform.localEulerAngles.z + (-difference * closeSpeed * dot * Time.deltaTime), 0, maxAngle));
             else if (transform.localEulerAngles.z < maxAngle && !locked)
-            {
-                transform.localEulerAngles = new Vector3(transform.localEulerAngles.x, transform.localEulerAngles.y,
-                    Mathf.Clamp(transform.localEulerAngles.z + (openSpeed * Time.deltaTime), 0, maxAngle));
-            }
+                transform.localEulerAngles = new Vector3(transform.localEulerAngles.x, transform.localEulerAngles.y, Mathf.Clamp(transform.localEulerAngles.z + (openSpeed * Time.deltaTime), 0, maxAngle));
 
             if (transform.localEulerAngles.z < 1 && !locked)
             {
