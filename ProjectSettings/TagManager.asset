@@ -7,6 +7,8 @@ TagManager:
   - Slot
   - Hand
   - Interactable
+  - Glass
+  - Wall
   layers:
   - Default
   - TransparentFX

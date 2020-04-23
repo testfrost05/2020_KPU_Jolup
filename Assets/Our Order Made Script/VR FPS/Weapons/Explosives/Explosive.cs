@@ -79,20 +79,24 @@ namespace VrFps
                 yield return new WaitForSeconds(delay);
             }
 
-            var cols = Physics.OverlapSphere(transform.position, radius);
+            var cols = Physics.OverlapSphere(gameObject.transform.position, radius);
+            
             var rigidbodies = new List<Rigidbody>();
 
+     
             foreach (var col in cols)
             {
-
-                col.gameObject.SendMessage("Damage", 3f, SendMessageOptions.DontRequireReceiver); //3f 이상으로하면 벽 파괴된다..
-
+               
+       
                 if (col.attachedRigidbody != null && !rigidbodies.Contains(col.attachedRigidbody))
                 {
                     rigidbodies.Add(col.attachedRigidbody);
                 }
 
-                
+                if (col.gameObject.CompareTag("Wall"))
+                {
+                    col.gameObject.SendMessage("Damage", 3f, SendMessageOptions.DontRequireReceiver); //3f 이상으로하면 벽 파괴된다.
+                }
 
                 if (detonateOtherExplosives)
                     if (col.tag == "Explosive")
