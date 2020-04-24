@@ -1,0 +1,110 @@
+fileFormatVersion: 2
+guid: 7e410e2963b573f499d757081ce0afe4
+timeCreated: 1466028137
+licenseType: Store
+ModelImporter:
+  serializedVersion: 19
+  fileIDToRecycleName:
+    100000: //RootNode
+    100002: SniperScope_AdjustSide
+    100004: SniperScope_AdjustTop
+    100006: SniperScope_Boby
+    100008: SniperScope_Brace
+    100010: SniperScope_CoverBack
+    100012: SniperScope_CoverFront
+    400000: //RootNode
+    400002: SniperScope_AdjustSide
+    400004: SniperScope_AdjustTop
+    400006: SniperScope_Boby
+    400008: SniperScope_Brace
+    400010: SniperScope_CoverBack
+    400012: SniperScope_CoverFront
+    2300000: SniperScope_AdjustSide
+    2300002: SniperScope_AdjustTop
+    2300004: SniperScope_Boby
+    2300006: SniperScope_Brace
+    2300008: SniperScope_CoverBack
+    2300010: SniperScope_CoverFront
+    3300000: SniperScope_AdjustSide
+    3300002: SniperScope_AdjustTop
+    3300004: SniperScope_Boby
+    3300006: SniperScope_Brace
+    3300008: SniperScope_CoverBack
+    3300010: SniperScope_CoverFront
+    4300000: SniperScope_CoverBack
+    4300002: SniperScope_CoverFront
+    4300004: SniperScope_AdjustSide
+    4300006: SniperScope_AdjustTop
+    4300008: SniperScope_Brace
+    4300010: SniperScope_Boby
+    9500000: //RootNode
+    13700000: SniperScope_AdjustSide
+    13700002: SniperScope_AdjustTop
+    13700004: SniperScope_Boby
+    13700006: SniperScope_Brace
+    13700008: SniperScope_CoverBack
+    13700010: SniperScope_CoverFront
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleRotations: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 0.11
+    meshCompression: 0
+    addColliders: 0
+    importBlendShapes: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    hasTranslationDoF: 0
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 0
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
