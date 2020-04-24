@@ -6,3 +6,4 @@ zip/* filter=lfs diff=lfs merge=lfs -text
 png/* filter=lfs diff=lfs merge=lfs -text
 *.zip filter=lfs diff=lfs merge=lfs -text
 >>>>>>> 0104ea2dca87184e9d69354ef9d8648576100b93
+*so. filter=lfs diff=lfs merge=lfs -text
