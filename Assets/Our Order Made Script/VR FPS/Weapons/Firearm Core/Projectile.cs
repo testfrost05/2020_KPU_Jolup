@@ -67,6 +67,11 @@ namespace VrFps
                 child.parent = null;
             }
 
+            if(col.gameObject.CompareTag("Glass"))
+            {
+                col.gameObject.SendMessage("Damage", 3f, SendMessageOptions.DontRequireReceiver); //3f 이상으로하면 벽 파괴된다.
+            }
+
             if (destroyOnImpact)
             {
                 if (destroyDelay != 0)
