@@ -18,6 +18,6 @@ public class GameSceneChangeScript : MonoBehaviour
 
     public void SceneChange_Menu_to_Ingame()
     {
-        SceneManager.LoadScene("InGameScene");
+        SceneManager.LoadScene("New InGameScene");
     }
 }
