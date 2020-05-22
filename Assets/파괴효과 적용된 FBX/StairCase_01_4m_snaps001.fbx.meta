@@ -1,5 +1,13 @@
 fileFormatVersion: 2
+<<<<<<< HEAD:Assets/파괴효과 적용된 FBX/StairCase_01_4m_snaps001.fbx.meta
 guid: 9842e687311a90f4e981115781a7cb75
+=======
+<<<<<<< HEAD:Assets/파괴효과 적용된 FBX/StairCase_01_4m_snaps001.fbx.meta
+guid: 7814315ab9131a941bccc36f9cfe83aa
+=======
+guid: b2aa35c372607cc4785c739174e973f8
+>>>>>>> 1e3710231ee3a86fb28152a7e743993949cfc719:Assets/StairCase_01_4m_snaps001.fbx.meta
+>>>>>>> 1be06e2c4f50b1bb08e575b0c5229f89ede7adcb:Assets/StairCase_01_4m_snaps001.fbx.meta
 ModelImporter:
   serializedVersion: 26
   internalIDToNameTable:

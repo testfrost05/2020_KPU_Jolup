@@ -1,5 +1,13 @@
 fileFormatVersion: 2
+<<<<<<< HEAD:Assets/파괴효과 적용된 FBX/Neo_Floor_Ceiling_02_snaps001.fbx.meta
 guid: 64a5c5394629463448bf174290ef4dcc
+=======
+<<<<<<< HEAD:Assets/파괴효과 적용된 FBX/Neo_Floor_Ceiling_02_snaps001.fbx.meta
+guid: be63715773b6e9349afe4d0f2e3a4db3
+=======
+guid: 9841abe4662be9f43a3670c9db03b441
+>>>>>>> 1e3710231ee3a86fb28152a7e743993949cfc719:Assets/Neo_Floor_Ceiling_02_snaps001.fbx.meta
+>>>>>>> 1be06e2c4f50b1bb08e575b0c5229f89ede7adcb:Assets/Neo_Floor_Ceiling_02_snaps001.fbx.meta
 ModelImporter:
   serializedVersion: 26
   internalIDToNameTable:

@@ -1,5 +1,13 @@
 fileFormatVersion: 2
+<<<<<<< HEAD:Assets/파괴효과 적용된 FBX/Classic_Window_01_snaps001.fbx.meta
 guid: 50e6a2ed46b22474d85e6616b9d1d80a
+=======
+<<<<<<< HEAD
+guid: fed1c1414749d2f43b0ad1ce14588e25
+=======
+guid: 5a4d8b704d7e99249910202a2a6eec8d
+>>>>>>> 1e3710231ee3a86fb28152a7e743993949cfc719
+>>>>>>> 1be06e2c4f50b1bb08e575b0c5229f89ede7adcb:Assets/Classic_Window_01_snaps001.fbx.meta
 ModelImporter:
   serializedVersion: 26
   internalIDToNameTable:

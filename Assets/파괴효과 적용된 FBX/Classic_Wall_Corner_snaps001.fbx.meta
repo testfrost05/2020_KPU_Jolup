@@ -1,5 +1,13 @@
 fileFormatVersion: 2
+<<<<<<< HEAD:Assets/파괴효과 적용된 FBX/Classic_Wall_Corner_snaps001.fbx.meta
 guid: bb307f3343c27f344a3628bb65d9de32
+=======
+<<<<<<< HEAD
+guid: 96b367b1110891941b6ca8888c9032c2
+=======
+guid: 0496e91652b57ee4f9c078266400e1ee
+>>>>>>> 1e3710231ee3a86fb28152a7e743993949cfc719
+>>>>>>> 1be06e2c4f50b1bb08e575b0c5229f89ede7adcb:Assets/Classic_Wall_Corner_snaps001.fbx.meta
 ModelImporter:
   serializedVersion: 26
   internalIDToNameTable:
