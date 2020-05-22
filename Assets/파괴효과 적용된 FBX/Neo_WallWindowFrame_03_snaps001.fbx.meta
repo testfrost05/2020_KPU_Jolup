@@ -1,5 +1,9 @@
 fileFormatVersion: 2
+<<<<<<< HEAD:Assets/파괴효과 적용된 FBX/Neo_WallWindowFrame_03_snaps001.fbx.meta
 guid: d520ddada930a09428a85442a9c3376a
+=======
+guid: f837685d86710e142b7cfebc49eededd
+>>>>>>> 1e3710231ee3a86fb28152a7e743993949cfc719:Assets/Neo_WallWindowFrame_03_snaps001.fbx.meta
 ModelImporter:
   serializedVersion: 26
   internalIDToNameTable:
