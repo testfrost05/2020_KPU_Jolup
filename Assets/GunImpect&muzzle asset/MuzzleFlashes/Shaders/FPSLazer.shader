@@ -1,4 +1,4 @@
-// Upgrade NOTE: replaced 'mul(UNITY_MATRIX_MVP,*)' with 'UnityObjectToClipPos(*)'
+﻿// Upgrade NOTE: replaced 'mul(UNITY_MATRIX_MVP,*)' with 'UnityObjectToClipPos(*)'
 
 Shader "Effects/FPS_Pack/Lazer" {
 	Properties {
@@ -10,9 +10,7 @@ Shader "Effects/FPS_Pack/Lazer" {
 Category {
 	Tags { "Queue"="Transparent" "IgnoreProjector"="True" "RenderType"="Transparent" }
 	Blend SrcAlpha One
-	Cull Off 
-	ZWrite Off 
-
+	Cull Off Lighting Off ZWrite Off Fog { Color (0,0,0,0) }
 	
 	SubShader {
 		Pass {
