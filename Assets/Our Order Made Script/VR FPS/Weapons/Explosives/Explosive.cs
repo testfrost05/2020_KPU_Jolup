@@ -98,6 +98,12 @@ namespace VrFps
                     col.gameObject.SendMessage("Damage", 3f, SendMessageOptions.DontRequireReceiver); //3f 이상으로하면 벽 파괴된다.
                 }
 
+                HealthManager healthManager = col.transform.GetComponent<HealthManager>();
+                if (healthManager)
+                {
+                    healthManager.ApplyDamage(baseDamage);
+                }
+
                 if (detonateOtherExplosives)
                     if (col.tag == "Explosive")
                     {
