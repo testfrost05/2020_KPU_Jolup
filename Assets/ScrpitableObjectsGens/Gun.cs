@@ -9,6 +9,7 @@ namespace Com.Kpu.SimpleHostile
     {
         public string name;
         public float firerate;
+        public float aimSpeed;
         public GameObject prefab;
     }
 }

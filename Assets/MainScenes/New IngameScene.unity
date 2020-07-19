@@ -37785,6 +37785,11 @@ PrefabInstance:
       propertyPath: viewIdField
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 5271309442597288819, guid: 7fdaf94ffa9df974abd6c8a4627a5f34,
+        type: 3}
+      propertyPath: weaponParent
+      value: 
+      objectReference: {fileID: 1701035413}
     - target: {fileID: 8871019571831368562, guid: 7fdaf94ffa9df974abd6c8a4627a5f34,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -37847,6 +37852,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7fdaf94ffa9df974abd6c8a4627a5f34, type: 3}
+--- !u!4 &1701035413 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 1117307821, guid: 7fdaf94ffa9df974abd6c8a4627a5f34,
+    type: 3}
+  m_PrefabInstance: {fileID: 1701035412}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1706965322
 PrefabInstance:
   m_ObjectHideFlags: 0
