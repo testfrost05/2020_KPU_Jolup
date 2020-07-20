@@ -25,8 +25,8 @@ TagManager:
   - InventoryItem
   - Door
   - Ground
-  - 
-  - 
+  - LocalPlayer
+  - Gun
   - 
   - 
   - 
