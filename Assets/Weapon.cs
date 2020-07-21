@@ -1,10 +1,11 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Photon.Pun;
 
 namespace Com.Kpu.SimpleHostile
 {
-    public class Weapon : MonoBehaviour
+    public class Weapon : MonoBehaviourPunCallbacks
     {
         #region Variables
 
@@ -23,7 +24,9 @@ namespace Com.Kpu.SimpleHostile
 
         void Update()
         {
-            if (Input.GetKeyDown(KeyCode.Alpha1)) Equip(0);
+            if (!photonView.IsMine) return;
+
+            if (Input.GetKeyDown(KeyCode.Alpha1)) {photonView.RPC("Equip", RpcTarget.All, 0); }
 
             if (currentWeapon != null)
             {
@@ -31,7 +34,7 @@ namespace Com.Kpu.SimpleHostile
 
                 if (Input.GetMouseButtonDown(0) && currentCooldown <=0)
                 {
-                    Shoot();
+                    photonView.RPC("Shoot", RpcTarget.All);
                 
                 }
                 //weapon position elasticity
@@ -45,6 +48,8 @@ namespace Com.Kpu.SimpleHostile
         #endregion
 
         #region Private Methods
+
+        [PunRPC]
         void Equip(int p_ind)
         {
             if (currentWeapon != null) Destroy(currentWeapon);
@@ -54,6 +59,7 @@ namespace Com.Kpu.SimpleHostile
             GameObject t_newWeapon = Instantiate(loadout[p_ind].prefab, weaponParent.position, weaponParent.rotation, weaponParent) as GameObject;
             t_newWeapon.transform.localPosition = Vector3.zero;
             t_newWeapon.transform.localEulerAngles = Vector3.zero;
+            t_newWeapon.GetComponent<Sway>().isMine = photonView.IsMine;
 
             currentWeapon = t_newWeapon;
         }
@@ -78,6 +84,7 @@ namespace Com.Kpu.SimpleHostile
             }
         }
 
+        [PunRPC]
         void Shoot()
         {
             Transform t_spawn = transform.Find("Cameras/NormalCamera");
@@ -89,21 +96,40 @@ namespace Com.Kpu.SimpleHostile
             t_bloom -= t_spawn.position;
             t_bloom.Normalize();
 
+            //cooldown
+            currentCooldown = loadout[currentIndex].firerate;
+
             //raycast
             RaycastHit t_hit = new RaycastHit();
-            if(Physics.Raycast(t_spawn.position, t_bloom, out t_hit, 1000f, canBeShot))
+            if (Physics.Raycast(t_spawn.position, t_bloom, out t_hit, 1000f, canBeShot))
             {
                 GameObject t_newHole = Instantiate(bulletholePrefab, t_hit.point + t_hit.normal * 0.001f, Quaternion.identity) as GameObject;
                 t_newHole.transform.LookAt(t_hit.point + t_hit.normal);
                 Destroy(t_newHole, 5f);
-            }
 
+                if (photonView.IsMine) 
+                {
+                    //shooting other player on network
+                    if (t_hit.collider.gameObject.layer == 8)
+                    {
+                        //RPC call to Damange Player Goes here
+                        t_hit.collider.gameObject.GetPhotonView().RPC("TakeDamage", RpcTarget.All, loadout[currentIndex].damage);
+                    
+                    }
+                
+                }
+            }
             //gun fx
             currentWeapon.transform.Rotate(-loadout[currentIndex].recoil, 0, 0);
             currentWeapon.transform.position -= currentWeapon.transform.forward * loadout[currentIndex].kickback;
 
-            //cooldown
-            currentCooldown = loadout[currentIndex].firerate;
+          
+        }
+        [PunRPC]
+        private void TakeDamage(int p_damage)
+        {
+            GetComponent<Motion>().TakeDamage(p_damage);
+        
         }
         #endregion
     }

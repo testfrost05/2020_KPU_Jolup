@@ -61,7 +61,7 @@ public class LobbyManager : MonoBehaviourPunCallbacks
     public override void OnJoinedRoom()
     {
         connectionInfoText.text = "방에 접속중입니다.";
-        PhotonNetwork.LoadLevel("VRFPS test");
+        PhotonNetwork.LoadLevel("New IngameScene");
     }
 }
 

@@ -4,7 +4,7 @@ using UnityEngine;
 using Photon.Pun;
 namespace Com.Kpu.SimpleHostile
 {
-    public class Look : MonoBehaviour
+    public class Look : MonoBehaviourPunCallbacks
     {
         #region Variables
         public static bool cursorLocked = true;
@@ -29,7 +29,7 @@ namespace Com.Kpu.SimpleHostile
         // Update is called once per frame
         void Update()
         {
-
+            if (!photonView.IsMine) return;
             SetY();
             SetX();
 

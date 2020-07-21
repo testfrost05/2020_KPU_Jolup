@@ -5,13 +5,15 @@ using Photon.Pun;
 
 namespace Com.Kpu.SimpleHostile
 {
-    public class Motion : MonoBehaviour
+    public class Motion : MonoBehaviourPunCallbacks
     {
         #region Variables
         public float speed;
         public float sprintModifier;
         public float jumpForce;
+        public int max_health;
         public Camera normalCam;
+        public GameObject cameraParent;
         public Transform weaponParent;
         public Transform groundDetector;
         public LayerMask ground;
@@ -27,19 +29,33 @@ namespace Com.Kpu.SimpleHostile
 
         private float baseFOV;
         private float sprintFOVModifier = 1.5f;
+
+        private int current_health;
+
+        private Manager manager;
         #endregion
 
         #region MonoBehaviour Callbacks
         private void Start()
         {
+            manager = GameObject.Find("Manager").GetComponent<Manager>();
+            current_health = max_health;
+
+            cameraParent.SetActive(photonView.IsMine);
+            if (!photonView.IsMine) gameObject.layer = 8;
+            
             baseFOV = normalCam.fieldOfView;
-            Camera.main.enabled = false;
+
+            if(Camera.main) Camera.main.enabled = false;
+
             rig = GetComponent<Rigidbody>();
             weaponParentOrigin = weaponParent.localPosition;
         }
 
         private void Update()
         {
+            if (!photonView.IsMine) return;
+
             //Axies
             float t_hmove = Input.GetAxisRaw("Horizontal");
             float t_vmove = Input.GetAxisRaw("Vertical");
@@ -58,6 +74,8 @@ namespace Com.Kpu.SimpleHostile
             {
                 rig.AddForce(Vector3.up * jumpForce);
             }
+
+            if (Input.GetKeyDown(KeyCode.U)) TakeDamage(500);
 
             //Head Bob
             if (t_hmove == 0 && t_vmove == 0)
@@ -83,6 +101,8 @@ namespace Com.Kpu.SimpleHostile
 
         private void FixedUpdate()
         {
+            if (!photonView.IsMine) return;
+
             //Axies
             float t_hmove = Input.GetAxisRaw("Horizontal");
             float t_vmove = Input.GetAxisRaw("Vertical");
@@ -121,6 +141,27 @@ namespace Com.Kpu.SimpleHostile
             targetWeaponBobPosition = weaponParentOrigin + new Vector3(Mathf.Cos(p_z) * p_x_intensity, Mathf.Sin(p_z *2) * p_y_intensity, 0);
           
         }
+
+        #endregion
+
+        #region Public methods
+
+        
+        public void TakeDamage(int p_damage)
+        {
+            if (photonView.IsMine)
+            {
+                current_health -= p_damage;
+                Debug.Log(current_health);
+
+                if (current_health <= 0)
+                {
+                    manager.SpawnPlayer();
+                    PhotonNetwork.Destroy(gameObject);
+                }
+            }
+        }
+
 
         #endregion
     }
