@@ -1,11 +1,98 @@
 {
+   "action_manifest_version" : 0,
+   "alias_info" : {},
+   "app_key" : "application.generated.unity.local.exe",
    "bindings" : {
       "/actions/buggy" : {
+         "chords" : [],
+         "haptics" : [],
+         "poses" : [],
+         "skeleton" : [],
+         "sources" : []
+      },
+      "/actions/default" : {
+         "chords" : [],
+         "haptics" : [],
+         "poses" : [],
+         "skeleton" : [],
+         "sources" : []
+      },
+      "/actions/platformer" : {
+         "chords" : [],
+         "haptics" : [],
+         "poses" : [],
+         "skeleton" : [],
+         "sources" : []
+      },
+      "/actions/varmory" : {
+         "chords" : [],
+         "haptics" : [],
+         "poses" : [],
+         "skeleton" : [],
+         "sources" : []
+      },
+      "/actions/vrfps" : {
+         "poses" : [
+            {
+               "output" : "/actions/vrfps/in/leftpose",
+               "path" : "/user/hand/left/pose/base"
+            },
+            {
+               "output" : "/actions/vrfps/in/rightpose",
+               "path" : "/user/hand/right/pose/base"
+            },
+            {
+               "output" : "/actions/vrfps/in/leftpose",
+               "path" : "/user/hand/left/pose/handgrip"
+            },
+            {
+               "output" : "/actions/vrfps/in/rightpose",
+               "path" : "/user/hand/right/pose/handgrip"
+            },
+            {
+               "output" : "/actions/vrfps/in/leftpose",
+               "path" : "/user/hand/left/pose/raw"
+            },
+            {
+               "output" : "/actions/vrfps/in/rightpose",
+               "path" : "/user/hand/right/pose/raw"
+            },
+            {
+               "output" : "/actions/vrfps/in/leftpose",
+               "path" : "/user/hand/left/pose/tip"
+            },
+            {
+               "output" : "/actions/vrfps/in/rightpose",
+               "path" : "/user/hand/right/pose/tip"
+            }
+         ],
+         "skeleton" : [
+            {
+               "output" : "/actions/vrfps/in/leftskel",
+               "path" : "/user/hand/left/input/skeleton/left"
+            },
+            {
+               "output" : "/actions/vrfps/in/rightskel",
+               "path" : "/user/hand/right/input/skeleton/right"
+            }
+         ],
          "sources" : [
             {
                "inputs" : {
+                  "click" : {
+                     "output" : "/actions/vrfps/in/menu"
+                  }
+               },
+               "mode" : "button",
+               "path" : "/user/hand/left/input/system"
+            },
+            {
+               "inputs" : {
+                  "click" : {
+                     "output" : "/actions/vrfps/in/trigger"
+                  },
                   "pull" : {
-                     "output" : "/actions/buggy/in/throttle"
+                     "output" : "/actions/vrfps/in/triggeraxis"
                   }
                },
                "mode" : "trigger",
@@ -13,17 +100,11 @@
             },
             {
                "inputs" : {
-                  "pull" : {
-                     "output" : "/actions/buggy/in/throttle"
-                  }
-               },
-               "mode" : "trigger",
-               "path" : "/user/hand/right/input/trigger"
-            },
-            {
-               "inputs" : {
+                  "click" : {
+                     "output" : "/actions/vrfps/in/touchpad"
+                  },
                   "position" : {
-                     "output" : "/actions/buggy/in/steering"
+                     "output" : "/actions/vrfps/in/touchpadaxis"
                   }
                },
                "mode" : "joystick",
@@ -31,17 +112,17 @@
             },
             {
                "inputs" : {
-                  "position" : {
-                     "output" : "/actions/buggy/in/steering"
+                  "click" : {
+                     "output" : "/actions/vrfps/in/grip"
                   }
                },
-               "mode" : "joystick",
-               "path" : "/user/hand/right/input/joystick"
+               "mode" : "button",
+               "path" : "/user/hand/left/input/grip"
             },
             {
                "inputs" : {
                   "click" : {
-                     "output" : "/actions/buggy/in/brake"
+                     "output" : "/actions/vrfps/in/a"
                   }
                },
                "mode" : "button",
@@ -50,16 +131,7 @@
             {
                "inputs" : {
                   "click" : {
-                     "output" : "/actions/buggy/in/brake"
-                  }
-               },
-               "mode" : "button",
-               "path" : "/user/hand/right/input/x"
-            },
-            {
-               "inputs" : {
-                  "click" : {
-                     "output" : "/actions/buggy/in/reset"
+                     "output" : "/actions/vrfps/in/b"
                   }
                },
                "mode" : "button",
@@ -68,16 +140,40 @@
             {
                "inputs" : {
                   "click" : {
-                     "output" : "/actions/buggy/in/reset"
+                     "output" : "/actions/vrfps/in/trigger"
+                  },
+                  "pull" : {
+                     "output" : "/actions/vrfps/in/triggeraxis"
                   }
                },
-               "mode" : "button",
-               "path" : "/user/hand/right/input/y"
+               "mode" : "trigger",
+               "path" : "/user/hand/right/input/trigger"
             },
             {
                "inputs" : {
                   "click" : {
-                     "output" : "/actions/buggy/in/brake"
+                     "output" : "/actions/vrfps/in/touchpad"
+                  },
+                  "position" : {
+                     "output" : "/actions/vrfps/in/touchpadaxis"
+                  }
+               },
+               "mode" : "joystick",
+               "path" : "/user/hand/right/input/joystick"
+            },
+            {
+               "inputs" : {
+                  "click" : {
+                     "output" : "/actions/vrfps/in/grip"
+                  }
+               },
+               "mode" : "button",
+               "path" : "/user/hand/right/input/grip"
+            },
+            {
+               "inputs" : {
+                  "click" : {
+                     "output" : "/actions/vrfps/in/a"
                   }
                },
                "mode" : "button",
@@ -86,230 +182,19 @@
             {
                "inputs" : {
                   "click" : {
-                     "output" : "/actions/buggy/in/reset"
+                     "output" : "/actions/vrfps/in/b"
                   }
                },
                "mode" : "button",
                "path" : "/user/hand/right/input/b"
             }
          ]
-      },
-      "/actions/default" : {
-         "chords" : [],
-         "haptics" : [
-            {
-               "output" : "/actions/default/out/haptic",
-               "path" : "/user/hand/left/output/haptic"
-            },
-            {
-               "output" : "/actions/default/out/haptic",
-               "path" : "/user/hand/right/output/haptic"
-            }
-         ],
-         "poses" : [
-            {
-               "output" : "/actions/default/in/pose",
-               "path" : "/user/hand/left/pose/raw"
-            },
-            {
-               "output" : "/actions/default/in/pose",
-               "path" : "/user/hand/right/pose/raw"
-            }
-         ],
-         "skeleton" : [
-            {
-               "output" : "/actions/default/in/skeletonlefthand",
-               "path" : "/user/hand/left/input/skeleton/left"
-            },
-            {
-               "output" : "/actions/default/in/skeletonrighthand",
-               "path" : "/user/hand/right/input/skeleton/right"
-            }
-         ],
-        "sources": [
-          {
-            "inputs": {
-              "click": {
-                "output": "/actions/default/in/interactui"
-              }
-            },
-            "mode": "button",
-            "path": "/user/hand/left/input/trigger"
-          },
-          {
-            "inputs": {
-              "click": {
-                "output": "/actions/default/in/grabgrip"
-              }
-            },
-            "mode": "button",
-            "parameters": {
-              "click_activate_threshold": "0.8",
-              "click_deactivate_threshold": "0.7"
-            },
-            "path": "/user/hand/left/input/grip"
-          },
-          {
-            "inputs": {
-              "click": {
-                "output": "/actions/default/in/grabpinch"
-              }
-            },
-            "mode": "button",
-            "parameters": {
-              "click_activate_threshold": "0.8",
-              "click_deactivate_threshold": "0.7",
-              "force_input": "value"
-            },
-            "path": "/user/hand/left/input/trigger"
-          },
-          {
-            "inputs": {
-              "click": {
-                "output": "/actions/default/in/interactui"
-              }
-            },
-            "mode": "button",
-            "path": "/user/hand/right/input/trigger"
-          },
-          {
-            "inputs": {
-              "click": {
-                "output": "/actions/default/in/grabpinch"
-              }
-            },
-            "mode": "button",
-            "parameters": {
-              "click_activate_threshold": "0.8",
-              "click_deactivate_threshold": "0.7"
-            },
-            "path": "/user/hand/right/input/trigger"
-          },
-          {
-            "inputs": {
-              "north": {
-                "output": "/actions/default/in/teleport"
-              }
-            },
-            "mode": "dpad",
-            "parameters": {
-              "deadzone_pct": "25",
-              "overlap_pct": "30",
-              "sub_mode": "touch"
-            },
-            "path": "/user/hand/left/input/joystick"
-          },
-          {
-            "inputs": {
-              "north": {
-                "output": "/actions/default/in/teleport"
-              }
-            },
-            "mode": "dpad",
-            "parameters": {
-              "deadzone_pct": "25",
-              "overlap_pct": "30",
-              "sub_mode": "touch"
-            },
-            "path": "/user/hand/right/input/joystick"
-          },
-          {
-            "inputs": {
-              "east": {
-                "output": "/actions/default/in/snapturnright"
-              },
-              "west": {
-                "output": "/actions/default/in/snapturnleft"
-              }
-            },
-            "mode": "dpad",
-            "parameters": {
-              "deadzone_pct": "85",
-              "overlap_pct": "0",
-              "sub_mode": "touch"
-            },
-            "path": "/user/hand/left/input/joystick"
-          },
-          {
-            "inputs": {
-              "east": {
-                "output": "/actions/default/in/snapturnright"
-              },
-              "west": {
-                "output": "/actions/default/in/snapturnleft"
-              }
-            },
-            "mode": "dpad",
-            "parameters": {
-              "deadzone_pct": "85",
-              "overlap_pct": "0",
-              "sub_mode": "touch"
-            },
-            "path": "/user/hand/right/input/joystick"
-          },
-          {
-            "inputs": {
-              "click": {
-                "output": "/actions/default/in/grabgrip"
-              }
-            },
-            "mode": "button",
-            "parameters": {
-              "click_activate_threshold": "0.8",
-              "click_deactivate_threshold": "0.7"
-            },
-            "path": "/user/hand/right/input/grip"
-          },
-          {
-            "inputs": {
-              "pull": {
-                "output": "/actions/default/in/squeeze"
-              }
-            },
-            "mode": "trigger",
-            "path": "/user/hand/left/input/grip"
-          },
-          {
-            "inputs": {
-              "pull": {
-                "output": "/actions/default/in/squeeze"
-              }
-            },
-            "mode": "trigger",
-            "path": "/user/hand/right/input/grip"
-          }
-        ]
-      },
-      "/actions/platformer" : {
-         "sources" : [
-            {
-               "inputs" : {
-                  "click" : {
-                     "output" : "/actions/platformer/in/jump"
-                  },
-                  "position" : {
-                     "output" : "/actions/platformer/in/move"
-                  }
-               },
-               "mode" : "joystick",
-               "path" : "/user/hand/left/input/joystick"
-            },
-            {
-               "inputs" : {
-                  "click" : {
-                     "output" : "/actions/platformer/in/jump"
-                  },
-                  "position" : {
-                     "output" : "/actions/platformer/in/move"
-                  }
-               },
-               "mode" : "joystick",
-               "path" : "/user/hand/right/input/joystick"
-            }
-         ]
       }
    },
+   "category" : "steamvr_input",
    "controller_type" : "oculus_touch",
    "description" : "",
-   "name" : "oculus_touch"
+   "name" : "Saved local [Testing] configuration for Oculus Touch",
+   "options" : {},
+   "simulated_actions" : []
 }

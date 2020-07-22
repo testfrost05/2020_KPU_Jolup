@@ -1,0 +1,111 @@
+{
+  "actions": [
+    {
+      "name": "/actions/VArmory/in/Grip",
+      "type": "boolean"
+    },
+    {
+      "name": "/actions/VArmory/in/Trigger",
+      "type": "boolean"
+    },
+    {
+      "name": "/actions/VArmory/in/Menu",
+      "type": "boolean"
+    },
+    {
+      "name": "/actions/VArmory/in/Touchpad",
+      "type": "boolean"
+    },
+    {
+      "name": "/actions/VArmory/in/TouchpadAxis",
+      "type": "vector2"
+    },
+    {
+      "name": "/actions/VArmory/in/TriggerAxis",
+      "type": "vector1"
+    },
+    {
+      "name": "/actions/VArmory/in/RightSkel",
+      "type": "skeleton",
+      "skeleton": "/skeleton/hand/right"
+    },
+    {
+      "name": "/actions/VArmory/in/LeftSkel",
+      "type": "skeleton",
+      "skeleton": "/skeleton/hand/left"
+    },
+    {
+      "name": "/actions/VArmory/in/LeftPose",
+      "type": "pose"
+    },
+    {
+      "name": "/actions/VArmory/in/RightPose",
+      "type": "pose"
+    },
+    {
+      "name": "/actions/VArmory/in/A",
+      "type": "boolean"
+    },
+    {
+      "name": "/actions/VArmory/in/B",
+      "type": "boolean"
+    },
+    {
+      "name": "/actions/VArmory/in/Joystick",
+      "type": "boolean"
+    },
+    {
+      "name": "/actions/VArmory/in/JoystickAxis",
+      "type": "vector2"
+    }
+  ],
+  "action_sets": [
+    {
+      "name": "/actions/VArmory",
+      "usage": "leftright"
+    }
+  ],
+  "default_bindings": [
+    {
+      "controller_type": "vive_controller",
+      "binding_url": "bindings_vive_controller.json"
+    },
+    {
+      "controller_type": "oculus_touch",
+      "binding_url": "bindings_oculus_touch.json"
+    },
+    {
+      "controller_type": "knuckles",
+      "binding_url": "bindings_knuckles.json"
+    },
+    {
+      "controller_type": "holographic_controller",
+      "binding_url": "bindings_holographic_controller.json"
+    },
+    {
+      "controller_type": "vive",
+      "binding_url": "binding_vive.json"
+    },
+    {
+      "controller_type": "vive_pro",
+      "binding_url": "binding_vive_pro.json"
+    },
+    {
+      "controller_type": "rift",
+      "binding_url": "binding_rift.json"
+    },
+    {
+      "controller_type": "holographic_hmd",
+      "binding_url": "binding_holographic_hmd.json"
+    },
+    {
+      "controller_type": "vive_tracker_camera",
+      "binding_url": "binding_vive_tracker_camera.json"
+    }
+  ],
+  "localization": [
+    {
+      "language_tag": "en_US"
+    }
+  ]
+}

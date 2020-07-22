@@ -1,58 +1,32 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Valve.VR;
 
 namespace VrFps
 {
-    public class Hand : Slot 
+    public class Hand : Slot
     {
-        protected Transform handSkeletonRoot; //손 뼈대
+        protected Transform handSkeletonRoot;
 
-        public Transform HandSkeletonRoot
-        {
-            get
-            {
-                return handSkeletonRoot;
-            }
-        }
+        public Transform HandSkeletonRoot { get { return handSkeletonRoot; } }
+
+        [SerializeField] protected SteamVR_Behaviour_Skeleton handSkeleton;
+
+        public SteamVR_Behaviour_Skeleton HandSkeleton { get { return handSkeleton; } }
 
         [HideInInspector] public Transform audioSourceContainer;
 
-        public OVRInput.Controller inputSource; //오큘러스 컨트롤러 입력
+        public SteamVR_Input_Sources inputSource;
 
         protected Hand sibling;
-        public Hand Sibling
-        {
-            get
-            {
-                return sibling;
-            }
-        }
+        public Hand Sibling { get { return sibling; } }
 
-        protected CharacterControllerMovement charController; //캐릭터 컨트롤러
-        public CharacterControllerMovement CharController
-        {
-            get
-            {
-                return charController;
-            }
-        }
-
-        protected Collider playerCollider; //캐릭터 콜리더
-        public Collider PlayerCollider
-        {
-            get
-            {
-                return playerCollider;
-            }
-        }
-        public Vector3 CharControllerVelocity //캐릭터 컨트롤 속도
-        {
-            get
-            {
-                return charController ? charController.velocityHistory._ReleaseVelocity : Vector3.zero;
-            }
-        }
+        protected CharacterControllerMovement charController;
+        public CharacterControllerMovement CharController { get { return charController; } }
+        protected Collider playerCollider;
+        public Collider PlayerCollider { get { return playerCollider; } }
+        public Vector3 CharControllerVelocity { get { return charController ? charController.velocityHistory._ReleaseVelocity : Vector3.zero; } }
 
         [SerializeField] protected MeshRenderer interactionSphere;
         [SerializeField] protected Material interactionSphereHighlight;
@@ -60,8 +34,8 @@ namespace VrFps
 
         protected Material defaultMat;
 
-        protected CapsuleGrab capsuleGrab; //그랩
-        protected RayGrab rayGrab; //원거리 그랩
+        protected CapsuleGrab capsuleGrab;
+        protected RayGrab rayGrab;
 
         [SerializeField] protected bool hapticFeedback = true;
         [SerializeField] protected bool tomatoePresence = true;
@@ -73,23 +47,10 @@ namespace VrFps
         [SerializeField] protected bool dropGrab = true;
         [SerializeField] protected bool pointGrab = true;
 
-        //자동으로 잡고 놓고
-        public bool AutoGrab
-        {
-            get
-            {
-                return autoGrab;
-            }
-        }
-        public bool AutoDrop {
-            get
-            {
-                return autoDrop;
-            }
-        }
+        public bool AutoGrab { get { return autoGrab; } }
+        public bool AutoDrop { get { return autoDrop; } }
 
         [SerializeField] [ReadOnly] protected InteractionVolume interactingVolume;
-
         public InteractionVolume InteractingVolume
         {
             get { return interactingVolume; }
@@ -107,13 +68,7 @@ namespace VrFps
 
         protected FixedJoint fixedJoint;
 
-        public bool IsInteracting
-        {
-            get
-            {
-                return interactingVolume;
-            }
-        }
+        public bool IsInteracting { get { return interactingVolume; } }
 
         protected virtual void Start()
         {
@@ -126,11 +81,12 @@ namespace VrFps
             AudioSource tempAudioSource = GetComponentInChildren<AudioSource>();
 
             if (tempAudioSource)
-            {
                 audioSourceContainer = tempAudioSource.transform;
-            }
 
             charController = transform.parent.GetComponentInChildren<CharacterControllerMovement>();
+
+            if (!handSkeleton) handSkeleton = GetComponentInChildren<SteamVR_Behaviour_Skeleton>();
+            handSkeletonRoot = handSkeleton ? handSkeleton.transform : null;
 
             gameObject.layer = LayerMask.NameToLayer("ItemDetection");
             rayGrab = GetComponent<RayGrab>();
@@ -140,88 +96,91 @@ namespace VrFps
             defaultMat = interactionSphere.sharedMaterial;
 
             offsetRigidbody = offset.GetComponent<Rigidbody>();
+            offsetRigidbody.maxAngularVelocity = Mathf.Infinity;
             playerCollider = charController.GetComponent<Collider>();
+
+            if (handSkeleton)
+                handSkeleton.BlendToPoser(handSkeleton.fallbackPoser);
         }
 
         protected override void FixedUpdate()
         {
             base.FixedUpdate();
-
         }
 
-        protected virtual void Update() //업데이트
+        void ManipulateStack()
+        {
+            if (VrFpsInput.TouchPadInput(null, VrFpsInput.TouchPadDirection.dontMatter, this))
+                if (touchpadAxis.axis.y > 0)
+                    PopFromStack();
+                else
+                {
+                    int collected = 0;
+
+                    foreach (InteractionVolume iv in potentialInteractionVolumes)
+                    {
+                        Item tempItem = iv.GetComponent<Item>();
+
+                        if (tempItem)
+                            if (!tempItem.Restrained)
+                                if (tempItem.Stackable)
+                                    if (AddToStack(tempItem))
+                                        collected++;
+
+                        if (collected >= addToStackAmount)
+                            break;
+                    }
+                }
+        }
+
+        protected virtual void Update()
         {
             PoseStoredItem();
 
             if (interactingVolume)
             {
-                if (OVRInput.GetDown(touchpadInput, inputSource)) //오큘러스 콘트럴러 입력 값
-                {
-                    if (OVRInput.Get(touchpadAxis, inputSource).y > 0)
-                    {
-                        PopFromStack();
-                    }
-                }
+                ManipulateStack();
 
-                else
-                {
-                    int collected = 0;
-
-                    foreach (InteractionVolume iv in potentialInteractionVolumes) 
-                    {
-                        Item tempItem = iv.GetComponent<Item>();
-
-                        if (tempItem)
-                        {
-                            if (!tempItem.Restrained)
-                            {
-                                if (tempItem.Stackable)
-                                {
-                                    if (AddToStack(tempItem))
-                                    {
-                                        collected++;
-                                    }
-                                }
-                            }
-                        }
-                        if (collected >= addToStackAmount)
-                        {
-                            break;
-                        }
-                    }
-                }
-
-                if (rayGrab)//원거리 그렙
-                {
+                if (rayGrab)
                     rayGrab.SetRayGrabActive(false);
-                }
 
-                if (activeHighlight) //하이라이트 활성
+                if (activeHighlight)
                 {
-                    activeHighlight.ActiveHighlight = false;
+                    activeHighlight.HighlightIsActive = false;
                     activeHighlight = null;
                 }
                 return;
             }
-            else 
+            else
             {
-
+                if (HandSkeletonRoot)
+                    if (storedItem)
+                    {
+                        if (Vector3.Distance(storedItem.PrimaryHand.Offset.localPosition, Vector3.zero) < 0.1f)
+                        {
+                            HandSkeletonRoot.transform.localPosition = Vector3.Lerp(HandSkeletonRoot.transform.localPosition, Vector3.zero, Time.deltaTime / 0.2f);
+                            HandSkeletonRoot.transform.localRotation = Quaternion.Lerp(HandSkeletonRoot.transform.localRotation, Quaternion.identity, Time.deltaTime / 0.2f);
+                        }
+                    }
+                    else
+                    {
+                        HandSkeletonRoot.transform.localPosition = Vector3.Lerp(HandSkeletonRoot.transform.localPosition, Vector3.zero, Time.deltaTime / 0.2f);
+                        HandSkeletonRoot.transform.localRotation = Quaternion.Lerp(HandSkeletonRoot.transform.localRotation, Quaternion.identity, Time.deltaTime / 0.2f);
+                    }
             }
 
-            if (pointGrab) //그렙
-            {
+            if (pointGrab)
                 if (rayGrab)
                 {
                     if (potentialInteractionVolumes.Count == 0)
                     {
-                        if (OVRInput.Get(touchpadInput, inputSource)) //입력키 값 누르면 그렙
+                        if (VrFpsInput.Input(touchpadInput, this))
                         {
                             InteractionVolume tempRayIV = rayGrab.RaycastGrab();
 
                             if (tempRayIV)
-                            {
                                 tempRayIV.AttemptInteraction(this);
-                            }
+
                             return;
                         }
                     }
@@ -229,41 +188,33 @@ namespace VrFps
                     rayGrab.ClearRayIV();
                     rayGrab.SetRayGrabActive(false);
                 }
-            }
 
-            if (dropGrab) //떨어트리기
-            {
+            if (dropGrab)
                 if (capsuleGrab)
                 {
-                    if (potentialInteractionVolumes.Count == 0) 
+                    if (potentialInteractionVolumes.Count == 0)
                     {
                         InteractionVolume tempCapsuleIV = SendInteractionInput(capsuleGrab.CapsuleGrabInteractions());
 
                         if (tempCapsuleIV)
-                        {
                             SetInteractionSphereMaterial(interactionSphereHighlight);
-                        }
                         else
-                        {
                             SetInteractionSphereMaterial(defaultMat);
-                        }
+
                         return;
                     }
                 }
-            }
 
             potentialInteractionVolumes.RemoveAll(item => item == null);
 
             InteractionVolume tempIV = null;
 
-            foreach (List<InteractionVolume> inputGroup in inputGroups.Values) //소리 입력
+            foreach (List<InteractionVolume> inputGroup in inputGroups.Values)
             {
                 inputGroup.RemoveAll(item => item == null);
                 InteractionVolume inputGroupTempIV = SendInteractionInput(inputGroup);
-                if (!tempIV)
-                {
-                    tempIV = inputGroupTempIV;
-                }
+
+                if (!tempIV) tempIV = inputGroupTempIV;
             }
 
             if (tempIV)
@@ -271,68 +222,51 @@ namespace VrFps
                 SetActiveHighlight(tempIV);
                 SetInteractionSphereMaterial(interactionSphereHighlight);
             }
-            else
-            {
-                SetInteractionSphereMaterial(defaultMat);
-            }
+            else SetInteractionSphereMaterial(defaultMat);
         }
 
-        protected override void SetVisibility(bool visible) //랜더링 세트
+        protected override void SetVisibility(bool visible)
         {
             if (interactionSphere)
-            {
                 interactionSphere.enabled = visible && showInteractionSphere;
-            }
 
             if (!tomatoePresence && showController)
-            {
                 return;
-            }
 
-            GameObject renderModel = null;
+            SteamVR_RenderModel renderModel = GetComponentInChildren<SteamVR_RenderModel>();
 
             if (renderModel)
             {
                 MeshRenderer[] meshes = renderModel.GetComponentsInChildren<MeshRenderer>();
 
                 if (meshes != null)
-                {
                     foreach (MeshRenderer mesh in meshes)
-                    {
                         mesh.enabled = visible;
-                    }
-                }
             }
         }
 
         InteractionVolume activeHighlight;
 
-        void SetActiveHighlight(InteractionVolume newActiveHighlight) //잡을수 있는 물건이 있으면 잡을수있다고 표현되는걸 활성화
+        void SetActiveHighlight(InteractionVolume newActiveHighlight)
         {
             if (activeHighlight)
-            {
-                activeHighlight.ActiveHighlight = false;
-            }
+                activeHighlight.HighlightIsActive = false;
 
             activeHighlight = newActiveHighlight;
 
             if (Highlight)
-            {
-                activeHighlight.ActiveHighlight = true;
-            }
+                activeHighlight.HighlightIsActive = true;
         }
 
         void SetInteractionSphereMaterial(Material newMat)
         {
             if (interactionSphere.sharedMaterial != newMat)
-            {
                 interactionSphere.sharedMaterial = newMat;
-                }
         }
 
         bool ValidIV(InteractionVolume iv) { if (iv == null) return false; return !(iv.restrained || (!iv.Overlap && iv.Hand)); }
 
-        InteractionVolume SendInteractionInput(List<InteractionVolume> interactionsToSort) //상호 작용 입력
+        InteractionVolume SendInteractionInput(List<InteractionVolume> interactionsToSort)
         {
             InteractionVolume[] interactions = new InteractionVolume[interactionsToSort.Count];
             interactionsToSort.CopyTo(interactions);
@@ -340,6 +274,7 @@ namespace VrFps
             return SendInteractionInput(interactions);
         }
 
+      
         InteractionVolume SendInteractionInput(InteractionVolume[] interactions)
         {
             if (interactions.Length == 0)
@@ -357,7 +292,7 @@ namespace VrFps
                     float distance = Vector3.Distance(currentIV.transform.position, interactionSphere.transform.position);
                     float priority = currentIV.Priority / distance;
 
-                    if (priority > highestPriority && ValidIV(currentIV))
+                    if ((priority > highestPriority && ValidIV(currentIV)))
                     {
                         prioritizedIV = currentIV;
                         highestPriority = priority;
@@ -371,7 +306,7 @@ namespace VrFps
             return prioritizedIV;
         }
 
-        public virtual Slot GetClosestValidSlot(Item item) //가장 근처의 유효한 슬롯 찾기
+        public virtual Slot GetClosestValidSlot(Item item)
         {
             float closestDistance = Mathf.Infinity;
             Slot closestValidSlot = null;
@@ -391,7 +326,7 @@ namespace VrFps
                         continue;
 
                     if (closestValidSlot.HasItem && !potentialSlot.HasItem) 
-                    {                                                       
+                    {                                                      
                         closestDistance = distance;
                         closestValidSlot = potentialSlot;
                         continue;
@@ -412,50 +347,23 @@ namespace VrFps
 
         [SerializeField] protected List<InteractionVolume> potentialInteractionVolumes = new List<InteractionVolume>();
 
+        [SerializeField] protected SteamVR_Action_Boolean triggerInput;
+        [SerializeField] protected SteamVR_Action_Boolean touchpadInput;
 
-        //오큘러스 버튼이랑 위치 가져옴
-        [SerializeField] protected OVRInput.Button triggerInput;
-        [SerializeField] protected OVRInput.Button touchpadInput;
+        [SerializeField] protected SteamVR_Action_Single triggerAxis;
+        [SerializeField] protected SteamVR_Action_Vector2 touchpadAxis;
 
-        [SerializeField] protected OVRInput.Axis1D triggerAxis;
-        [SerializeField] protected OVRInput.Axis2D touchpadAxis;
+        public SteamVR_Action_Boolean TriggerInput { get { return triggerInput; } }
+        public SteamVR_Action_Boolean TouchpadInput { get { return touchpadInput; } }
 
-        public OVRInput.Button TriggerInput
+        public float TriggerRotation { get { return triggerAxis.GetAxis(inputSource); } }
+        public Vector2 TouchpadAxis { get { return touchpadAxis.GetAxis(inputSource); } }
+
+        Dictionary<SteamVR_Action_Boolean, List<InteractionVolume>> inputGroups = new Dictionary<SteamVR_Action_Boolean, List<InteractionVolume>>();
+
+        void AddInteractables(Collider other)
         {
-            get
-            {
-                return triggerInput;
-            }
-        }
-        public OVRInput.Button TouchpadInput
-        {
-            get
-            {
-                return touchpadInput;
-            }
-        }
-     
-        public float TriggerRotation
-        {
-            get
-            {
-                return OVRInput.Get(triggerAxis, inputSource);
-            }
-        }
-
-        public Vector2 TouchpadAxis
-        {
-            get
-            {
-                return OVRInput.Get(touchpadAxis, inputSource);
-            }
-        }
-
-        Dictionary<OVRInput.Button, List<InteractionVolume>> inputGroups = new Dictionary<OVRInput.Button, List<InteractionVolume>>();
-
-        void AddInteractables(Collider other) //상호작용 가능한것 추가
-        {
-            if(other.gameObject.tag == "Slot")
+            if (other.gameObject.tag == "Slot")
             {
                 Slot[] tempSlots = other.GetComponents<Slot>();
 
@@ -467,7 +375,7 @@ namespace VrFps
                 }
             }
 
-            if (other.gameObject.tag == "Interactable") //다른 게임 오브젝트들중 태그로 "Interactable"
+            if (other.gameObject.tag == "Interactable")
             {
                 InteractionVolume[] tempInteractionVolumes = other.GetComponents<InteractionVolume>();
 
@@ -480,7 +388,7 @@ namespace VrFps
 
                             potentialInteractionVolumes.Add(tempInteractionVolume);
 
-                            OVRInput.Button tempInput = tempInteractionVolume.StartInputID;
+                            SteamVR_Action_Boolean tempInput = tempInteractionVolume.StartInputID;
 
                             if (tempInput != null)
                             {
@@ -493,7 +401,7 @@ namespace VrFps
             }
         }
 
-        void RemoveInteractables(Collider other) //상호가능한것 제거
+        void RemoveInteractables(Collider other)
         {
             if (other.gameObject.tag == "Slot")
             {
@@ -514,17 +422,17 @@ namespace VrFps
                 foreach (InteractionVolume tempInteractionVolume in tempInteractionVolumes)
                     if (potentialInteractionVolumes.Contains(tempInteractionVolume))
                     {
-                        tempInteractionVolume.ActiveHighlight = false;
+                        tempInteractionVolume.HighlightIsActive = false;
 
                         if (tempInteractionVolume._OnExitOverlap != null)
                             tempInteractionVolume._OnExitOverlap(this);
 
                         potentialInteractionVolumes.Remove(tempInteractionVolume);
 
-                        OVRInput.Button tempInput = tempInteractionVolume.StartInputID;
+                        SteamVR_Action_Boolean tempInput = tempInteractionVolume.StartInputID;
 
-                        if(tempInput != null)
-                            if(inputGroups.ContainsKey(tempInput))
+                        if (tempInput != null)
+                            if (inputGroups.ContainsKey(tempInput))
                                 inputGroups[tempInput].Remove(tempInteractionVolume);
                     }
             }
@@ -532,11 +440,9 @@ namespace VrFps
 
         protected Slot highlightSlot;
 
-        protected void OnTriggerStay(Collider other) //온트리거 관련
+        protected void OnTriggerStay(Collider other)
         {
-            bool hasStorableItem = HasItem ? StoredItem ? StoredItem.Storable : false : false;
-
-            if (hasStorableItem)
+            if (HasItem)
             {
                 Slot tempHighlightSlot = GetClosestValidSlot(storedItem);
 
@@ -566,7 +472,7 @@ namespace VrFps
             }
         }
 
-        protected void OnTriggerEnter(Collider other) 
+        protected void OnTriggerEnter(Collider other)
         {
             AddInteractables(other);
         }
@@ -588,22 +494,21 @@ namespace VrFps
         public void HapticPulse(float length, float strength)
         {
             if (!hapticFeedback)
-            {
                 return;
-            }
+
+            if (hapticAction != null)
+                hapticAction.Execute(0, length, 150, strength, inputSource);
         }
 
-        protected virtual void PopFromStack() //스택에서 꺼냄
+        [SerializeField] protected SteamVR_Action_Vibration hapticAction;
+
+        protected virtual void PopFromStack()
         {
             if (!storedItem)
-            {
                 return;
-            }
 
             if (!storedItem.Stackable)
-            {
                 return;
-            }
 
             Item tempStoredItem = storedItem;
 
@@ -615,21 +520,16 @@ namespace VrFps
             tempStoredItem.dropStack = true;
 
             if (tempSlot)
-            {
                 tempSlot.AddToStack(tempStoredItem);
-            }
             else if (sibling.StackableStoredItem)
-            {
                 if (Vector3.Distance(transform.position, sibling.transform.position) <= 0.2f)
-                {
                     sibling.AddToStack(tempStoredItem);
-                }
-            }
 
             GrabFromStack();
         }
 
-        public virtual void GrabFromStack() //스택에서 그렙
+ 
+        public virtual void GrabFromStack()
         {
             if (!StackIsEmpty)
             {
@@ -642,7 +542,8 @@ namespace VrFps
             }
         }
 
-        Slot ClosestStackableSlot(Item tempItem) //최근접 스택이 가능한 슬롯
+
+        Slot ClosestStackableSlot(Item tempItem)
         {
             Slot closestSlot = null;
             float closestDistance = Mathf.Infinity;
@@ -670,10 +571,10 @@ namespace VrFps
 
                 if (closestSlot)
                 {
-                    if (closestSlot.HasItem && !tempSlot.HasItem)
+                    if (closestSlot.HasItem && !tempSlot.HasItem) 
                         continue;
 
-                    if (!closestSlot.HasItem && tempSlot.HasItem)  
+                    if (!closestSlot.HasItem && tempSlot.HasItem)
                     {
                         closestDistance = distance;
                         closestSlot = tempSlot;
@@ -693,17 +594,10 @@ namespace VrFps
 
         [SerializeField] int addToStackAmount = 1;
 
-       
-        //상호작용 크기 조절
-        public void IncreaseInteractionSphereSize(float increment)
-        {
-            ResizeInteractionSphere((interactionTrigger.radius) + increment);
-        }
 
-        public void DecreaseInteractionSphereSize(float decrement)
-        {
-            ResizeInteractionSphere((interactionTrigger.radius) - decrement);
-        }
+        public void IncreaseInteractionSphereSize(float increment) { ResizeInteractionSphere((interactionTrigger.radius) + increment); }
+
+        public void DecreaseInteractionSphereSize(float decrement) { ResizeInteractionSphere((interactionTrigger.radius) - decrement); }
 
         public void ResizeInteractionSphere(float newSize)
         {
@@ -740,6 +634,20 @@ namespace VrFps
         public virtual void ToggleDropGrab() { dropGrab = !dropGrab; }
 
         public virtual void TogglePointGrab() { pointGrab = !pointGrab; }
+
+        public virtual void CycleDeviceIndex()
+        {
+            SteamVR_TrackedObject trackedObj = GetComponent<SteamVR_TrackedObject>();
+
+            int index = (int)trackedObj.index;
+
+            if (index == 4)
+                index = 1;
+            else
+                index++;
+
+            trackedObj.SetDeviceIndex(index);
+        }
 
         void PoseStoredItem()
         {

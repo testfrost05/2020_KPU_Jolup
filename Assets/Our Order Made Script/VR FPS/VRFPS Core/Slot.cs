@@ -6,6 +6,15 @@ namespace VrFps
 {
     public class Slot : MonoBehaviour //아이템 넣을 수 있는 슬롯
     {
+        [SerializeField] protected Transform globalOffset;
+        public virtual Transform GlobalOffset
+        {
+            get
+            {
+                return globalOffset;
+            }
+        }
+
         [SerializeField] protected Transform offset;
         public virtual Transform Offset
         {
@@ -27,6 +36,7 @@ namespace VrFps
 
         [SerializeField] public int sizeLimit; //들고 다닐수 있는 크기 제한
         [SerializeField] protected List<string> AcceptedTags = new List<string>();
+        [SerializeField] protected List<string> UnacceptedTags = new List<string>();
 
         [SerializeField] protected bool poseItem;
 
@@ -47,17 +57,26 @@ namespace VrFps
 
         [ReadOnly] [SerializeField] protected Item storedItem;
 
-        public virtual Item StoredItem //아이템 저장
+        public virtual Item StoredItem
         {
-            get
-            {
-                return storedItem;
-            }
+            get { return storedItem; }
             set
             {
-                storedItem = value; }
+                storedItem = value;
+
+                if (value != null && _OnStore != null)
+                    _OnStore(storedItem);
+
+                if (value == null && _OnUnstore != null)
+                    _OnUnstore(storedItem);
+            }
         }
 
+        public delegate void OnStore(Item item);
+        public OnStore _OnStore;
+
+        public delegate void OnUnstore(Item item);
+        public OnUnstore _OnUnstore;
 
         private void Start()
         {
@@ -92,7 +111,9 @@ namespace VrFps
         public void UnstoreItem()
         {
             if (storedItem)
+            {
                 storedItem.DetachSlot();
+            }
         }
 
         [SerializeField] protected MeshRenderer mesh;
@@ -154,6 +175,25 @@ namespace VrFps
             return false;
         }
 
+        protected virtual bool HasUnacceptedTag(Item item)
+        {
+
+            if (UnacceptedTags.Count == 0)
+            {
+                return false;
+            }
+
+            for (int i = 0; i < UnacceptedTags.Count; i++)
+            {
+                if (item.HasTag(UnacceptedTags[i]))
+                {
+                    return true;
+                }
+            }
+
+            return false;
+        }
+
         public virtual bool ValidItem(Item potentialItem) //유효 아이템
         {
             if (potentialItem == null)
@@ -170,6 +210,12 @@ namespace VrFps
             {
                 return false;
             }
+
+            if (HasUnacceptedTag(potentialItem))
+            {
+                return false;
+            }
+
             return true;
         }
 

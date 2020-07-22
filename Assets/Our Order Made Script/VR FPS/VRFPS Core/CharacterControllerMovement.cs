@@ -1,38 +1,32 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Valve.VR;
 
 namespace VrFps
 {
-    public class CharacterControllerMovement : MonoBehaviour //캐릭터 컨트롤러
+    public class CharacterControllerMovement : MonoBehaviour
     {
-        [SerializeField] protected OVRInput.Axis2D movementAxis; 
+        [SerializeField] protected SteamVR_Action_Vector2 movementAxis;
 
         public bool linearMovement = false;
 
-        public Hand currentHand; //현재 손 위치
-        public Hand defaultHand; //기본 손 위치
+        public Hand currentHand;
+        public Hand defaultHand;
 
         [SerializeField]
-        protected CharacterController characterController; //유니티 엔진 캐릭터 콘트롤러
+        protected CharacterController characterController;
 
-        public CharacterController CharacterController
-        {
-            get
-            {
-                return characterController;
-            }
-        }
+        public CharacterController CharacterController { get { return characterController; } }
 
         public float maxHeight = 2;
 
-        public float movementSpeed; //이동속도
+        public float movementSpeed;
         public float fallingMovementSpeedScale;
         public float sprintScale;
 
         public float gravity = -1;
 
-        //부위별 각각 트랜스폼
         public Transform rig;
         public Transform body;
         public Transform head;
@@ -48,7 +42,7 @@ namespace VrFps
         void Start()
         {
             gameObject.tag = "Player";
-;           gameObject.layer = LayerMask.NameToLayer("Player"); //플레이어 레이어
+            ; gameObject.layer = LayerMask.NameToLayer("Player");
             velocityHistory.InitializeHistory();
             prevPos = transform.position;
         }
@@ -111,14 +105,48 @@ namespace VrFps
 
         public virtual void SetHand(Hand hand)
         {
-        
+            /*if (!autoSetMovementHand)
+			    return;
+
+		    if (!defaultHand.InteractingVolume)
+		    {
+			    currentHand = defaultHand;
+			    return;
+		    }
+
+		    if (!hand.InteractingVolume && hand.Sibling.InteractingVolume)
+		    {
+			    currentHand = hand;
+			    return;
+		    }
+		    else if (hand.InteractingVolume && !hand.Sibling.InteractingVolume)
+		    {
+			    currentHand = hand.Sibling;
+			    return;
+		    }
+		    else if (hand.InteractingVolume && hand.Sibling.InteractingVolume)
+		    {
+			    if (hand.InteractingVolume == hand.Sibling.InteractingVolume)
+			    {
+				    currentHand = hand.StoredItem.SecondaryHand;
+				    return;
+			    }
+
+			    float handPriority = hand.InteractingVolume.MovementPriority;
+			    float siblingPriority = hand.Sibling.InteractingVolume.MovementPriority;
+
+			    if (handPriority == siblingPriority)
+				    currentHand = defaultHand;
+			    else
+				    currentHand = handPriority > siblingPriority ? hand : hand.Sibling;
+		    }*/
         }
 
         public delegate void MovementEvent();
         public MovementEvent _StartMoving;
         public MovementEvent _StopMoving;
 
-        void UpdatePosition() //위치 업데이트
+        void UpdatePosition()
         {
             if (!currentHand)
                 return;
@@ -129,70 +157,50 @@ namespace VrFps
             float sprintInput = sprinting ? sprintScale : 1;
 
             
-            //오큘러스 헤드마운트에 따른 움직임
             Vector3 movement = ((new Vector3(currentHand.transform.forward.x, 0, currentHand.transform.forward.z).normalized
-                                    * (linearMovement ? (OVRInput.Get(movementAxis, currentHand.inputSource).y != 0 ? 1 : 0) : OVRInput.Get(movementAxis, currentHand.inputSource).y))
+                                    * (linearMovement ? (movementAxis.GetAxis(currentHand.inputSource).y != 0 ? 1 : 0) : movementAxis.GetAxis(currentHand.inputSource).y))
                               + (new Vector3(currentHand.transform.right.x, 0, currentHand.transform.right.z).normalized
-                                    * (linearMovement ? (OVRInput.Get(movementAxis, currentHand.inputSource).x != 0 ? 1 : 0) : OVRInput.Get(movementAxis, currentHand.inputSource).x)))
+                                    * (linearMovement ? (movementAxis.GetAxis(currentHand.inputSource).x != 0 ? 1 : 0) : movementAxis.GetAxis(currentHand.inputSource).x)))
                                 * movementSpeed * sprintInput * (Time.deltaTime) * (fallingTime > 0.1f ? fallingMovementSpeedScale : 1);
 
             RaycastHit hit;
             Collider[] collider = Physics.OverlapSphere(head.position, characterController.radius * 2f, door);
 
-
             if (collider.Length > 0)
-            {
                 if (collider[0])
-                {
                     if (Physics.Linecast(head.position, collider[0].transform.position, out hit, door))
                     {
                         if (Vector3.Dot(hit.normal, movement) < 0)
-                        {
                             movement = Vector3.ProjectOnPlane(movement, hit.normal);
-                        }
+
                         if (Vector3.Dot(hit.normal, (prevPos - head.position).normalized) > 0)
-                        {
                             movement += Vector3.Project((prevPos - head.position), hit.normal);
-                        }
                     }
-                }
-            }
 
             if (!characterController.isGrounded && !climbing)
-            {
                 fallingTime += (Time.deltaTime);
-            }
             else
-            {
                 fallingTime = 0;
-            }
 
             if (climbingHand && climbingPos == Vector3.zero)
             {
                 climbingPos = climbingHand.transform.position;
 
                 if (climbable)
-                {
                     climbablePos = climbable.transform.position;
-                }
             }
 
-            //y 이동
-            movement.y = Mathf.Clamp((climbing ? 0 : -gravity) * Mathf.Pow(fallingTime + 1, 2),
-                Mathf.NegativeInfinity, -2f) * (Time.deltaTime);
+            movement.y = Mathf.Clamp((climbing ? 0 : -gravity) * Mathf.Pow(fallingTime + 1, 2), Mathf.NegativeInfinity, -2f) * (Time.deltaTime);
 
-            characterController.Move(climbing ? (climbingPos - climbingHand.transform.position)
-                + (climbable.transform.position - climbablePos) : movement);
+            characterController.Move(climbing ? (climbingPos - climbingHand.transform.position) + (climbable.transform.position - climbablePos) : movement);
 
             rig.position += transform.position - prevPos;
             transform.position = head.position;
+
             prevPos = transform.position;
 
-            characterController.height = climbing ? climbingHeight : Mathf.Lerp(characterController.height,
-                head.localPosition.y, Time.time - climbingTime);
-
-            characterController.center = new Vector3(0, climbing ? 0 : Mathf.Lerp(characterController.center.y,
-                -head.localPosition.y / 2, Time.time - climbingTime), 0);
+            characterController.height = climbing ? climbingHeight : Mathf.Lerp(characterController.height, head.localPosition.y, Time.time - climbingTime);
+            characterController.center = new Vector3(0, climbing ? 0 : Mathf.Lerp(characterController.center.y, -(head.localPosition.y) / 2, Time.time - climbingTime), 0);
 
             body.position = head.position;
 
@@ -207,9 +215,7 @@ namespace VrFps
                 if (headYRotation != -1)
                 {
                     if (Mathf.Abs(headYRotation - head.rotation.eulerAngles.y) > 60 && tempDot < 0.95f)
-                    {
                         headYRotation = head.rotation.eulerAngles.y;
-                    }
 
                     body.rotation = Quaternion.Euler(0, headYRotation, 0);
                 }
@@ -223,20 +229,15 @@ namespace VrFps
             }
 
             if (!currentHand)
-            {
                 return;
-            }
 
-            if (OVRInput.GetDown(defaultHand.TouchpadInput, defaultHand.inputSource))
-            {
+            if (VrFpsInput.TouchPadInput(null, VrFpsInput.TouchPadDirection.dontMatter, defaultHand))
                 sprinting = true;
-            }
-
-            if (Mathf.Abs(OVRInput.Get(movementAxis, currentHand.inputSource).x) <= sprintingDeadzone
-             && Mathf.Abs(OVRInput.Get(movementAxis, currentHand.inputSource).y) <= sprintingDeadzone)
-            {
+            
+            if (Mathf.Abs(movementAxis.GetAxis(currentHand.inputSource).x) <= sprintingDeadzone
+             && Mathf.Abs(movementAxis.GetAxis(currentHand.inputSource).y) <= sprintingDeadzone)
                 sprinting = false;
-            }
+            
 
             updateTime = Time.time;
         }

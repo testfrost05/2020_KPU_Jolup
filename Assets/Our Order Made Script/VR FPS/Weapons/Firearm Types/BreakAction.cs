@@ -27,12 +27,12 @@ namespace VrFps
         
         protected override void TouchpadUpInput()
         {
-            TouchPadInput(UnlockHingeWrapper, TouchPadDirection.up);
+            TouchPadInput(UnlockHingeWrapper, VrFpsInput.TouchPadDirection.up);
         }
-        
+
         protected override void TouchpadDownInput()
         {
-            TouchPadInput(UnlockHingeWrapper, TouchPadDirection.up);
+            TouchPadInput(UnlockHingeWrapper, VrFpsInput.TouchPadDirection.up);
         }
 
         protected void UnlockHingeWrapper()

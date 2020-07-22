@@ -290,7 +290,7 @@ namespace VrFps
             }
 
             if (primaryGrip.StartInputID == PrimaryHand.TriggerInput &&
-                OVRInput.Get(primaryGrip.StartInputID, PrimaryHand.inputSource))
+                VrFpsInput.Input(primaryGrip.StartInputID, PrimaryHand))
             {
                 releasedTriggerAfterPickUp = false;
             }

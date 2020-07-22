@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Valve.VR;
 
 namespace VrFps
 {
@@ -16,8 +17,8 @@ namespace VrFps
 
         [SerializeField] protected TwitchExtension.DotAxis pullToEjectDirection; 
 
-        [SerializeField] protected OVRInput.Button openCylinderInput; //실린더 여는 키 입력
-        [SerializeField] protected TouchPadDirection openCylinderDirection;
+        [SerializeField] protected SteamVR_Action_Boolean openCylinderInput; //실린더 여는 키 입력
+        [SerializeField] protected VrFpsInput.TouchPadDirection openCylinderDirection;
 
         protected override void Start() 
         {

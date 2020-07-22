@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Valve.VR;
 
 namespace VrFps
 {
@@ -64,11 +65,11 @@ namespace VrFps
         [SerializeField] protected Transform slideStopObject;
         [SerializeField] protected Vector3[] slideStopRotations = new Vector3[2];
 
-        [SerializeField] protected OVRInput.Button slideStopInput; //오큘러스 컨트롤러 버튼 입력 받는거
-        public OVRInput.Button SlideStopInput { get { return slideStopInput; } }
+        [SerializeField] protected SteamVR_Action_Boolean slideStopInput;
+        public SteamVR_Action_Boolean SlideStopInput { get { return slideStopInput; } }
 
-        [SerializeField] protected Item.TouchPadDirection slideStopTouchpadDirection;
-        public Item.TouchPadDirection SlideStopTouchpadDirection { get { return slideStopTouchpadDirection; } }
+        [SerializeField] protected VrFpsInput.TouchPadDirection slideStopTouchpadDirection;
+        public VrFpsInput.TouchPadDirection SlideStopTouchpadDirection { get { return slideStopTouchpadDirection; } }
 
         [SerializeField] protected SlideStopFunction slideStopFunction;
         protected enum SlideStopFunction //슬라이드 멈추는거 기능

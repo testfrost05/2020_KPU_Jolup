@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Valve.VR;
 
 namespace VrFps
 {
@@ -10,7 +11,7 @@ namespace VrFps
 
         [SerializeField] protected List<AudioClip> useSounds = new List<AudioClip>(); //부착할때 소리
 
-        [SerializeField] protected OVRInput.Button useAttachmentInput; //부착아이템 관련 버튼키 설정
+        [SerializeField] protected SteamVR_Action_Boolean useAttachmentInput; //부착아이템 관련 버튼키 설정
 
         public enum Type //부착 아이템 타입 
         {

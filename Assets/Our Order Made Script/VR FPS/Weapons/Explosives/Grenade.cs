@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Valve.VR;
 
 namespace VrFps
 {
@@ -17,8 +18,8 @@ namespace VrFps
 
         [SerializeField] protected float forceThreshold = -1;
 
-        [SerializeField] protected TouchPadDirection ejectHandleTouchpadDirection; //안전손잡이 제거 버튼
-        [SerializeField] protected OVRInput.Button ejectHandleInput; //안전손잡이 제거 입력
+        [SerializeField] protected VrFpsInput.TouchPadDirection ejectHandleTouchpadDirection;
+        [SerializeField] protected SteamVR_Action_Boolean ejectHandleInput; //안전손잡이 제거 입력
 
         protected override void Start()
         {

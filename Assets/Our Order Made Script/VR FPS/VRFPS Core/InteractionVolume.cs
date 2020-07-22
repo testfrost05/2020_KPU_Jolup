@@ -1,6 +1,8 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEditor;
+using Valve.VR;
 
 namespace VrFps
 {
@@ -9,23 +11,21 @@ namespace VrFps
         [ReadOnly] [SerializeField] protected Hand hand;
         public Hand Hand { get { return hand; } }
 
-        protected Collider interactionTrigger;
+        [SerializeField] GameObject highlight;
 
-        [SerializeField] GameObject highlight; //하이라이트 - 총을 컨트롤러로 잡을 수 있을 때 무기에 색변화를 줘서 보여줌
-
-        public bool ActiveHighlight //하이라이트 활성
+        public bool HighlightIsActive
         {
             set
             {
-                if (highlight == null) //하이라이트 없으면 그냥 리턴
+                if (highlight == null)
                     return;
 
-                if (highlight.activeSelf != value) //하이라이트 활성화 변수가 다를 경우
+                if (highlight.activeSelf != value)
                 {
-                    if (value == true) 
+                    if (value == true)
                     {
                         if (!(restrained || (!overlap && hand)))
-                            highlight.SetActive(true); 
+                            highlight.SetActive(true);
                     }
                     else
                         highlight.SetActive(false);
@@ -33,20 +33,21 @@ namespace VrFps
             }
         }
 
-        public GameObject Highlight 
+        public GameObject Highlight
         {
             set { highlight = value; }
             get { return highlight; }
         }
 
-    
-        [SerializeField] protected int priority = 1; //우선순위
-        [SerializeField] protected int movementPriority; 
+        [Tooltip("As you increase the priority the required distance to interact with this volume is shortened while other volumes are also inside the hands interaction sphere")]
+        [SerializeField] protected int priority = 1;
+        [Tooltip("If auto select movement hand is enabled the hand holding the item with the highest movement priority is set to move the character controller")]
+        [SerializeField] protected int movementPriority;
 
         public int Priority { get { return priority; } }
         public int MovementPriority { get { return movementPriority; } }
 
-        public delegate void OverlapEvent(Hand hand); //오버렙 
+        public delegate void OverlapEvent(Hand hand);
 
         public OverlapEvent _OnEnterOverlap;
         public OverlapEvent _OnOverlapInteraction;
@@ -57,15 +58,15 @@ namespace VrFps
         public Interaction _StartInteraction;
         public Interaction _EndInteraction;
 
-       
-        [SerializeField] protected bool overlap; 
+        [Tooltip("If overlap is set to true another hand can override the current interacting hand")]
+        [SerializeField] protected bool overlap;
         public bool Overlap { get { return overlap; } }
 
 
-        
+        [Tooltip("This volume cannot be interacted with while restrained is true")]
         public bool restrained;
 
-        public enum InteractionMode // 키 누르고 때고
+        public enum InteractionMode
         {
             Press,
             PressDown,
@@ -76,7 +77,7 @@ namespace VrFps
 
         [ReadOnly] [SerializeField] protected int releaseCount;
 
-        protected enum Input //컨트롤러 키 종류
+        protected enum Input
         {
             Grip,
             Trigger,
@@ -84,17 +85,16 @@ namespace VrFps
             ApplicationMenu
         }
 
-        [SerializeField] protected OVRInput.Button startInteractingInputID;
-        [SerializeField] protected OVRInput.Button stopInteractingInputID;
+        [SerializeField] protected SteamVR_Action_Boolean startInteractingInputID;
+        [SerializeField] protected SteamVR_Action_Boolean stopInteractingInputID;
 
-        public OVRInput.Button StartInputID { get { return startInteractingInputID; } } //무슨키로 잡을건지 x로 잡을건지 손잡이쪽 버튼으로 잡을건지
-        public OVRInput.Button EndInputID { get { return stopInteractingInputID; } } //무슨키로 놓을건지
+        public SteamVR_Action_Boolean StartInputID { get { return startInteractingInputID; } }
+        public SteamVR_Action_Boolean EndInputID { get { return stopInteractingInputID; } }
 
-        [SerializeField] protected InteractionMode startInteractionMode = InteractionMode.PressDown; // 어떻게 눌렀을때 잡을건지 설정한 키를 눌렀을때 
-                                                                                                     // 혹은 놓았을때 등등..
-        [SerializeField] protected InteractionMode endInteractionMode = InteractionMode.PressUp; // 어떻게 눌렀을때 놓을건지
+        [SerializeField] protected InteractionMode startInteractionMode = InteractionMode.PressDown;
+        [SerializeField] protected InteractionMode endInteractionMode = InteractionMode.PressUp;
 
-        public enum EarlyExitCondition 
+        public enum EarlyExitCondition
         {
             none,
             onExitTrigger,
@@ -112,37 +112,120 @@ namespace VrFps
 
         [Header("Hand Pose Blend Settings")]
 
-        [SerializeField] public Transform handRoot; //손 모양 변경
+        [SerializeField] public SteamVR_Skeleton_Poser RightHandPoser;
+        [SerializeField] public SteamVR_Skeleton_Poser LeftHandPoser;
 
-        [SerializeField] public Vector3 rightPosePositionOffset; // 오른손 위치 변경
-        [SerializeField] public Vector3 rightPoseRotationOffset; // 오른손 로테이션 변경
+        [SerializeField] public Transform handRoot;
 
-        [SerializeField] public Vector3 leftPosePositionOffset; // 왼손
-        [SerializeField] public Vector3 leftPoseRotationOffset; // 왼속
+        [SerializeField] public Vector3 rightPosePositionOffset;
+        [SerializeField] public Vector3 rightPoseRotationOffset;
+
+        [SerializeField] public Vector3 leftPosePositionOffset;
+        [SerializeField] public Vector3 leftPoseRotationOffset;
 
         [SerializeField] protected float poseTime = 0.2f;
         public float PoseTime { get { return poseTime; } set { poseTime = value; } }
 
         protected virtual void Start()
         {
+            SteamVR_Skeleton_Poser[] tempHandPosers = GetComponents<SteamVR_Skeleton_Poser>();
 
-            if (interactionTrigger == null) interactionTrigger = GetComponent<Collider>(); 
+            if (tempHandPosers.Length >= 2)
+            {
+                if (!RightHandPoser) RightHandPoser = tempHandPosers[0];
+                if (!LeftHandPoser) LeftHandPoser = tempHandPosers[1];
+            }
 
-            if (handRoot == null) handRoot = transform;  
+            if (handRoot == null) handRoot = transform;
 
             gameObject.tag = "Interactable";
+
+            CreateHighlight();
         }
 
-        private float RightPoseValue;
-        private float LeftPoseValue;
+        public void CreateHighlight()
+        {
+            if (highlight) return;
 
-        private int RightPolarity;
-        private int LeftPolarity;
+            MeshFilter currentMeshFilter = GetComponent<MeshFilter>();
+
+            bool child = false;
+
+            if (!currentMeshFilter)
+            {
+                currentMeshFilter = GetComponentInChildren<MeshFilter>();
+                child = true;
+            }
+
+            if (!currentMeshFilter) return;
+
+            if (child && currentMeshFilter.GetComponent<InteractionVolume>()) return;
+
+            highlight = new GameObject(name + " Highlight");
+            MeshRenderer newRenderer = highlight.AddComponent<MeshRenderer>();
+
+#if UNITY_EDITOR
+            newRenderer.material = (Material)AssetDatabase.LoadAssetAtPath("Assets/SteamVR/InteractionSystem/Core/Materials/HoverHighlight.mat", typeof(Material));
+#endif
+
+            MeshFilter newFilter = highlight.AddComponent<MeshFilter>();
+            newFilter.mesh = currentMeshFilter.sharedMesh;
+
+            newFilter.transform.SetParent(currentMeshFilter.transform, true);
+            highlight.transform.localScale = Vector3.one;
+            newFilter.transform.localPosition = Vector3.zero;
+            newFilter.transform.localEulerAngles = Vector3.zero;
+
+            highlight.SetActive(false);
+        }
+
+        public float RightPoseValue;
+        public float LeftPoseValue;
+
+        public int RightPolarity;
+        public int LeftPolarity;
 
         protected virtual void Update()
         {
             EndInput();
+            AnimateHandPose();
+            AnimateHandToInteraction();
+        }
 
+        protected void AnimateHandPose()
+        {
+            if (!RightHandPoser || !LeftHandPoser) return;
+
+            RightHandPoser.SetBlendingBehaviourValue("Interact", RightPoseValue);
+            LeftHandPoser.SetBlendingBehaviourValue("Interact", LeftPoseValue);
+
+            RightPoseValue = Mathf.Clamp01(RightPoseValue + Time.deltaTime / poseTime * RightPolarity);
+            LeftPoseValue = Mathf.Clamp01(LeftPoseValue + Time.deltaTime / poseTime * LeftPolarity);
+        }
+
+        protected void AnimateHandToInteraction()
+        {
+            if (!RightHandPoser || !LeftHandPoser) return;
+
+            if (!hand) return;
+
+            if (!hand.HandSkeletonRoot) return;
+
+            if (hand.StoredItem)
+                if (Vector3.Distance(hand.Offset.localPosition, Vector3.zero) > 0.1f) return;
+
+            if (hand.HandSkeletonRoot.parent != handRoot)
+                hand.HandSkeletonRoot.SetParent(handRoot);
+
+            bool leftHand = hand.inputSource == SteamVR_Input_Sources.LeftHand;
+
+            Vector3 tempPosePositionOffset = leftHand ? leftPosePositionOffset : rightPosePositionOffset;
+            Vector3 tempPoseRotationOffset = leftHand ? leftPoseRotationOffset : rightPoseRotationOffset;
+
+            hand.HandSkeletonRoot.transform.localPosition = Vector3.Lerp(hand.HandSkeletonRoot.transform.localPosition, tempPosePositionOffset, Time.deltaTime / poseTime * 3);
+            hand.HandSkeletonRoot.transform.localRotation = Quaternion.Lerp(hand.HandSkeletonRoot.transform.localRotation, Quaternion.Euler(tempPoseRotationOffset), Time.deltaTime / poseTime * 3);
+
+            if (!handRoot) return;
         }
 
         protected virtual void FixedUpdate()
@@ -163,9 +246,9 @@ namespace VrFps
             switch (earlyExitCondition)
             {
                 case EarlyExitCondition.none:
-                    break; //earlyexitcondition이 none일경우 그냥 넘어감
+                    break;
 
-                case EarlyExitCondition.onExitTrigger: //onExitTrigger일경우 바로 상호작용 불가
+                case EarlyExitCondition.onExitTrigger:
                     StopInteraction();
                     break;
 
@@ -173,7 +256,7 @@ namespace VrFps
 
                     if (Vector3.Distance(transform.position, hand.transform.position) > SphereBoundsRadius)
                         StopInteraction();
-                    //onExitSphereBounds일경우 설정한 SphereBoundsRadius보다 넘어가면 상호작용 불가
+
                     break;
 
                 case EarlyExitCondition.onExitBoxBounds:
@@ -193,7 +276,7 @@ namespace VrFps
                      || relativePosition.y < -boxBounds.y
                      || relativePosition.z < -boxBounds.z)
                         StopInteraction();
-                    //onExitBoxBounds일경우 설정한 boxBounds를 넘어가면 상호작용 불가
+
                     break;
 
                 default:
@@ -214,6 +297,7 @@ namespace VrFps
 
             if (DetectInput(hand, startInteractionMode, startInteractingInputID))
             {
+                //If there is a current interactions, stop it
                 if (this.hand != null)
                     if (overlap && hand && this.hand != hand)
                     {
@@ -235,14 +319,14 @@ namespace VrFps
             if (!hand)
                 return;
 
-            if (DetectInput(hand, InteractionMode.PressUp, stopInteractingInputID)) //
+            if (DetectInput(hand, InteractionMode.PressUp, stopInteractingInputID))
                 releaseCount++;
 
-            if (DetectInput(hand, endInteractionMode, stopInteractingInputID)) // Dectectinput함수를 써서 값이 리턴되면 상호작용 불가능
+            if (DetectInput(hand, endInteractionMode, stopInteractingInputID))
                 StopInteraction();
         }
 
-        bool DetectInput(Hand hand, InteractionMode input, OVRInput.Button id) //입력키 감지
+        bool DetectInput(Hand hand, InteractionMode input, SteamVR_Action_Boolean id)
         {
             if (!hand)
                 return false;
@@ -253,17 +337,17 @@ namespace VrFps
             switch (input)
             {
                 case InteractionMode.Press:
-                    return OVRInput.Get(id, hand.inputSource); //상호작용 설정키가  press일때 오큘러스 키입력을 get
+                    return VrFpsInput.Input(id, hand);
 
                 case InteractionMode.PressDown:
-                    return OVRInput.GetDown(id, hand.inputSource);  //상호작용 설정키가  pressdown일때 오큘러스 키입력을 getdown
+                    return VrFpsInput.InputDown(id, hand);
 
                 case InteractionMode.PressUp:
-                    return OVRInput.GetUp(id, hand.inputSource); //상호작용 설정키가  pressup일때 오큘러스 키입력을 getup
+                    return VrFpsInput.InputUp(id, hand);
 
                 case InteractionMode.SecondPressUp:
-                    return OVRInput.GetUp(id, hand.inputSource) && releaseCount == 2;
-                    //상호작용 설정키가  secoondpressup일때 오큘러스 키입력을 getup으로 하되 카운터가 2여지만 가능
+                    return VrFpsInput.InputUp(id, hand) && releaseCount == 2;
+
                 default:
                     break;
             }
@@ -277,7 +361,7 @@ namespace VrFps
             StartInteraction(newHand);
         }
 
-        protected void StartInteraction(Hand newHand) //상호 작용 가능하게 하는 함수
+        protected void StartInteraction(Hand newHand)
         {
            
 
@@ -293,14 +377,34 @@ namespace VrFps
             if (_StartInteraction != null)
                 _StartInteraction();
 
-    
+            if (!hand) return;
+
+            bool leftHand = hand.inputSource == SteamVR_Input_Sources.LeftHand;
+
+            SteamVR_Skeleton_Poser tempPoser = leftHand ? LeftHandPoser : RightHandPoser;
+
+            if (leftHand)
+            {
+                LeftPoseValue = 0;
+                LeftPolarity = 1;
+            }
+            else
+            {
+                RightPoseValue = 0;
+                RightPolarity = 1;
+            }
+
+            if (tempPoser && hand.HandSkeleton)
+            {
+                tempPoser.SetBlendingBehaviourValue("Interact", leftHand ? LeftPoseValue : RightPoseValue);
+                StartCoroutine(DelayPose(hand.HandSkeleton, tempPoser));
+            }
         }
 
-    
+        SteamVR_Skeleton_Pose newPose;
 
-        public void StopInteraction() //상호 작용 불가능하게 하는 함수
+        public void StopInteraction()
         {
-          
 
             handInTrigger = false;
 
@@ -316,12 +420,50 @@ namespace VrFps
                 if (hand.InteractingVolume == this)
                     hand.InteractingVolume = null;
 
-            
+            //newPose = ScriptableObject.CreateInstance<SteamVR_Skeleton_Pose>();
+            //newPose.name = "Get Rekt Son";
+            //newPose.leftHand.bonePositions = hand.HandSkeleton.GetBonePositions();
+            //newPose.leftHand.boneRotations = hand.HandSkeleton.GetBoneRotations();
+            //newPose.rightHand.bonePositions = hand.HandSkeleton.GetBonePositions();
+            //newPose.rightHand.boneRotations = hand.HandSkeleton.GetBoneRotations();
+            //hand.HandPoser.skeletonMainPose = newPose;
+            //hand.HandPoser.skeletonMainPose.leftHand.bonePositions = StartInteractingHandPoser.skeletonAdditionalPoses[0].leftHand.bonePositions;
+
+            bool leftHand = hand.inputSource == SteamVR_Input_Sources.LeftHand;
+
+            SteamVR_Skeleton_Poser tempPoser = leftHand ? LeftHandPoser : RightHandPoser;
+
+            if (leftHand)
+            {
+                LeftPoseValue = 1;
+                LeftPolarity = -1;
+            }
+            else
+            {
+                RightPoseValue = 1;
+                RightPolarity = -1;
+            }
+
+            if (tempPoser && hand.HandSkeleton)
+            {
+                tempPoser.SetBlendingBehaviourValue("Interact", leftHand ? LeftPoseValue : RightPoseValue);
+                StartCoroutine(DelayPose(hand.HandSkeleton, tempPoser));
+            }
+
+            if (hand.HandSkeletonRoot)
+                hand.HandSkeletonRoot.SetParent(hand.transform);
+
             hand = null;
         }
 
-   
-        void OnTriggerExit(Collider other) 
+        IEnumerator DelayPose(SteamVR_Behaviour_Skeleton skeleton, SteamVR_Skeleton_Poser poser)
+        {
+            yield return new WaitForEndOfFrame();
+
+            skeleton.BlendToPoser(poser);
+        }
+
+        void OnTriggerExit(Collider other)
         {
             if (hand)
                 if (other.gameObject == hand.gameObject)

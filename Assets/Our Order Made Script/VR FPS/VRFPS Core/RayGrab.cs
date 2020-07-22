@@ -33,7 +33,7 @@ namespace VrFps
                 {
                     if (raycastInteraction != tempRAYIV.PrimaryGrip && raycastInteraction)
                     {
-                        raycastInteraction.ActiveHighlight = false;
+                        raycastInteraction.HighlightIsActive = false;
                     }
 
                     raycastInteraction = tempRAYIV.PrimaryGrip;
@@ -86,7 +86,7 @@ namespace VrFps
         {
             if (raycastInteraction)
             {
-                raycastInteraction.ActiveHighlight = false;
+                raycastInteraction.HighlightIsActive = false;
                 raycastInteraction = null;
                 rayMeshRenderer.sharedMaterial = rayEmptyMat;
             }

@@ -1,28 +1,17 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Valve.VR;
 
 namespace VrFps
 {
     public class SocketSlide : Slide
     {
-        [SerializeField] protected OVRInput.Button ejectInput; //탄창 빼는 버튼 설정
-        public OVRInput.Button EjectInput
-        {
-            get
-            {
-                return ejectInput;
-            }
+        [SerializeField] protected SteamVR_Action_Boolean ejectInput;
+        public SteamVR_Action_Boolean EjectInput { get { return ejectInput; } }
 
-        }
-        [SerializeField] protected Item.TouchPadDirection ejectTouchpadDirection; //탄창 빼는 조이스틱 버튼 설정 방향으로 기울여서 누르면 됨
-        public Item.TouchPadDirection EjectTouchpadDirection
-        {
-            get
-            {
-                return ejectTouchpadDirection;
-            }
-        }
+        [SerializeField] protected VrFpsInput.TouchPadDirection ejectTouchpadDirection;
+        public VrFpsInput.TouchPadDirection EjectTouchpadDirection { get { return ejectTouchpadDirection; } }
 
         Vector3 initialSize;
         Vector3 initialCenter;
@@ -184,7 +173,7 @@ namespace VrFps
             if (lastHand && lastItem)
             {
                 if (interactionVolume.StartInputID != null)
-                    if (OVRInput.GetUp(interactionVolume.StartInputID, lastHand.inputSource))
+                    if (VrFpsInput.InputUp(interactionVolume.StartInputID, lastHand))
                     {
                         if (lastHand.StoredItem == lastItem)
                         {
@@ -420,7 +409,7 @@ namespace VrFps
             ClearSlider();
 
             interactionVolume.restrained = true;
-            interactionVolume.ActiveHighlight = false;
+            interactionVolume.HighlightIsActive = false;
         }
 
         public void ClearSlider() //탄창을 뻈을떄
@@ -488,7 +477,7 @@ namespace VrFps
         void SetForAutoDrop(Hand hand) //오토 드랍 셋트
         {
             if(interactionVolume.StartInputID != null)
-                if (OVRInput.Get(interactionVolume.StartInputID, hand.inputSource))
+                if (VrFpsInput.Input(interactionVolume.StartInputID, hand))
                 {
                     lastHand = hand;
                     lastItem = potentialSlider;
@@ -522,7 +511,7 @@ namespace VrFps
             if (Vector3.Distance(startPosition.position, hand.transform.position) <= ejectAutoGrabDistance)
             {
                 if (!hand.HasItem && !hand.IsInteracting
-                && OVRInput.Get(interactionVolume.StartInputID, hand.inputSource))
+                && VrFpsInput.Input(interactionVolume.StartInputID, hand))
                 {
                     potentialSlider.Attach(hand);
                     lastHand = hand;

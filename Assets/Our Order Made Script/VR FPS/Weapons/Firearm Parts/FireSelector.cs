@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Valve.VR;
 
 namespace VrFps
 {
@@ -35,8 +36,8 @@ namespace VrFps
             }
         }
 
-        [SerializeField] protected Item.TouchPadDirection touchpadDirection;
-        public Item.TouchPadDirection _TouchPadDirection
+        [SerializeField] protected VrFpsInput.TouchPadDirection touchpadDirection;
+        public VrFpsInput.TouchPadDirection _TouchPadDirection
         {
             get
             {
@@ -49,8 +50,8 @@ namespace VrFps
         [SerializeField] protected List<AudioClip> switchFireModeSounds = new List<AudioClip>(); //사격 모드 바꿀때 나는 소리
         //ex) 군대에서 k1이나 k2 쓸 때 안전 -> 단발로 바꾸면 팅 같은 소리 나는데 그런 소리 넣도록
 
-        [SerializeField] protected OVRInput.Button fireSelectorInput; //사격 모드 바꿀 버튼 설정
-        public OVRInput.Button FireSelectorInput
+        [SerializeField] protected SteamVR_Action_Boolean fireSelectorInput; //사격 모드 바꿀 버튼 설정
+        public SteamVR_Action_Boolean FireSelectorInput
         {
             get
             {

@@ -24,12 +24,12 @@ TagManager:
   - HeldItem
   - InventoryItem
   - Door
+  - Projectile
+  - Ragdoll
   - Ground
+  - Character
   - LocalPlayer
   - Gun
-  - 
-  - 
-  - 
   - 
   - 
   - 
