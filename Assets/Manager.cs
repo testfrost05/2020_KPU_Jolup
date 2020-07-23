@@ -21,11 +21,17 @@ using UnityEngine.SceneManagement;
         private static Manager instance;
 
         public Transform[] spawnPositions;
-        public GameObject playerPrefab;
+        public GameObject playerPrefab1;
+     
 
 
 
-        private void Start()
+
+
+
+
+
+    private void Start()
         {
             SpawnPlayer();
 
@@ -36,10 +42,14 @@ using UnityEngine.SceneManagement;
             var localPlayerIndex = PhotonNetwork.LocalPlayer.ActorNumber - 1;
             var spawnPosition = spawnPositions[localPlayerIndex % spawnPositions.Length];
 
-            PhotonNetwork.Instantiate(playerPrefab.name, spawnPosition.position, spawnPosition.rotation);
+        PhotonNetwork.Instantiate(playerPrefab1.name, spawnPosition.position, spawnPosition.rotation);
 
-        }
-        public override void OnLeftRoom()
+
+
+
+
+    }
+    public override void OnLeftRoom()
         {
             SceneManager.LoadScene("MainMenu");
         }

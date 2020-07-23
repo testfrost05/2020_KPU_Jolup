@@ -5,7 +5,7 @@ using UnityEngine;
 namespace VrFps
 {
     [System.Serializable]
-    public class VectorHistoryAverage 
+    public class VectorHistoryAverage
     {
         public int velocitySampleSize = 3;
         protected Vector3?[] releaseVelocity;
@@ -42,14 +42,13 @@ namespace VrFps
             releaseAngularVelocity = new Vector3?[velocitySampleSize];
         }
 
+  
         public void VelocityStep(Transform transform)
         {
             velocityHistoryStep++;
 
             if (velocityHistoryStep >= releaseVelocity.Length && velocityHistoryStep >= releaseAngularVelocity.Length)
-            {
                 velocityHistoryStep = 0;
-            }
 
             releaseAngularVelocity[velocityHistoryStep] = GetAngularVelocityAngleAxis(previousRotation, transform.rotation);
             previousRotation = transform.rotation;
@@ -57,23 +56,17 @@ namespace VrFps
             previousPosition = transform.position;
         }
 
-        public Vector3 GetVelocity(Rigidbody rb) //속도 구함
-        {
-            return GetMeanVector(releaseVelocity) * releaseForceMultiplier / rb.mass;
-        }
+        public Vector3 GetVelocity(Rigidbody rb) { return GetMeanVector(releaseVelocity) * releaseForceMultiplier / rb.mass; }
 
-        public Vector3 GetAngularVelocity(Rigidbody rb) //가속도 구함
-        {
-            return GetMeanVector(releaseAngularVelocity) * releaseAngularForceMultiplier / rb.mass;
-        }
+        public Vector3 GetAngularVelocity(Rigidbody rb) { return GetMeanVector(releaseAngularVelocity) * releaseAngularForceMultiplier / rb.mass; }
 
 
-        public IEnumerator ReleaseVelocity(Rigidbody rb)
+        public void ReleaseVelocity(Rigidbody rb)
         {
+            if (rb == null) return;
+
             Vector3 tempVelocity = GetMeanVector(releaseVelocity);
             Vector3 tempAngularVelocity = GetMeanVector(releaseAngularVelocity);
-
-            yield return new WaitForEndOfFrame();
 
             if (!float.IsNaN(tempVelocity.x) && !float.IsNaN(tempVelocity.y) && !float.IsNaN(tempVelocity.z))
             {
@@ -86,11 +79,11 @@ namespace VrFps
 
             if (!float.IsNaN(tempAngularVelocity.x) && !float.IsNaN(tempAngularVelocity.y) && !float.IsNaN(tempAngularVelocity.z))
             {
-               rb.angularVelocity = tempAngularVelocity * releaseAngularForceMultiplier;
+                rb.angularVelocity = tempAngularVelocity * releaseAngularForceMultiplier;
             }
             else
             {
-                rb.angularVelocity = Vector3.one;
+                rb.angularVelocity = Vector3.zero;
             }
 
             velocityHistoryStep = 0;
@@ -102,7 +95,7 @@ namespace VrFps
             }
         }
 
-        public static Vector3 GetAngularVelocityAngleAxis(Quaternion from, Quaternion to) //벡터 각도 구함
+        public static Vector3 GetAngularVelocityAngleAxis(Quaternion from, Quaternion to)
         {
             Quaternion angularVelocity = to * Quaternion.Inverse(from);
 
@@ -112,9 +105,7 @@ namespace VrFps
             angularVelocity.ToAngleAxis(out angle, out axis);
 
             if (angle > 180f)
-            {
                 angle -= 360f;
-            }
 
             angle *= Mathf.Deg2Rad;
 
@@ -122,14 +113,12 @@ namespace VrFps
 
             if ((float.IsNaN(axis.x) || float.IsNaN(axis.y) || float.IsNaN(axis.z))
                 || float.IsInfinity(axis.x) || float.IsInfinity(axis.y) || float.IsInfinity(axis.z))
-            {
                 return Vector3.zero;
-            }
 
             return axis;
         }
 
-        public static Vector3 GetMeanVector(Vector3?[] positions) //의미있는 벡터 얻음
+        public static Vector3 GetMeanVector(Vector3?[] positions)
         {
             float x = 0f;
             float y = 0f;

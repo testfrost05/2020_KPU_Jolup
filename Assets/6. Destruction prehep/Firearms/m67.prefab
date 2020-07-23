@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 5181876065577440969}
   - component: {fileID: 5157378566612947601}
   - component: {fileID: 5167382825833543429}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: m67_body
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -91,7 +91,7 @@ GameObject:
   - component: {fileID: 5167382826368432983}
   - component: {fileID: 5180266224094405557}
   - component: {fileID: 5180266224094405562}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: m67_handle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -203,7 +203,7 @@ GameObject:
   - component: {fileID: 5180266225039115483}
   - component: {fileID: 5180266225039115480}
   - component: {fileID: 5180266225039115476}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: m67_pin
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -317,19 +317,29 @@ MonoBehaviour:
   overlap: 0
   restrained: 0
   releaseCount: 0
-  startInteractingInputID: 0
-  stopInteractingInputID: 0
+  startInteractingInputID:
+    actionPath: 
+    needsReinit: 0
+  stopInteractingInputID:
+    actionPath: 
+    needsReinit: 0
   startInteractionMode: 1
   endInteractionMode: 2
   earlyExitCondition: 0
   SphereBoundsRadius: 0
   boxBounds: {x: 0, y: 0, z: 0}
+  RightHandPoser: {fileID: 0}
+  LeftHandPoser: {fileID: 0}
   handRoot: {fileID: 0}
   rightPosePositionOffset: {x: 0, y: 0, z: 0}
   rightPoseRotationOffset: {x: 0, y: 0, z: 0}
   leftPosePositionOffset: {x: 0, y: 0, z: 0}
   leftPoseRotationOffset: {x: 0, y: 0, z: 0}
   poseTime: 0.2
+  RightPoseValue: 0
+  LeftPoseValue: 0
+  RightPolarity: 0
+  LeftPolarity: 0
 --- !u!114 &5180266225039115480
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -344,7 +354,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tags: []
   itemOffsetPressed: 0
+  itemFlippedOffsetPressed: 0
   controller: {fileID: 0}
+  rb: {fileID: 0}
   colliders: []
   velocityHistory:
     velocitySampleSize: 3
@@ -370,7 +382,9 @@ MonoBehaviour:
     parent: 0
   positionOffset: {x: 0, y: 0, z: 0}
   rotationOffset: {x: 0, y: 0, z: 0}
-  alignedRotationOffset: {x: 0, y: 0, z: 0}
+  flippedPositionOffset: {x: 0, y: 0, z: 0}
+  flippedRotationOffset: {x: 0, y: 0, z: 0}
+  twoHandRotationOffset: {x: 0, y: 0, z: 0}
   setPositionSpeed: 4
   setRotationSpeed: 4
   setTwoHandRotationSpeed: 5
@@ -428,7 +442,12 @@ MonoBehaviour:
   stackable: 0
   stackableID: 
   autoDropDot: 0.5
+  autoAttachSecondaryToPrimary: {fileID: 0}
   dropStack: 1
+  useFlippedOffset: 0
+  flipOffsetInput:
+    actionPath: 
+    needsReinit: 0
 --- !u!54 &5180266225039115476
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -456,7 +475,7 @@ GameObject:
   - component: {fileID: 5181876064099648701}
   - component: {fileID: 5157378566781143645}
   - component: {fileID: 5167382824889663863}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: m67_ring
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -537,7 +556,7 @@ GameObject:
   - component: {fileID: 5180266225876934978}
   - component: {fileID: 5180266225876935007}
   - component: {fileID: 5180266225876935006}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: m67
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -552,7 +571,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5180266225876934979}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1.0302497, y: 0.9502, z: 1.3981}
+  m_LocalPosition: {x: 1.0288, y: 0.9502, z: 1.3981}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 5181876065577440969}
@@ -611,19 +630,29 @@ MonoBehaviour:
   overlap: 0
   restrained: 0
   releaseCount: 0
-  startInteractingInputID: 16384
-  stopInteractingInputID: 16384
+  startInteractingInputID:
+    actionPath: /actions/VrFps/in/Grip
+    needsReinit: 0
+  stopInteractingInputID:
+    actionPath: /actions/VrFps/in/Grip
+    needsReinit: 0
   startInteractionMode: 1
   endInteractionMode: 2
   earlyExitCondition: 0
   SphereBoundsRadius: 0
   boxBounds: {x: 0, y: 0, z: 0}
+  RightHandPoser: {fileID: 0}
+  LeftHandPoser: {fileID: 0}
   handRoot: {fileID: 0}
   rightPosePositionOffset: {x: 0, y: 0, z: 0}
   rightPoseRotationOffset: {x: 0, y: 0, z: 0}
   leftPosePositionOffset: {x: 0, y: 0, z: 0}
   leftPoseRotationOffset: {x: 0, y: 0, z: 0}
   poseTime: 0.2
+  RightPoseValue: 0
+  LeftPoseValue: 0
+  RightPolarity: 0
+  LeftPolarity: 0
 --- !u!114 &5180266225876935007
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -638,7 +667,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tags: []
   itemOffsetPressed: 0
+  itemFlippedOffsetPressed: 0
   controller: {fileID: 0}
+  rb: {fileID: 0}
   colliders: []
   velocityHistory:
     velocitySampleSize: 3
@@ -662,9 +693,11 @@ MonoBehaviour:
     colliderEnabled: 1
     isTrigger: 0
     parent: 0
-  positionOffset: {x: 0, y: 0, z: 0}
+  positionOffset: {x: 0.05, y: 0, z: 0}
   rotationOffset: {x: 0, y: 180, z: 0}
-  alignedRotationOffset: {x: 0, y: 0, z: 0}
+  flippedPositionOffset: {x: 0, y: 0, z: 0}
+  flippedRotationOffset: {x: 0, y: 0, z: 0}
+  twoHandRotationOffset: {x: 0, y: 0, z: 0}
   setPositionSpeed: 3
   setRotationSpeed: 3
   setTwoHandRotationSpeed: 5
@@ -722,7 +755,12 @@ MonoBehaviour:
   stackable: 0
   stackableID: 
   autoDropDot: 0.5
+  autoAttachSecondaryToPrimary: {fileID: 0}
   dropStack: 1
+  useFlippedOffset: 0
+  flipOffsetInput:
+    actionPath: /actions/VrFps/in/Trigger
+    needsReinit: 0
   explosive: {fileID: 5180266225876935006}
   armed: 0
   armDelay: 0
@@ -737,7 +775,9 @@ MonoBehaviour:
   ring: {fileID: 5181876064099648701}
   forceThreshold: -1
   ejectHandleTouchpadDirection: 4
-  ejectHandleInput: 0
+  ejectHandleInput:
+    actionPath: 
+    needsReinit: 0
 --- !u!114 &5180266225876935006
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -823,7 +863,7 @@ GameObject:
   - component: {fileID: 5181265127505796112}
   - component: {fileID: 5181265127505796113}
   - component: {fileID: 5181265127505796115}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Pin Pulled
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -910,19 +950,29 @@ MonoBehaviour:
   overlap: 0
   restrained: 0
   releaseCount: 0
-  startInteractingInputID: 8192
-  stopInteractingInputID: 8192
+  startInteractingInputID:
+    actionPath: /actions/VrFps/in/Trigger
+    needsReinit: 0
+  stopInteractingInputID:
+    actionPath: /actions/VrFps/in/Trigger
+    needsReinit: 0
   startInteractionMode: 1
   endInteractionMode: 2
   earlyExitCondition: 0
   SphereBoundsRadius: 0
   boxBounds: {x: 0, y: 0, z: 0}
+  RightHandPoser: {fileID: 0}
+  LeftHandPoser: {fileID: 0}
   handRoot: {fileID: 0}
   rightPosePositionOffset: {x: 0, y: 0, z: 0}
   rightPoseRotationOffset: {x: 0, y: 0, z: 0}
   leftPosePositionOffset: {x: 0, y: 0, z: 0}
   leftPoseRotationOffset: {x: 0, y: 0, z: 0}
   poseTime: 0.2
+  RightPoseValue: 0
+  LeftPoseValue: 0
+  RightPolarity: 0
+  LeftPolarity: 0
 --- !u!114 &5181265127505796113
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -948,7 +998,9 @@ MonoBehaviour:
   hasReachedStart: 1
   continuous: 0
   interactionPoint: {fileID: 0}
-  ejectInput: 0
+  ejectInput:
+    actionPath: 
+    needsReinit: 0
   ejectTouchpadDirection: 0
   acceptedTag: 
   potentialSlot: {fileID: 0}
@@ -990,7 +1042,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5181265128253129786}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Pin Unpulled
   m_TagString: Untagged
   m_Icon: {fileID: 0}
