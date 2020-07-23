@@ -21,7 +21,9 @@ using UnityEngine.SceneManagement;
         private static Manager instance;
 
         public Transform[] spawnPositions;
-        public GameObject playerPrefab;
+        public GameObject playerPrefab1;
+        public GameObject playerPrefab2;
+
 
 
 
@@ -36,9 +38,11 @@ using UnityEngine.SceneManagement;
             var localPlayerIndex = PhotonNetwork.LocalPlayer.ActorNumber - 1;
             var spawnPosition = spawnPositions[localPlayerIndex % spawnPositions.Length];
 
-            PhotonNetwork.Instantiate(playerPrefab.name, spawnPosition.position, spawnPosition.rotation);
+            PhotonNetwork.Instantiate(playerPrefab1.name, spawnPosition.position, spawnPosition.rotation);
+            PhotonNetwork.Instantiate(playerPrefab2.name, spawnPosition.position, spawnPosition.rotation);
 
-        }
+
+    }
         public override void OnLeftRoom()
         {
             SceneManager.LoadScene("MainMenu");

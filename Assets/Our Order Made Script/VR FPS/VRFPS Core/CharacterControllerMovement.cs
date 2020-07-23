@@ -2,10 +2,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 using Valve.VR;
-
+using Photon.Pun;
 namespace VrFps
 {
-    public class CharacterControllerMovement : MonoBehaviour
+    public class CharacterControllerMovement : MonoBehaviourPunCallbacks
     {
         [SerializeField] protected SteamVR_Action_Vector2 movementAxis;
 
@@ -53,11 +53,13 @@ namespace VrFps
 
         void LateUpdate()
         {
+            if (!photonView.IsMine) return;
             UpdatePosition();
         }
 
         void FixedUpdate()
         {
+            if (!photonView.IsMine) return;
             velocityHistory.VelocityStep(transform);
         }
 

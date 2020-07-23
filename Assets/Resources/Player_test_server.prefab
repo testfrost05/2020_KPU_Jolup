@@ -506,7 +506,7 @@ MonoBehaviour:
   groundDetector: {fileID: 8612668694734084511}
   ground:
     serializedVersion: 2
-    m_Bits: 16384
+    m_Bits: 65536
 --- !u!114 &5271309442597288816
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -544,4 +544,4 @@ MonoBehaviour:
     type: 3}
   canBeShot:
     serializedVersion: 2
-    m_Bits: 32567
+    m_Bits: 556855
