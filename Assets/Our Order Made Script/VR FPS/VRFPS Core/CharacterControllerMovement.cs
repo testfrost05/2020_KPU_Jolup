@@ -41,6 +41,7 @@ namespace VrFps
 
         void Start()
         {
+            if (!photonView.IsMine) return;
             gameObject.tag = "Player";
             ; gameObject.layer = LayerMask.NameToLayer("Player");
             velocityHistory.InitializeHistory();
