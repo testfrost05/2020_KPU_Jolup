@@ -18725,7 +18725,7 @@ MonoBehaviour:
   - {fileID: 620044141}
   playerPrefab1: {fileID: 6153637110989260807, guid: cde4bdf93d33f554d9641741ad3827ef,
     type: 3}
-  playerPrefab2: {fileID: 6153637110989260807, guid: cde4bdf93d33f554d9641741ad3827ef,
+  playerPrefab2: {fileID: 8871019571831368567, guid: 7fdaf94ffa9df974abd6c8a4627a5f34,
     type: 3}
 --- !u!4 &875621755
 Transform:
