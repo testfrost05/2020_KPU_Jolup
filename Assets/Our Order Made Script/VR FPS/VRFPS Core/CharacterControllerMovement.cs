@@ -5,7 +5,7 @@ using Valve.VR;
 using Photon.Pun;
 namespace VrFps
 {
-    public class CharacterControllerMovement : MonoBehaviourPunCallbacks
+    public class CharacterControllerMovement : MonoBehaviour //PunCallbacks
     {
         [SerializeField] protected SteamVR_Action_Vector2 movementAxis;
 
@@ -41,7 +41,7 @@ namespace VrFps
 
         void Start()
         {
-            if (!photonView.IsMine) return;
+            //if (!photonView.IsMine) return;
             gameObject.tag = "Player";
             ; gameObject.layer = LayerMask.NameToLayer("Player");
             velocityHistory.InitializeHistory();
@@ -54,13 +54,13 @@ namespace VrFps
 
         void LateUpdate()
         {
-            if (!photonView.IsMine) return;
+            //if (!photonView.IsMine) return;
             UpdatePosition();
         }
 
         void FixedUpdate()
         {
-            if (!photonView.IsMine) return;
+            //if (!photonView.IsMine) return;
             velocityHistory.VelocityStep(transform);
         }
 
