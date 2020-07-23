@@ -22,7 +22,7 @@ using UnityEngine.SceneManagement;
 
         public Transform[] spawnPositions;
         public GameObject playerPrefab1;
-        public GameObject playerPrefab2;
+     
 
 
 
@@ -43,7 +43,6 @@ using UnityEngine.SceneManagement;
             var spawnPosition = spawnPositions[localPlayerIndex % spawnPositions.Length];
 
         PhotonNetwork.Instantiate(playerPrefab1.name, spawnPosition.position, spawnPosition.rotation);
-        PhotonNetwork.Instantiate(playerPrefab2.name, spawnPosition.position, spawnPosition.rotation);
 
 
 
