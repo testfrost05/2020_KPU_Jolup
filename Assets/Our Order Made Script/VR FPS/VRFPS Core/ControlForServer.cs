@@ -5,7 +5,7 @@ using Valve.VR;
 using Photon.Pun;
 namespace VrFps
 {
-    public class CharacterControllerMovement : MonoBehaviour
+    public class ControlForServer : MonoBehaviourPunCallbacks
     {
         [SerializeField] protected SteamVR_Action_Vector2 movementAxis;
 
@@ -30,6 +30,8 @@ namespace VrFps
         public Transform rig;
         public Transform body;
         public Transform head;
+        public GameObject headParent;
+        
 
         Vector3 prevPos;
 
@@ -42,7 +44,8 @@ namespace VrFps
         void Start()
         {
 
-
+            headParent.SetActive(photonView.IsMine);
+            if (Camera.main) Camera.main.enabled = false;
 
 
             gameObject.tag = "Player";
@@ -57,13 +60,13 @@ namespace VrFps
 
         void LateUpdate()
         {
-          
+            if (!photonView.IsMine) return;
             UpdatePosition();
         }
 
         void FixedUpdate()
         {
-           
+            if (!photonView.IsMine) return;
             velocityHistory.VelocityStep(transform);
         }
 
@@ -162,7 +165,7 @@ namespace VrFps
 
             float sprintInput = sprinting ? sprintScale : 1;
 
-            
+
             Vector3 movement = ((new Vector3(currentHand.transform.forward.x, 0, currentHand.transform.forward.z).normalized
                                     * (linearMovement ? (movementAxis.GetAxis(currentHand.inputSource).y != 0 ? 1 : 0) : movementAxis.GetAxis(currentHand.inputSource).y))
                               + (new Vector3(currentHand.transform.right.x, 0, currentHand.transform.right.z).normalized
@@ -239,11 +242,11 @@ namespace VrFps
 
             if (VrFpsInput.TouchPadInput(null, VrFpsInput.TouchPadDirection.dontMatter, defaultHand))
                 sprinting = true;
-            
+
             if (Mathf.Abs(movementAxis.GetAxis(currentHand.inputSource).x) <= sprintingDeadzone
              && Mathf.Abs(movementAxis.GetAxis(currentHand.inputSource).y) <= sprintingDeadzone)
                 sprinting = false;
-            
+
 
             updateTime = Time.time;
         }
