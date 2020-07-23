@@ -212,19 +212,29 @@ MonoBehaviour:
   overlap: 0
   restrained: 0
   releaseCount: 0
-  startInteractingInputID: 8192
-  stopInteractingInputID: 8192
+  startInteractingInputID:
+    actionPath: /actions/VrFps/in/Grip
+    needsReinit: 0
+  stopInteractingInputID:
+    actionPath: /actions/VrFps/in/Grip
+    needsReinit: 0
   startInteractionMode: 1
   endInteractionMode: 2
   earlyExitCondition: 0
   SphereBoundsRadius: 0
   boxBounds: {x: 0, y: 0, z: 0}
+  RightHandPoser: {fileID: 0}
+  LeftHandPoser: {fileID: 0}
   handRoot: {fileID: 0}
   rightPosePositionOffset: {x: 0, y: 0, z: 0}
   rightPoseRotationOffset: {x: 0, y: 0, z: 0}
   leftPosePositionOffset: {x: 0, y: 0, z: 0}
   leftPoseRotationOffset: {x: 0, y: 0, z: 0}
   poseTime: 0.2
+  RightPoseValue: 0
+  LeftPoseValue: 0
+  RightPolarity: 0
+  LeftPolarity: 0
 --- !u!114 &1288441955027793392
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -244,19 +254,29 @@ MonoBehaviour:
   overlap: 0
   restrained: 0
   releaseCount: 0
-  startInteractingInputID: 16384
-  stopInteractingInputID: 16384
+  startInteractingInputID:
+    actionPath: 
+    needsReinit: 0
+  stopInteractingInputID:
+    actionPath: 
+    needsReinit: 0
   startInteractionMode: 1
   endInteractionMode: 3
   earlyExitCondition: 0
   SphereBoundsRadius: 0
   boxBounds: {x: 0, y: 0, z: 0}
+  RightHandPoser: {fileID: 0}
+  LeftHandPoser: {fileID: 0}
   handRoot: {fileID: 0}
   rightPosePositionOffset: {x: 0, y: 0, z: 0}
   rightPoseRotationOffset: {x: 0, y: 0, z: 0}
   leftPosePositionOffset: {x: 0, y: 0, z: 0}
   leftPoseRotationOffset: {x: 0, y: 0, z: 0}
   poseTime: 0.2
+  RightPoseValue: 0
+  LeftPoseValue: 0
+  RightPolarity: 0
+  LeftPolarity: 0
 --- !u!65 &1288441955027793393
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -657,7 +677,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tags: []
   itemOffsetPressed: 0
+  itemFlippedOffsetPressed: 0
   controller: {fileID: 0}
+  rb: {fileID: 0}
   colliders: []
   velocityHistory:
     velocitySampleSize: 3
@@ -683,7 +705,9 @@ MonoBehaviour:
     parent: 0
   positionOffset: {x: 0, y: 0, z: 0}
   rotationOffset: {x: 60, y: 0, z: 0}
-  alignedRotationOffset: {x: 0, y: 0, z: 0}
+  flippedPositionOffset: {x: 0, y: 0, z: 0}
+  flippedRotationOffset: {x: 0, y: 0, z: 0}
+  twoHandRotationOffset: {x: 0, y: 0, z: 0}
   setPositionSpeed: 3
   setRotationSpeed: 3
   setTwoHandRotationSpeed: 5
@@ -741,7 +765,12 @@ MonoBehaviour:
   stackable: 0
   stackableID: 
   autoDropDot: 0.5
+  autoAttachSecondaryToPrimary: {fileID: 0}
   dropStack: 1
+  useFlippedOffset: 0
+  flipOffsetInput:
+    actionPath: 
+    needsReinit: 0
   recoilManager:
     recoilPositionOffset: {fileID: 0}
     recoilRotationOffset: {fileID: 0}
@@ -912,19 +941,29 @@ MonoBehaviour:
   overlap: 0
   restrained: 0
   releaseCount: 0
-  startInteractingInputID: 16384
-  stopInteractingInputID: 16384
+  startInteractingInputID:
+    actionPath: /actions/VrFps/in/Grip
+    needsReinit: 0
+  stopInteractingInputID:
+    actionPath: /actions/VrFps/in/Grip
+    needsReinit: 0
   startInteractionMode: 1
   endInteractionMode: 3
   earlyExitCondition: 0
   SphereBoundsRadius: 0
   boxBounds: {x: 0, y: 0, z: 0}
+  RightHandPoser: {fileID: 0}
+  LeftHandPoser: {fileID: 0}
   handRoot: {fileID: 0}
   rightPosePositionOffset: {x: 0, y: 0, z: 0}
   rightPoseRotationOffset: {x: 0, y: 0, z: 0}
   leftPosePositionOffset: {x: 0, y: 0, z: 0}
   leftPoseRotationOffset: {x: 0, y: 0, z: 0}
   poseTime: 0.2
+  RightPoseValue: 0
+  LeftPoseValue: 0
+  RightPolarity: 0
+  LeftPolarity: 0
 --- !u!114 &1288441955027835330
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -943,7 +982,9 @@ MonoBehaviour:
   safetySlideLimit: -1
   touchpadDirection: 0
   switchFireModeSounds: []
-  fireSelectorInput: 0
+  fireSelectorInput:
+    actionPath: 
+    needsReinit: 0
 --- !u!114 &5265624848604275234
 MonoBehaviour:
   m_ObjectHideFlags: 0
