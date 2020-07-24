@@ -5,7 +5,7 @@ using Photon.Pun;
 
 namespace Com.Kpu.SimpleHostile
 {
-    public class Motion : MonoBehaviourPunCallbacks
+    public class Player : MonoBehaviourPunCallbacks
     {
         #region Variables
         public float speed;
@@ -17,6 +17,8 @@ namespace Com.Kpu.SimpleHostile
         public Transform weaponParent;
         public Transform groundDetector;
         public LayerMask ground;
+
+        private Transform ui_healthbar;
 
 
         private Rigidbody rig;
@@ -50,6 +52,13 @@ namespace Com.Kpu.SimpleHostile
 
             rig = GetComponent<Rigidbody>();
             weaponParentOrigin = weaponParent.localPosition;
+
+            if (photonView.IsMine)
+            {
+                ui_healthbar = GameObject.Find("HUD/Health/Bar").transform;
+                RefreshHealthBar();
+            }
+
         }
 
         private void Update()
@@ -75,7 +84,7 @@ namespace Com.Kpu.SimpleHostile
                 rig.AddForce(Vector3.up * jumpForce);
             }
 
-            if (Input.GetKeyDown(KeyCode.U)) TakeDamage(500);
+            if (Input.GetKeyDown(KeyCode.U)) TakeDamage(100);
 
             //Head Bob
             if (t_hmove == 0 && t_vmove == 0)
@@ -97,6 +106,10 @@ namespace Com.Kpu.SimpleHostile
                 movementCounter += Time.deltaTime * 7f;
                 weaponParent.localPosition = Vector3.Lerp(weaponParent.localPosition, targetWeaponBobPosition, Time.deltaTime * 10f);
             }
+
+            //UI Refreshes
+            RefreshHealthBar();
+
         }
 
         private void FixedUpdate()
@@ -142,6 +155,13 @@ namespace Com.Kpu.SimpleHostile
           
         }
 
+        void RefreshHealthBar ()
+        {
+            float t_health_ratio = (float)current_health / (float)max_health;
+            ui_healthbar.localScale = Vector3.Lerp(ui_healthbar.localScale, new Vector3(t_health_ratio, 1, 1), Time.deltaTime * 8f);
+
+        }
+
         #endregion
 
         #region Public methods
@@ -152,7 +172,7 @@ namespace Com.Kpu.SimpleHostile
             if (photonView.IsMine)
             {
                 current_health -= p_damage;
-                Debug.Log(current_health);
+                RefreshHealthBar();
 
                 if (current_health <= 0)
                 {

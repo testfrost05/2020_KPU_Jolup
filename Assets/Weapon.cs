@@ -24,24 +24,26 @@ namespace Com.Kpu.SimpleHostile
 
         void Update()
         {
-            if (!photonView.IsMine) return;
+            if (photonView.IsMine && Input.GetKeyDown(KeyCode.Alpha1)) { photonView.RPC("Equip", RpcTarget.All, 0); }
 
-            if (Input.GetKeyDown(KeyCode.Alpha1)) {photonView.RPC("Equip", RpcTarget.All, 0); }
-
+            
             if (currentWeapon != null)
             {
-                Aim(Input.GetMouseButton(1));
-
-                if (Input.GetMouseButtonDown(0) && currentCooldown <=0)
+                if (photonView.IsMine)
                 {
-                    photonView.RPC("Shoot", RpcTarget.All);
-                
+                    Aim(Input.GetMouseButton(1));
+
+                    if (Input.GetMouseButtonDown(0) && currentCooldown <= 0)
+                    {
+                        photonView.RPC("Shoot", RpcTarget.All);
+                    }
+                    //cooldown
+                    if (currentCooldown > 0) currentCooldown -= Time.deltaTime;
                 }
+
                 //weapon position elasticity
                 currentWeapon.transform.localPosition = Vector3.Lerp(currentWeapon.transform.localPosition, Vector3.zero, Time.deltaTime * 4f);
 
-                //cooldown
-                if (currentCooldown > 0) currentCooldown -= Time.deltaTime;
             }
 
         }
@@ -116,7 +118,7 @@ namespace Com.Kpu.SimpleHostile
                         t_hit.collider.gameObject.GetPhotonView().RPC("TakeDamage", RpcTarget.All, loadout[currentIndex].damage);
                     
                     }
-                
+
                 }
             }
             //gun fx
@@ -128,7 +130,7 @@ namespace Com.Kpu.SimpleHostile
         [PunRPC]
         private void TakeDamage(int p_damage)
         {
-            GetComponent<Motion>().TakeDamage(p_damage);
+            GetComponent<Player>().TakeDamage(p_damage);
         
         }
         #endregion

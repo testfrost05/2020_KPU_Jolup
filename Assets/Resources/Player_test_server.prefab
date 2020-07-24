@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 161489404}
-  m_Layer: 8
+  m_Layer: 18
   m_Name: Design
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -40,7 +40,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1110192017}
-  m_Layer: 8
+  m_Layer: 18
   m_Name: Cameras
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -71,7 +71,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1117307821}
-  m_Layer: 8
+  m_Layer: 18
   m_Name: Weapon
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -103,7 +103,7 @@ GameObject:
   - component: {fileID: 6740537549339089362}
   - component: {fileID: 5684267881507272848}
   - component: {fileID: 6008414090946602314}
-  m_Layer: 8
+  m_Layer: 18
   m_Name: NormalCamera
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -184,7 +184,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5799070022349622084}
-  m_Layer: 8
+  m_Layer: 18
   m_Name: Misc
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -215,7 +215,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8612668694734084511}
-  m_Layer: 8
+  m_Layer: 18
   m_Name: Ground Detect
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -248,7 +248,7 @@ GameObject:
   - component: {fileID: 8791306168271227750}
   - component: {fileID: 8791306168271227745}
   - component: {fileID: 8791306168271227744}
-  m_Layer: 8
+  m_Layer: 18
   m_Name: Eyes
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -346,7 +346,7 @@ GameObject:
   - component: {fileID: 5271309442597288819}
   - component: {fileID: 5271309442597288816}
   - component: {fileID: 1960985128}
-  m_Layer: 8
+  m_Layer: 18
   m_Name: Player_test_server
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -493,7 +493,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 8871019571831368567}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7b77bd1f67dc7064882e8b65d0524156, type: 3}
+  m_Script: {fileID: 11500000, guid: d3d9efe86891b0f4d8571df4fce0ab5f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 500
