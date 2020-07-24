@@ -11469,6 +11469,11 @@ PrefabInstance:
       propertyPath: forceMin
       value: 100
       objectReference: {fileID: 0}
+    - target: {fileID: 3739515695995207709, guid: 3bcf62d98a80c5b4fbe1f5b4de657343,
+        type: 3}
+      propertyPath: fragAllOnDamage
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3bcf62d98a80c5b4fbe1f5b4de657343, type: 3}
 --- !u!1 &441542634

@@ -1,10 +1,10 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using Photon.Pun;
 namespace VrFps
 {
-    public class Projectile : MonoBehaviour //총알을 쏠 때
+    public class Projectile : MonoBehaviourPunCallbacks //총알을 쏠 때
     {
         [SerializeField] protected Rigidbody rb;
         [SerializeField] protected Collider col;
@@ -53,6 +53,7 @@ namespace VrFps
             Destroy(gameObject, 7.5f);
         }
 
+        [PunRPC]
         void OnCollisionEnter(Collision col) //충돌 진입
         {
             Effect(col, true);
@@ -67,10 +68,9 @@ namespace VrFps
                 child.parent = null;
             }
 
-            if(col.gameObject.CompareTag("Glass"))
-            {
-                col.gameObject.SendMessage("Damage", 3f, SendMessageOptions.DontRequireReceiver); //3f 이상으로하면 벽 파괴된다.
-            }
+            col.gameObject.SendMessage("Damage", 3f, SendMessageOptions.DontRequireReceiver); //3f 이상으로하면 벽 파괴된다.
+            
+            
 
             HealthManager healthManager = col.transform.GetComponent<HealthManager>();
             if (healthManager)

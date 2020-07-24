@@ -3,8 +3,10 @@ using System;
 using System.Collections.Generic;
 using System.Collections;
 using System.Linq;
+using Photon.Pun;
 
-public class FraggedController : MonoBehaviour
+[PunRPC]
+public class FraggedController : MonoBehaviourPunCallbacks
 {
     [Header("Fragments")]
     public bool fragEnabled = true; //������� ������ �������ִ��� ������

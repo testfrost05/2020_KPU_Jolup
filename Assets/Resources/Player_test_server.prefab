@@ -540,7 +540,7 @@ MonoBehaviour:
   loadout:
   - {fileID: 11400000, guid: fc511919b8180804bb8b5359f9f47eef, type: 2}
   weaponParent: {fileID: 1117307821}
-  bulletholePrefab: {fileID: 7724638885200436271, guid: 87e65a4006aef794ca2a607be8b1ca9f,
+  bulletholePrefab: {fileID: 5662515463710978566, guid: d9916a70514db4a42a1fefccb83ac904,
     type: 3}
   canBeShot:
     serializedVersion: 2
