@@ -16,6 +16,7 @@ public class EnemySpawnManager : MonoBehaviourPunCallbacks
 
     private void Start()
     {
+        if (!photonView.IsMine) return;
         SpawnPlayer();
 
     }
@@ -23,8 +24,6 @@ public class EnemySpawnManager : MonoBehaviourPunCallbacks
     public void SpawnPlayer()
     {
         Transform spawnPosition = spawnPositions[Random.Range(0,spawnPositions.Length)];
-
-        if (!photonView.IsMine) return;
         PhotonNetwork.Instantiate(playerPrefab1.name, spawnPosition.position, spawnPosition.rotation);
 
 
