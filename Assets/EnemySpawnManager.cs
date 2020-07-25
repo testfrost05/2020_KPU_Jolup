@@ -16,9 +16,10 @@ public class EnemySpawnManager : MonoBehaviourPunCallbacks
 
     private void Start()
     {
-        if (!photonView.IsMine) return;
-        SpawnPlayer();
-
+        if (PhotonNetwork.IsMasterClient)
+        {
+            SpawnPlayer();
+        }
     }
 
     public void SpawnPlayer()
