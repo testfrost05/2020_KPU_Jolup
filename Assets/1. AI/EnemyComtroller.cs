@@ -2,8 +2,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+using Photon.Pun;
 
-public class EnemyComtroller : MonoBehaviour
+[PunRPC]
+
+public class EnemyComtroller : MonoBehaviourPunCallbacks
 {
     public enum CurrentState { idle, trace, attack, dead};
     public CurrentState curState = CurrentState.idle;
