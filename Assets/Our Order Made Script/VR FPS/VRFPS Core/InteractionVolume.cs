@@ -3,9 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor;
 using Valve.VR;
+using System;
+using Photon.Pun;
 
 namespace VrFps
 {
+    [PunRPC]
     public class InteractionVolume : MonoBehaviour
     {
         [ReadOnly] [SerializeField] protected Hand hand;
@@ -469,5 +472,7 @@ namespace VrFps
                 if (other.gameObject == hand.gameObject)
                     handInTrigger = false;
         }
+
+      
     }
 }

@@ -1,9 +1,11 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Photon.Pun;
 
 namespace VrFps
 {
+    [PunRPC]
     public class Chamber : MonoBehaviour
     {
         public delegate void ChamberEvent(Chamber chamber);

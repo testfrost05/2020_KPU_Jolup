@@ -1,9 +1,11 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Photon.Pun;
 
 namespace VrFps
 {
+    [PunRPC]
     public class Trigger : MonoBehaviour //방아쇠 
     {
         public delegate void TriggerEvent();

@@ -2,9 +2,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 using Valve.VR;
+using Photon.Pun;
 
 namespace VrFps
 {
+    [PunRPC]
     public class FireSelector : MonoBehaviour
     {
         public enum _FireMode // 총 사격 모드

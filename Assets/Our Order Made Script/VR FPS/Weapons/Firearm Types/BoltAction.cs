@@ -1,9 +1,11 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Photon.Pun;
 
 namespace VrFps
 {
+    [PunRPC]
     public class BoltAction : Firearm //볼트액션용 firearm
         //firearm 상속받아서 볼트액션 가능하게 
     {

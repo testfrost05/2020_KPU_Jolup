@@ -2,9 +2,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 using Valve.VR;
-
+using Photon.Pun;
 namespace VrFps
 {
+    [PunRPC]
     public class FirearmSlide : Slide
     {
         [SerializeField] protected bool animateForwardOnRelease;
