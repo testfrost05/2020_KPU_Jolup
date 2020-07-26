@@ -26,7 +26,7 @@ namespace Com.Kpu.SimpleHostile
         {
             if (photonView.IsMine && Input.GetKeyDown(KeyCode.Alpha1)) { photonView.RPC("Equip", RpcTarget.All, 0); }
 
-            
+
             if (currentWeapon != null)
             {
                 if (photonView.IsMine)
@@ -109,14 +109,14 @@ namespace Com.Kpu.SimpleHostile
                 t_newHole.transform.LookAt(t_hit.point + t_hit.normal);
                 Destroy(t_newHole, 5f);
 
-                if (photonView.IsMine) 
+                if (photonView.IsMine)
                 {
                     //shooting other player on network
                     if (t_hit.collider.gameObject.layer == 8)
                     {
                         //RPC call to Damange Player Goes here
                         t_hit.collider.gameObject.GetPhotonView().RPC("TakeDamage", RpcTarget.All, loadout[currentIndex].damage);
-                    
+
                     }
 
                 }
@@ -125,14 +125,16 @@ namespace Com.Kpu.SimpleHostile
             currentWeapon.transform.Rotate(-loadout[currentIndex].recoil, 0, 0);
             currentWeapon.transform.position -= currentWeapon.transform.forward * loadout[currentIndex].kickback;
 
-          
+
         }
         [PunRPC]
         private void TakeDamage(int p_damage)
         {
             GetComponent<Player>().TakeDamage(p_damage);
-        
+
         }
-        #endregion
+
     }
+        #endregion
+    
 }
