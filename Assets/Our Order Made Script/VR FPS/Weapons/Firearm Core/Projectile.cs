@@ -4,6 +4,7 @@ using UnityEngine;
 using Photon.Pun;
 namespace VrFps
 {
+    [PunRPC]
     public class Projectile : MonoBehaviourPunCallbacks //총알을 쏠 때
     {
         [SerializeField] protected Rigidbody rb;

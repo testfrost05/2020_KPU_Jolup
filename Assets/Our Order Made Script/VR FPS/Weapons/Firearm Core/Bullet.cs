@@ -1,9 +1,11 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Photon.Pun;
 
 namespace VrFps
 {
+    [PunRPC]
     public class Bullet : Item //총알은 아이템
     {
         [SerializeField] protected bool spent;
