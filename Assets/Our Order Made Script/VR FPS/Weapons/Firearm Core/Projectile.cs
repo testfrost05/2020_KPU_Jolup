@@ -56,12 +56,12 @@ namespace VrFps
 
         void Update()
         {
-            if (photonView.IsMine)
+            if (PhotonNetwork.IsMasterClient)
             {
-                photonView.RPC("OnCollisionEnter", RpcTarget.All);
-                photonView.RPC("Fire", RpcTarget.All);
-                photonView.RPC("Fire(float muzzleVelocity, float spread)", RpcTarget.All);
-                photonView.RPC("Effect", RpcTarget.All);
+                photonView.RPC("OnCollisionEnter", RpcTarget.AllBuffered);
+                photonView.RPC("Fire", RpcTarget.AllBuffered);
+                photonView.RPC("Fire(float muzzleVelocity, float spread)", RpcTarget.AllBuffered);
+                photonView.RPC("Effect", RpcTarget.AllBuffered);
             }
             
         }
