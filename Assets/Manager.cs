@@ -21,8 +21,9 @@ public class Manager : MonoBehaviourPunCallbacks
     private static Manager instance;
 
     public Transform[] spawnPositions;
-    //public GameObject playerPrefab1;
+    public GameObject playerPrefab1;
     public GameObject Vrplayer;
+  
 
 
 
@@ -34,11 +35,17 @@ public class Manager : MonoBehaviourPunCallbacks
 
     private void Start()
     {
+        if (PhotonNetwork.IsMasterClient)
+        {
             VrSpawn();
-
+        }
+        else
+        {
+            SpawnPlayer();
+        }
     }
 
-    /*
+    
     public void SpawnPlayer()
     {
         var localPlayerIndex = PhotonNetwork.LocalPlayer.ActorNumber - 1;
@@ -46,7 +53,7 @@ public class Manager : MonoBehaviourPunCallbacks
 
         PhotonNetwork.Instantiate(playerPrefab1.name, spawnPosition.position, spawnPosition.rotation);
     }
-    */
+    
     public void VrSpawn()
     {
         var localPlayerIndex = PhotonNetwork.LocalPlayer.ActorNumber - 1;

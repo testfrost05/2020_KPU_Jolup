@@ -176,7 +176,7 @@ namespace Com.Kpu.SimpleHostile
 
                 if (current_health <= 0)
                 {
-                  //  manager.SpawnPlayer();
+                    manager.SpawnPlayer();
                     PhotonNetwork.Destroy(gameObject);
                 }
             }
