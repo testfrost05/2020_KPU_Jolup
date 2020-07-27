@@ -58,6 +58,7 @@ namespace VrFps
 
         void LateUpdate()
         {
+
        
           
             UpdatePosition();
@@ -65,7 +66,8 @@ namespace VrFps
 
         void FixedUpdate()
         {
-           
+            
+
             velocityHistory.VelocityStep(transform);
         }
 
