@@ -54,6 +54,18 @@ namespace VrFps
             Destroy(gameObject, 7.5f);
         }
 
+        void Update()
+        {
+            if (photonView.IsMine)
+            {
+                photonView.RPC("OnCollisionEnter", RpcTarget.All);
+                photonView.RPC("Fire", RpcTarget.All);
+                photonView.RPC("Fire(float muzzleVelocity, float spread)", RpcTarget.All);
+                photonView.RPC("Effect", RpcTarget.All);
+            }
+            
+        }
+
         [PunRPC]
         void OnCollisionEnter(Collision col) //충돌 진입
         {
