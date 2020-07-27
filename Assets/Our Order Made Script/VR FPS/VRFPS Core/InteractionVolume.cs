@@ -9,7 +9,7 @@ using Photon.Pun;
 namespace VrFps
 {
     [PunRPC]
-    public class InteractionVolume : MonoBehaviour
+    public class InteractionVolume : MonoBehaviourPunCallbacks
     {
         [ReadOnly] [SerializeField] protected Hand hand;
         public Hand Hand { get { return hand; } }

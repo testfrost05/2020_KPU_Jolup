@@ -6,7 +6,7 @@ using Photon.Pun;
 namespace VrFps
 {
     [PunRPC]
-    public class Chamber : MonoBehaviour
+    public class Chamber : MonoBehaviourPunCallbacks
     {
         public delegate void ChamberEvent(Chamber chamber);
         public ChamberEvent _LoadBullet;

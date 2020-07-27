@@ -7,6 +7,7 @@ namespace VrFps
 {
     public class CharacterControllerMovement : MonoBehaviourPunCallbacks
     {
+        [PunRPC]
         [SerializeField] protected SteamVR_Action_Vector2 movementAxis;
 
         public bool linearMovement = false;

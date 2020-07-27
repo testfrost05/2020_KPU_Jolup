@@ -1,9 +1,10 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using Photon.Pun;
 namespace VrFps
 {
+    [PunRPC]
     public class CapsuleGrab : MonoBehaviour
     {
         public List<InteractionVolume> CapsuleGrabInteractions()
