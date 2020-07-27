@@ -103,7 +103,7 @@ namespace VrFps
                 projectile.transform.position = muzzle.position;
                 projectile.transform.rotation = muzzle.rotation;
                 projectile.gameObject.SetActive(true);
-                projectile.Fire();
+                projectile.Fire1();
             }
         }
 

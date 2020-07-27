@@ -23,9 +23,9 @@ public class Manager : MonoBehaviourPunCallbacks
     public Transform[] spawnPositions;
     public GameObject playerPrefab1;
     public GameObject Vrplayer;
-  
 
 
+ 
 
 
 
