@@ -243,6 +243,8 @@ GameObject:
   - component: {fileID: 3615893758209122950}
   - component: {fileID: 3709642254364756966}
   - component: {fileID: 3708795174100227014}
+  - component: {fileID: 6356986526008138496}
+  - component: {fileID: 6700646770881467171}
   m_Layer: 10
   m_Name: 5.56Bullet
   m_TagString: Interactable
@@ -455,6 +457,43 @@ MonoBehaviour:
   LeftPoseValue: 0
   RightPolarity: 0
   LeftPolarity: 0
+--- !u!114 &6356986526008138496
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3668445358543710458}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa584fbee541324448dd18d8409c7a41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ObservedComponentsFoldoutOpen: 1
+  Group: 0
+  prefixField: -1
+  Synchronization: 3
+  OwnershipTransfer: 0
+  ObservedComponents:
+  - {fileID: 6700646770881467171}
+  viewIdField: 0
+  InstantiationId: 0
+  isRuntimeInstantiated: 0
+--- !u!114 &6700646770881467171
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3668445358543710458}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 627855c7f81362d41938ffe0b1475957, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_SynchronizePosition: 1
+  m_SynchronizeRotation: 1
+  m_SynchronizeScale: 0
 --- !u!1 &3669121570123678120
 GameObject:
   m_ObjectHideFlags: 0

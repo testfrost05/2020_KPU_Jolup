@@ -11,7 +11,9 @@ namespace Com.Kpu.SimpleHostile
         #region Variables
         public float speed;
         public float sprintModifier;
+        public float slideModifier;
         public float jumpForce;
+        public float lenthofslide;
         public int max_health;
         public Camera normalCam;
         public GameObject cameraParent;
@@ -38,6 +40,12 @@ namespace Com.Kpu.SimpleHostile
 
         private Manager manager;
         private Weapon weapon;
+
+        private bool sliding;
+        private float slide_time;
+        private Vector3 slide_dir;
+
+
         #endregion
 
         #region MonoBehaviour Callbacks
@@ -78,11 +86,13 @@ namespace Com.Kpu.SimpleHostile
             //Controls
             bool sprint = Input.GetKey(KeyCode.LeftShift) || Input.GetKey(KeyCode.RightShift);
             bool jump = Input.GetKeyDown(KeyCode.Space);
+         
 
             //States
             bool isGrounded = Physics.Raycast(groundDetector.position, Vector3.down, 0.1f, ground);
             bool isJumping = jump && isGrounded;
             bool isSprinting = sprint && t_vmove > 0 && !isJumping && isGrounded;
+           
 
             //Jumping
             if (isJumping)
@@ -129,26 +139,57 @@ namespace Com.Kpu.SimpleHostile
             //Controls
             bool sprint = Input.GetKey(KeyCode.LeftShift) || Input.GetKey(KeyCode.RightShift);
             bool jump = Input.GetKeyDown(KeyCode.Space);
+            bool slide = Input.GetKey(KeyCode.LeftControl);
 
             //States
             bool isGrounded = Physics.Raycast(groundDetector.position, Vector3.down, 0.1f, ground);
             bool isJumping = jump && isGrounded;
             bool isSprinting = sprint && t_vmove > 0 && !isJumping && isGrounded;
+            bool isSliding = isSprinting && slide;
 
-            
 
             //Movement
-            Vector3 t_direction = new Vector3(t_hmove, 0, t_vmove);
-            t_direction.Normalize();
-
+            Vector3 t_direction = Vector3.zero;
             float t_adjustedSpeed = speed;
-            if (isSprinting) t_adjustedSpeed *= sprintModifier;
+            if (!sliding)
+            {
+                t_direction = new Vector3(t_hmove, 0, t_vmove);
+                t_direction.Normalize();
+
+
+                if (isSprinting) t_adjustedSpeed *= sprintModifier;
+
+            }
+            else
+            {
+                t_direction = slide_dir;
+                t_adjustedSpeed *= slideModifier;
+                slide_time -= Time.deltaTime;
+                if (slide_time <= 0)
+                {
+                    sliding = false;
+                
+                }
+                
+            }
 
             Vector3 t_targetVelocity = transform.TransformDirection(t_direction) * t_adjustedSpeed * Time.deltaTime;
             t_targetVelocity.y = rig.velocity.y;
             rig.velocity = t_targetVelocity;
 
-            if (isSprinting) { normalCam.fieldOfView = Mathf.Lerp(normalCam.fieldOfView, baseFOV * sprintFOVModifier, Time.deltaTime * 8f); }
+            //sliding
+            if (isSliding)
+            {
+                sliding = true;
+                slide_dir = transform.TransformDirection(t_direction);
+                slide_time = lenthofslide;
+                //adjust camera
+            
+            }
+            
+
+            //field of view
+                if (isSprinting) { normalCam.fieldOfView = Mathf.Lerp(normalCam.fieldOfView, baseFOV * sprintFOVModifier, Time.deltaTime * 8f); }
             else { normalCam.fieldOfView = Mathf.Lerp(normalCam.fieldOfView, baseFOV, Time.deltaTime * 8f); }
         }
 
