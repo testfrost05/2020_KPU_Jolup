@@ -489,9 +489,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 500
   sprintModifier: 2
-  slideModifier: 0
+  slideModifier: 0.5
   jumpForce: 1000
-  lenthofslide: 0
+  lenthofslide: 0.75
   max_health: 1000
   normalCam: {fileID: 5684267881507272848}
   cameraParent: {fileID: 1110192016}

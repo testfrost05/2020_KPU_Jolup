@@ -29,12 +29,14 @@ namespace Com.Kpu.SimpleHostile
 
         private Vector3 targetWeaponBobPosition;
         private Vector3 weaponParentOrigin;
+        private Vector3 weaponParentCurrentPos;
 
         private float movementCounter;
         private float idleCounter;
 
         private float baseFOV;
         private float sprintFOVModifier = 1.5f;
+        private Vector3 origin;
 
         private int current_health;
 
@@ -58,13 +60,15 @@ namespace Com.Kpu.SimpleHostile
 
             cameraParent.SetActive(photonView.IsMine);
             if (!photonView.IsMine) gameObject.layer = 8;
-            
-            baseFOV = normalCam.fieldOfView;
 
-            if(Camera.main) Camera.main.enabled = false;
+            baseFOV = normalCam.fieldOfView;
+            origin = normalCam.transform.localPosition;
+
+            if (Camera.main) Camera.main.enabled = false;
 
             rig = GetComponent<Rigidbody>();
             weaponParentOrigin = weaponParent.localPosition;
+            weaponParentCurrentPos = weaponParentOrigin;
 
             if (photonView.IsMine)
             {
@@ -86,13 +90,13 @@ namespace Com.Kpu.SimpleHostile
             //Controls
             bool sprint = Input.GetKey(KeyCode.LeftShift) || Input.GetKey(KeyCode.RightShift);
             bool jump = Input.GetKeyDown(KeyCode.Space);
-         
+
 
             //States
             bool isGrounded = Physics.Raycast(groundDetector.position, Vector3.down, 0.1f, ground);
             bool isJumping = jump && isGrounded;
             bool isSprinting = sprint && t_vmove > 0 && !isJumping && isGrounded;
-           
+
 
             //Jumping
             if (isJumping)
@@ -103,7 +107,8 @@ namespace Com.Kpu.SimpleHostile
             if (Input.GetKeyDown(KeyCode.U)) TakeDamage(100);
 
             //Head Bob
-            if (t_hmove == 0 && t_vmove == 0)
+            if (sliding) { }
+            else if (t_hmove == 0 && t_vmove == 0)
             {
                 HeadBob(idleCounter, 0.025f, 0.025f);
                 idleCounter += Time.deltaTime;
@@ -128,7 +133,7 @@ namespace Com.Kpu.SimpleHostile
             weapon.RefreshAmmo(ui_ammo);
         }
 
-        private void FixedUpdate()
+        void FixedUpdate()
         {
             if (!photonView.IsMine) return;
 
@@ -145,16 +150,18 @@ namespace Com.Kpu.SimpleHostile
             bool isGrounded = Physics.Raycast(groundDetector.position, Vector3.down, 0.1f, ground);
             bool isJumping = jump && isGrounded;
             bool isSprinting = sprint && t_vmove > 0 && !isJumping && isGrounded;
-            bool isSliding = isSprinting && slide;
+            bool isSliding = isSprinting && slide && !sliding;
 
 
             //Movement
             Vector3 t_direction = Vector3.zero;
             float t_adjustedSpeed = speed;
+
             if (!sliding)
             {
                 t_direction = new Vector3(t_hmove, 0, t_vmove);
                 t_direction.Normalize();
+                t_direction = transform.TransformDirection(t_direction);
 
 
                 if (isSprinting) t_adjustedSpeed *= sprintModifier;
@@ -168,12 +175,13 @@ namespace Com.Kpu.SimpleHostile
                 if (slide_time <= 0)
                 {
                     sliding = false;
-                
+                    weaponParentCurrentPos += Vector3.up * 0.5f;
+
                 }
-                
+
             }
 
-            Vector3 t_targetVelocity = transform.TransformDirection(t_direction) * t_adjustedSpeed * Time.deltaTime;
+            Vector3 t_targetVelocity = t_direction * t_adjustedSpeed * Time.deltaTime;
             t_targetVelocity.y = rig.velocity.y;
             rig.velocity = t_targetVelocity;
 
@@ -181,16 +189,28 @@ namespace Com.Kpu.SimpleHostile
             if (isSliding)
             {
                 sliding = true;
-                slide_dir = transform.TransformDirection(t_direction);
+                slide_dir = t_direction;
                 slide_time = lenthofslide;
-                //adjust camera
-            
-            }
-            
+                weaponParentCurrentPos += Vector3.down * 0.5f;
 
-            //field of view
+            }
+
+
+            //Camera Stuff
+            if (sliding)
+            {
+                normalCam.fieldOfView = Mathf.Lerp(normalCam.fieldOfView, baseFOV * sprintFOVModifier * 1.25f, Time.deltaTime * 8f);
+                normalCam.transform.localPosition = Vector3.Lerp(normalCam.transform.localPosition, origin + Vector3.down * 0.5f, Time.deltaTime * 6f);
+
+            }
+            else 
+            {
                 if (isSprinting) { normalCam.fieldOfView = Mathf.Lerp(normalCam.fieldOfView, baseFOV * sprintFOVModifier, Time.deltaTime * 8f); }
-            else { normalCam.fieldOfView = Mathf.Lerp(normalCam.fieldOfView, baseFOV, Time.deltaTime * 8f); }
+                else { normalCam.fieldOfView = Mathf.Lerp(normalCam.fieldOfView, baseFOV, Time.deltaTime * 8f); }
+
+                normalCam.transform.localPosition = Vector3.Lerp(normalCam.transform.localPosition, origin, Time.deltaTime * 6f);
+
+            }
         }
 
         #endregion
@@ -198,11 +218,11 @@ namespace Com.Kpu.SimpleHostile
         #region private Methods
         void HeadBob(float p_z, float p_x_intensity, float p_y_intensity)
         {
-            targetWeaponBobPosition = weaponParentOrigin + new Vector3(Mathf.Cos(p_z) * p_x_intensity, Mathf.Sin(p_z *2) * p_y_intensity, 0);
-          
+            targetWeaponBobPosition = weaponParentCurrentPos + new Vector3(Mathf.Cos(p_z) * p_x_intensity, Mathf.Sin(p_z * 2) * p_y_intensity, 0);
+
         }
 
-        void RefreshHealthBar ()
+        void RefreshHealthBar()
         {
             float t_health_ratio = (float)current_health / (float)max_health;
             ui_healthbar.localScale = Vector3.Lerp(ui_healthbar.localScale, new Vector3(t_health_ratio, 1, 1), Time.deltaTime * 8f);
@@ -213,7 +233,7 @@ namespace Com.Kpu.SimpleHostile
 
         #region Public methods
 
-        
+
         public void TakeDamage(int p_damage)
         {
             if (photonView.IsMine)

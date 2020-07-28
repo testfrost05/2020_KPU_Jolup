@@ -36,15 +36,9 @@ public class Manager : MonoBehaviourPunCallbacks
     private void Start()
     {
 
-        if (PhotonNetwork.IsMasterClient)
-        {
-            VrSpawn();
-        }
-        else
-        {
 
             SpawnPlayer();
-        }
+        
     }
 
     
