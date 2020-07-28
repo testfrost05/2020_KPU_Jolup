@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using Photon.Pun;
 
 namespace Com.Kpu.SimpleHostile
@@ -19,6 +20,7 @@ namespace Com.Kpu.SimpleHostile
         public LayerMask ground;
 
         private Transform ui_healthbar;
+        private Text ui_ammo;
 
 
         private Rigidbody rig;
@@ -35,12 +37,15 @@ namespace Com.Kpu.SimpleHostile
         private int current_health;
 
         private Manager manager;
+        private Weapon weapon;
         #endregion
 
         #region MonoBehaviour Callbacks
         private void Start()
         {
             manager = GameObject.Find("Manager").GetComponent<Manager>();
+            weapon = GetComponent<Weapon>();
+
             current_health = max_health;
 
             cameraParent.SetActive(photonView.IsMine);
@@ -56,6 +61,7 @@ namespace Com.Kpu.SimpleHostile
             if (photonView.IsMine)
             {
                 ui_healthbar = GameObject.Find("HUD/Health/Bar").transform;
+                ui_ammo = GameObject.Find("HUD/Ammo/Text").GetComponent<Text>();
                 RefreshHealthBar();
             }
 
@@ -109,7 +115,7 @@ namespace Com.Kpu.SimpleHostile
 
             //UI Refreshes
             RefreshHealthBar();
-
+            weapon.RefreshAmmo(ui_ammo);
         }
 
         private void FixedUpdate()

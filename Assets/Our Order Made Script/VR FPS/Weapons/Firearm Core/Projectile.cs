@@ -48,23 +48,13 @@ namespace VrFps
         }
 
         [SerializeField] protected List<BulletImpactEffect> impactEffects;
-
+        [PunRPC]
         void Start()
         {
             Destroy(gameObject, 7.5f);
         }
 
-        void Update()
-        {
-            if (PhotonNetwork.IsMasterClient)
-            {
-                photonView.RPC("OnCollisionEnter", RpcTarget.MasterClient);
-                photonView.RPC("Fire1", RpcTarget.MasterClient);
-                photonView.RPC("Fire", RpcTarget.MasterClient);
-                photonView.RPC("Effect", RpcTarget.MasterClient);
-            }
-            
-        }
+      
 
         [PunRPC]
         void OnCollisionEnter(Collision col) //충돌 진입
@@ -103,8 +93,8 @@ namespace VrFps
                 }
             }
         }
-
-        public void Fire1() //총을 쐈을 때 
+        [PunRPC]
+        public void Fire() //총을 쐈을 때 
         {
             rb.AddForce(transform.forward * muzzleVelocity, ForceMode.Impulse);
             Destroy(gameObject, 7.5f);
@@ -118,6 +108,7 @@ namespace VrFps
             }
         }
 
+        [PunRPC]
         public void Fire(float muzzleVelocity, float spread) //총을 쐇을 때 탄 퍼짐 적용
         {
             rb.AddForce(transform.forward * muzzleVelocity, ForceMode.Impulse);
@@ -136,7 +127,7 @@ namespace VrFps
                 Destroy(clone, 7.5f);
             }
         }
-
+        [PunRPC]
         void Effect(Collision col, bool ENTEREXIT) //임펙트관련
         {
             for (int i = 0; i < impactEffects.Count; i++)

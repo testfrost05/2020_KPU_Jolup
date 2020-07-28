@@ -41,6 +41,54 @@ MonoBehaviour:
   - TakeDamage
   - OnCollisionEnter
   - TakeDamage_Vr
+  - Fire3
+  - Fire4
+  - Fire1
+  - Effect
+  - Fire2
+  - EnableBullets
+  - Update
+  - AddAttachment
+  - AdvanceChamberIndex
+  - CatchBullet
+  - ChamberBullet
+  - ChamberRoundFromMagazine
+  - DelayIgnorePhysics
+  - DetachMagSFX
+  - DryFireSounds
+  - EjectBullet
+  - EjectCartridge
+  - EjectMagazine
+  - EnableBulletRenderers
+  - FirePreconditions
+  - FixedUpdate
+  - HoldTrigger
+  - LoadBullet
+  - LoadMag
+  - LocalEjectMagInput
+  - LocalFireSelectorInput
+  - LocalSlideStopInput
+  - MuzzleFlash
+  - OnTriggerEnter
+  - PrimaryDrop
+  - PrimaryGrasp
+  - PullTrigger
+  - ReleaseTrigger
+  - RemoveAttachment
+  - RemoveMag
+  - RestOnSlideStop
+  - RestrainTapedMag
+  - SecondaryDrop
+  - SecondaryGrasp
+  - SlideBackAudio
+  - SlideStop
+  - Start
+  - StartVirutalStock
+  - StopVirtualStock
+  - TouchpadDownInput
+  - TouchpadUpInput
+  - UpdateBulletRenderers
+  - Awake
   DisableAutoOpenWizard: 1
   ShowSettings: 0
   DevRegionSetOnce: 1

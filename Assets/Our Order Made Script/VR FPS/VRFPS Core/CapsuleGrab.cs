@@ -5,7 +5,7 @@ using Photon.Pun;
 namespace VrFps
 {
     [PunRPC]
-    public class CapsuleGrab : MonoBehaviour
+    public class CapsuleGrab : MonoBehaviourPunCallbacks
     {
         public List<InteractionVolume> CapsuleGrabInteractions()
         {

@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.UI;
 using UnityEngine;
 using Photon.Pun;
 
@@ -18,9 +19,17 @@ namespace Com.Kpu.SimpleHostile
         private int currentIndex;
         private GameObject currentWeapon;
 
+        private bool isReloading;
         #endregion
 
         #region MonoBehaviour Callbacks
+
+        private void Start()
+        {
+            foreach (Gun a in loadout) a.Initialize();
+            Equip(0);
+
+        }
 
         void Update()
         {
@@ -35,8 +44,12 @@ namespace Com.Kpu.SimpleHostile
 
                     if (Input.GetMouseButtonDown(0) && currentCooldown <= 0)
                     {
-                        photonView.RPC("Shoot", RpcTarget.All);
+                        if (loadout[currentIndex].FireBullet()) photonView.RPC("Shoot", RpcTarget.All);
+                        else StartCoroutine(Reload(loadout[currentIndex].reload));
                     }
+
+                    if (Input.GetKeyDown(KeyCode.R)) StartCoroutine(Reload(loadout[currentIndex].reload));
+
                     //cooldown
                     if (currentCooldown > 0) currentCooldown -= Time.deltaTime;
                 }
@@ -51,11 +64,28 @@ namespace Com.Kpu.SimpleHostile
 
         #region Private Methods
 
+        IEnumerator Reload(float p_wait)
+        {
+            isReloading = true;
+            currentWeapon.SetActive(false);
+
+            yield return new WaitForSeconds(p_wait);
+
+            loadout[currentIndex].Reload();
+            currentWeapon.SetActive(true);
+            isReloading = false;
+        }
+
+
+
         [PunRPC]
         void Equip(int p_ind)
         {
-            if (currentWeapon != null) Destroy(currentWeapon);
-
+            if (currentWeapon != null)
+            {
+                if(isReloading) StopCoroutine("Reload");
+                Destroy(currentWeapon);
+            }
             currentIndex = p_ind;
 
             GameObject t_newWeapon = Instantiate(loadout[p_ind].prefab, weaponParent.position, weaponParent.rotation, weaponParent) as GameObject;
@@ -134,7 +164,21 @@ namespace Com.Kpu.SimpleHostile
 
         }
 
-    }
+        #region Public Methods;
+
+        public void RefreshAmmo(Text p_text)
+        {
+            int t_clip = loadout[currentIndex].Getclip();
+            int t_stash = loadout[currentIndex].Getstash();
+
+            p_text.text = t_clip.ToString("D2") + " / " + t_stash.ToString("D2");
+
+        }
         #endregion
-    
+
+    }
+
+    #endregion
+
+
 }

@@ -4147,6 +4147,7 @@ GameObject:
   - component: {fileID: 6833425944188469836}
   - component: {fileID: 6833425944188469813}
   - component: {fileID: 6833425944188469822}
+  - component: {fileID: 5890032300471028356}
   m_Layer: 0
   m_Name: M4 Magzine_With_Pose (1)
   m_TagString: Untagged
@@ -4536,6 +4537,27 @@ MonoBehaviour:
       values: 010101010101
     previewEnabled: 1
   scale: 1
+--- !u!114 &5890032300471028356
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6833425944188469812}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa584fbee541324448dd18d8409c7a41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ObservedComponentsFoldoutOpen: 1
+  Group: 0
+  prefixField: -1
+  Synchronization: 0
+  OwnershipTransfer: 0
+  ObservedComponents: []
+  viewIdField: 0
+  InstantiationId: 0
+  isRuntimeInstantiated: 0
 --- !u!1 &6833425944231395524
 GameObject:
   m_ObjectHideFlags: 0
