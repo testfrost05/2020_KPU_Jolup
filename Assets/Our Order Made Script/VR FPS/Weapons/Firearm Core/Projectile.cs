@@ -58,10 +58,10 @@ namespace VrFps
         {
             if (PhotonNetwork.IsMasterClient)
             {
-                photonView.RPC("OnCollisionEnter", RpcTarget.AllBuffered);
-                photonView.RPC("Fire", RpcTarget.AllBuffered);
-                photonView.RPC("Fire(float muzzleVelocity, float spread)", RpcTarget.AllBuffered);
-                photonView.RPC("Effect", RpcTarget.AllBuffered);
+                photonView.RPC("OnCollisionEnter", RpcTarget.MasterClient);
+                photonView.RPC("Fire1", RpcTarget.MasterClient);
+                photonView.RPC("Fire", RpcTarget.MasterClient);
+                photonView.RPC("Effect", RpcTarget.MasterClient);
             }
             
         }
@@ -104,7 +104,7 @@ namespace VrFps
             }
         }
 
-        public void Fire() //총을 쐈을 때 
+        public void Fire1() //총을 쐈을 때 
         {
             rb.AddForce(transform.forward * muzzleVelocity, ForceMode.Impulse);
             Destroy(gameObject, 7.5f);
