@@ -146,7 +146,7 @@ namespace Com.Kpu.SimpleHostile
                     if (t_hit.collider.gameObject.layer == 8)
                     {
                         //RPC call to Damange Player Goes here
-                        t_hit.collider.gameObject.GetPhotonView().RPC("TakeDamage", RpcTarget.All, loadout[currentIndex].damage);
+                        t_hit.collider.transform.root.gameObject.GetPhotonView().RPC("TakeDamage", RpcTarget.All, loadout[currentIndex].damage);
 
                     }
 

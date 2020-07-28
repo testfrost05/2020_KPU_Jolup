@@ -68,6 +68,10 @@ namespace Com.Kpu.SimpleHostile
 
             cameraParent.SetActive(photonView.IsMine);
             if (!photonView.IsMine) gameObject.layer = 8;
+            if (!photonView.IsMine) standingCollider.layer = 8;
+            if (!photonView.IsMine) crouchingCollider.layer = 8;
+
+
 
             baseFOV = normalCam.fieldOfView;
             origin = normalCam.transform.localPosition;
