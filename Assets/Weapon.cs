@@ -19,6 +19,7 @@ namespace Com.Kpu.SimpleHostile
         private int currentIndex;
         private GameObject currentWeapon;
 
+        //재장전 
         private bool isReloading;
         #endregion
 

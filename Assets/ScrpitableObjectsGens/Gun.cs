@@ -24,8 +24,10 @@ namespace Com.Kpu.SimpleHostile
 
         public void Initialize()
         {
+            //총알
             stash = ammo;
             clip = clipsize;
+            
         }
 
 

@@ -22,7 +22,7 @@ namespace Com.Kpu.SimpleHostile
         public LayerMask ground;
 
         private Transform ui_healthbar;
-        private Text ui_ammo;
+        private Text ui_ammo; //탄창 ui
 
 
         private Rigidbody rig;
