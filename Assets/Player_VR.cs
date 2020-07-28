@@ -88,7 +88,7 @@ namespace Com.Kpu.SimpleHostile
 
                 if (current_health <= 0)
                 {
-                    manager.VrSpawn();
+                    //manager.VrSpawn();
                     PhotonNetwork.Destroy(gameObject);
                 }
             }
