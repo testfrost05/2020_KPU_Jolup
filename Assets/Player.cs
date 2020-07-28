@@ -6,7 +6,7 @@ using Photon.Pun;
 
 namespace Com.Kpu.SimpleHostile
 {
-    public class Player : MonoBehaviourPunCallbacks
+    public class Player : MonoBehaviourPunCallbacks , IPunObservable
     {
         #region Variables
         public float speed;
@@ -55,10 +55,28 @@ namespace Com.Kpu.SimpleHostile
         private float slide_time;
         private Vector3 slide_dir;
 
+        private float aimAngle;
+
 
         #endregion
 
         #region MonoBehaviour Callbacks
+
+        public void OnPhotonSerializeView(PhotonStream p_stream, PhotonMessageInfo p_message)
+        {
+            if (p_stream.IsWriting)
+            {
+                p_stream.SendNext((int)(weaponParent.transform.localEulerAngles.x * 100f));
+            }
+            else
+            {
+                aimAngle = (int)p_stream.ReceiveNext() / 100f;
+            
+            }
+        }
+
+
+
         private void Start()
         {
             manager = GameObject.Find("Manager").GetComponent<Manager>();
@@ -67,10 +85,14 @@ namespace Com.Kpu.SimpleHostile
             current_health = max_health;
 
             cameraParent.SetActive(photonView.IsMine);
-            if (!photonView.IsMine) gameObject.layer = 8;
-            if (!photonView.IsMine) standingCollider.layer = 8;
-            if (!photonView.IsMine) crouchingCollider.layer = 8;
 
+            if (!photonView.IsMine)
+            {
+                gameObject.layer = 8;
+                standingCollider.layer = 8;
+                crouchingCollider.layer = 8;
+
+            }
 
 
             baseFOV = normalCam.fieldOfView;
@@ -93,8 +115,11 @@ namespace Com.Kpu.SimpleHostile
 
         private void Update()
         {
-            if (!photonView.IsMine) return;
-
+            if (!photonView.IsMine)
+            {
+                RefreshMultiplayerState();
+                return;
+            }
             //Axies
             float t_hmove = Input.GetAxisRaw("Horizontal");
             float t_vmove = Input.GetAxisRaw("Vertical");
@@ -103,6 +128,7 @@ namespace Com.Kpu.SimpleHostile
             bool sprint = Input.GetKey(KeyCode.LeftShift) || Input.GetKey(KeyCode.RightShift);
             bool jump = Input.GetKeyDown(KeyCode.Space);
             bool crouch = Input.GetKeyDown(KeyCode.LeftControl) || Input.GetKeyDown(KeyCode.RightControl);
+            bool pause = Input.GetKeyDown(KeyCode.Escape);
 
 
             //States
@@ -111,8 +137,29 @@ namespace Com.Kpu.SimpleHostile
             bool isSprinting = sprint && t_vmove > 0 && !isJumping && isGrounded;
             bool isCrouching = crouch && !isSprinting && !isJumping && isGrounded;
 
-            //Crouching
+            //Pause
+            if (pause)
+            {
+                GameObject.Find("Pause").GetComponent<Pause>().TogglePause();
+            }
 
+            if (Pause.paused)
+            {
+                t_hmove = 0f;
+                t_vmove = 0f;
+                sprint = false;
+                jump = false;
+                crouch = false;
+                pause = false;
+                isGrounded = false;
+                isJumping = false;
+                isSprinting = false;
+                isCrouching = false;
+            }
+
+
+
+            //Crouching
             if (isCrouching)
             {
                 photonView.RPC("SetCrouch", RpcTarget.All, !crouched);
@@ -267,6 +314,24 @@ namespace Com.Kpu.SimpleHostile
         #endregion
 
         #region private Methods
+
+
+        void RefreshMultiplayerState()
+        {
+            float cacheEulY = weaponParent.localEulerAngles.y;
+
+            Quaternion targetRotation = Quaternion.identity * Quaternion.AngleAxis(aimAngle, Vector3.right);
+            weaponParent.rotation = Quaternion.Slerp(weaponParent.rotation, targetRotation, Time.deltaTime * 8f);
+
+            Vector3 finalRotation = weaponParent.localEulerAngles;
+            finalRotation.y = cacheEulY;
+
+            weaponParent.localEulerAngles = finalRotation;
+        }
+
+
+
+
         void HeadBob(float p_z, float p_x_intensity, float p_y_intensity)
         {
             targetWeaponBobPosition = weaponParentCurrentPos + new Vector3(Mathf.Cos(p_z) * p_x_intensity, Mathf.Sin(p_z * 2) * p_y_intensity, 0);
@@ -321,6 +386,8 @@ namespace Com.Kpu.SimpleHostile
                 }
             }
         }
+
+     
 
 
         #endregion

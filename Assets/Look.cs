@@ -30,6 +30,7 @@ namespace Com.Kpu.SimpleHostile
         void Update()
         {
             if (!photonView.IsMine) return;
+            if (Pause.paused) return;
             SetY();
             SetX();
 

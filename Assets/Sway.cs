@@ -28,6 +28,7 @@ namespace Com.Kpu.SimpleHostile
 
         private void Update()
         {
+            if (Pause.paused) return;
             UpdateSway();
         }
 
