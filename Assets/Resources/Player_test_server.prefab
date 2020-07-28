@@ -489,7 +489,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 500
   sprintModifier: 2
-  slideModifier: 0.5
+  crouchModifier: 0.5
+  slideModifier: 2.5
   jumpForce: 1000
   lenthofslide: 0.75
   max_health: 1000
@@ -500,6 +501,10 @@ MonoBehaviour:
   ground:
     serializedVersion: 2
     m_Bits: 65536
+  slideAmount: 0.75
+  crouchAmount: 0.5
+  standingCollider: {fileID: 0}
+  crouchingCollider: {fileID: 0}
 --- !u!114 &5271309442597288816
 MonoBehaviour:
   m_ObjectHideFlags: 0
