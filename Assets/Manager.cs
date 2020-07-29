@@ -59,24 +59,11 @@ public class Manager : MonoBehaviourPunCallbacks
 
     private void Start()
     {
-        ValidateConnection();
-        InitializeUI();
-
+        
         SpawnPlayer();
     }
 
-    private void Update()
-    {
-
-    }
-
-
-
-    public override void OnLeftRoom()
-    {
-        base.OnLeftRoom();
-        SceneManager.LoadScene(mainmenu);
-    }
+   
 
 
     public void SpawnPlayer()
@@ -97,59 +84,9 @@ public class Manager : MonoBehaviourPunCallbacks
 
     }
     */
-    private void InitializeUI()
-    {
-        ui_endgame = GameObject.Find("Canvas").transform.Find("End Game").transform;
-   
-    }
-
-    private void ValidateConnection()
-    {
-        if (PhotonNetwork.IsConnected) return;
-        SceneManager.LoadScene(mainmenu); 
-    }
-
-    private void EndGame()
-    {
-        state = GameState.Ending;
-
-        //방 파괴
-        if (PhotonNetwork.IsMasterClient)
-        {
-            PhotonNetwork.DestroyAll();
-            PhotonNetwork.CurrentRoom.IsVisible = false;
-            PhotonNetwork.CurrentRoom.IsOpen = false;
-        
-        }
-
-        //게임오버 씬 보여주기
-        ui_endgame.gameObject.SetActive(true);
-
-        //6초후 메인메뉴
-        StartCoroutine(End(6f));
-
-    }
-
-    private IEnumerator End(float p_wait)
-    {
-        yield return new WaitForSeconds(p_wait);
-
-        //연결해제
-        PhotonNetwork.AutomaticallySyncScene = false;
-        PhotonNetwork.LeaveRoom();
-        
-    }
-
-    private void StateCheck()
-    {
-        if (state == GameState.Ending)
-        {
-            EndGame();
-       
-        }
     
-    
-    }
+
+
 
    
 }

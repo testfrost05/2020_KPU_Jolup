@@ -78,7 +78,7 @@ public class AuthManager : MonoBehaviour
             {
                 User = task.Result;
                 Debug.Log(User.Email);
-                SceneManager.LoadScene("MainMenu");
+                SceneManager.LoadScene("Menu");
             }
         }
 
