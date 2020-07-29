@@ -41,17 +41,13 @@ public class Manager : MonoBehaviourPunCallbacks
 
     public int mainmenu = 0;
 
-    public GameObject mapcam;
 
-    public string player_prefab_string;
 
     public GameObject player_prefab;
+    public GameObject Vrplayer;
     public Transform[] spawn_points;
 
-    private Transform ui_endgame;
 
-
-    private GameState state = GameState.Waiting;
 
 
 
@@ -59,8 +55,18 @@ public class Manager : MonoBehaviourPunCallbacks
 
     private void Start()
     {
-        
-        SpawnPlayer();
+        if (PhotonNetwork.IsMasterClient)
+        {
+            VrSpawn();
+
+
+        }
+        else
+        {
+
+
+            SpawnPlayer();
+        }
     }
 
    
@@ -68,22 +74,22 @@ public class Manager : MonoBehaviourPunCallbacks
 
     public void SpawnPlayer()
     {
-        var localPlayerIndex = PhotonNetwork.LocalPlayer.ActorNumber - 1;
-        var spawnPosition = spawn_points[localPlayerIndex % spawn_points.Length];
+      
+        var spawnPosition = spawn_points[Random.Range(0, spawn_points.Length)];
 
         PhotonNetwork.Instantiate(player_prefab.name, spawnPosition.position, spawnPosition.rotation);
     }
 
-    /*
+    
     public void VrSpawn()
     {
-        var localPlayerIndex = PhotonNetwork.LocalPlayer.ActorNumber - 1;
-        var spawnPosition = spawnPositions[localPlayerIndex % spawnPositions.Length];
+
+        var spawnPosition = spawn_points[Random.Range(0, spawn_points.Length)];
         PhotonNetwork.Instantiate(Vrplayer.name, spawnPosition.position, spawnPosition.rotation);
 
 
     }
-    */
+    
     
 
 
