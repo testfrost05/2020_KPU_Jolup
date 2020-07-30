@@ -163,7 +163,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d795768d858f31248b5e3866af326adc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  connectionInfoText: {fileID: 1666970150}
   JoinButton: {fileID: 430161871}
 --- !u!1 &348116062
 GameObject:
@@ -474,7 +473,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 70595184}
-        m_MethodName: Connect
+        m_MethodName: Join
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -914,7 +913,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1622788166
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1003,7 +1002,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1666970149
 RectTransform:
   m_ObjectHideFlags: 0

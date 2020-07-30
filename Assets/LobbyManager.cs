@@ -2,26 +2,34 @@
 using Photon.Realtime;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class LobbyManager : MonoBehaviourPunCallbacks
 {
     private string gameVersion = "1";
 
-    public Text connectionInfoText;
+    // public Text connectionInfoText;
     public Button JoinButton;
 
 
     // Start is called before the first frame update
     private void Start()
-    {
+    { 
+        /*
         PhotonNetwork.GameVersion = gameVersion;
         PhotonNetwork.ConnectUsingSettings();
 
         JoinButton.interactable = false;
         connectionInfoText.text = "마스터 서버에 연결중...";
-        
+        */
     }
+    public void Join() 
+    {
+        SceneManager.LoadScene("New IngameScene");
+    }
+}
 
+/*
     public override void OnConnectedToMaster()
     {
         JoinButton.interactable = true;
@@ -65,4 +73,4 @@ public class LobbyManager : MonoBehaviourPunCallbacks
     }
 }
 
-
+*/

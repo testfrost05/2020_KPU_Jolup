@@ -8,14 +8,6 @@ using UnityEngine.SceneManagement;
 using ExitGames.Client.Photon;
 
 
-public enum GameState
-{
-    Waiting = 0,
-    Starting = 1,
-    Playing = 2,
-    Ending = 3
-}
-
 
 
 public class Manager : MonoBehaviourPunCallbacks
@@ -55,18 +47,9 @@ public class Manager : MonoBehaviourPunCallbacks
 
     private void Start()
     {
-        if (PhotonNetwork.IsMasterClient)
-        {
-            VrSpawn();
-
-
-        }
-        else
-        {
-
-
+      
             SpawnPlayer();
-        }
+        
     }
 
    
