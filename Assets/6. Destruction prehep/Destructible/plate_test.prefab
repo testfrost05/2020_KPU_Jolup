@@ -12445,7 +12445,7 @@ MonoBehaviour:
     m_Bits: 1
   disableDelay: 5
   combineFrags: 1
-  combineMeshesDelay: 3
+  combineMeshesDelay: 9999999
   startMesh: {fileID: 0}
   fragParticles: {fileID: 0}
   dustParticles: {fileID: 0}

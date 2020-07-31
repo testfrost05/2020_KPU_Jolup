@@ -18712,7 +18712,7 @@ MonoBehaviour:
     m_Bits: 17
   disableDelay: 5
   combineFrags: 1
-  combineMeshesDelay: 3
+  combineMeshesDelay: 999999
   startMesh: {fileID: 0}
   fragParticles: {fileID: 0}
   dustParticles: {fileID: 19800000, guid: 80fdbf9ad675bfa4aa3dd1af61f62687, type: 3}

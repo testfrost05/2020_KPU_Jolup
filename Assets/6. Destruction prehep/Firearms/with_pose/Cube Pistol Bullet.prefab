@@ -424,6 +424,8 @@ GameObject:
   - component: {fileID: 54119546032884328}
   - component: {fileID: 114053158939501320}
   - component: {fileID: 114332477031725864}
+  - component: {fileID: 6600756124515179066}
+  - component: {fileID: 8236429942587373748}
   m_Layer: 10
   m_Name: Cube Pistol Bullet
   m_TagString: Interactable
@@ -623,15 +625,119 @@ MonoBehaviour:
   earlyExitCondition: 0
   SphereBoundsRadius: 0
   boxBounds: {x: 0, y: 0, z: 0}
-  RightHandPoser: {fileID: 0}
-  LeftHandPoser: {fileID: 0}
+  RightHandPoser: {fileID: 6600756124515179066}
+  LeftHandPoser: {fileID: 8236429942587373748}
   handRoot: {fileID: 0}
-  rightPosePositionOffset: {x: 0, y: 0, z: 0}
-  rightPoseRotationOffset: {x: 0, y: 0, z: 0}
-  leftPosePositionOffset: {x: 0, y: 0, z: 0}
-  leftPoseRotationOffset: {x: 0, y: 0, z: 0}
+  rightPosePositionOffset: {x: -0.05200001, y: 0.02640001, z: -0.0008000061}
+  rightPoseRotationOffset: {x: -24.453, y: -48.196, z: 108.441}
+  leftPosePositionOffset: {x: 0.05200001, y: 0.02640001, z: -0.0008000061}
+  leftPoseRotationOffset: {x: -24.453, y: 48.196, z: -108.441}
   poseTime: 0.2
   RightPoseValue: 0
   LeftPoseValue: 0
   RightPolarity: 0
   LeftPolarity: 0
+--- !u!114 &6600756124515179066
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1854711544463380}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e7418c7dd8f977d4e969202d3fa7e926, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  poseEditorExpanded: 1
+  blendEditorExpanded: 1
+  poseNames:
+  - BulletPose (MAIN)
+  overridePreviewLeftHandPrefab: {fileID: 1000013348574242, guid: 638779290bce1af49b356f33dcc6fccf,
+    type: 3}
+  overridePreviewRightHandPrefab: {fileID: 1000010304998954, guid: 6def53d002137b747aec0b29551e0e25,
+    type: 3}
+  skeletonMainPose: {fileID: 11400000, guid: 824e9f60da367fe4f9e578813572018c, type: 2}
+  skeletonAdditionalPoses: []
+  showLeftPreview: 0
+  showRightPreview: 0
+  previewLeftInstance: {fileID: 0}
+  previewRightInstance: {fileID: 0}
+  previewPoseSelection: 0
+  blendingBehaviours:
+  - name: Interact
+    enabled: 1
+    influence: 1
+    pose: 0
+    value: 0
+    action_single:
+      actionPath: 
+      needsReinit: 0
+    action_bool:
+      actionPath: 
+      needsReinit: 0
+    smoothingSpeed: 0
+    type: 0
+    useMask: 0
+    mask:
+      palm: 1
+      thumb: 1
+      index: 1
+      middle: 1
+      ring: 1
+      pinky: 1
+      values: 010101010101
+    previewEnabled: 1
+  scale: 1
+--- !u!114 &8236429942587373748
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1854711544463380}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e7418c7dd8f977d4e969202d3fa7e926, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  poseEditorExpanded: 1
+  blendEditorExpanded: 1
+  poseNames:
+  - BulletPose (MAIN)
+  overridePreviewLeftHandPrefab: {fileID: 1000013348574242, guid: 638779290bce1af49b356f33dcc6fccf,
+    type: 3}
+  overridePreviewRightHandPrefab: {fileID: 1000010304998954, guid: 6def53d002137b747aec0b29551e0e25,
+    type: 3}
+  skeletonMainPose: {fileID: 11400000, guid: 824e9f60da367fe4f9e578813572018c, type: 2}
+  skeletonAdditionalPoses: []
+  showLeftPreview: 0
+  showRightPreview: 0
+  previewLeftInstance: {fileID: 0}
+  previewRightInstance: {fileID: 0}
+  previewPoseSelection: 0
+  blendingBehaviours:
+  - name: Interact
+    enabled: 1
+    influence: 1
+    pose: 0
+    value: 0
+    action_single:
+      actionPath: 
+      needsReinit: 0
+    action_bool:
+      actionPath: 
+      needsReinit: 0
+    smoothingSpeed: 0
+    type: 0
+    useMask: 0
+    mask:
+      palm: 1
+      thumb: 1
+      index: 1
+      middle: 1
+      ring: 1
+      pinky: 1
+      values: 010101010101
+    previewEnabled: 1
+  scale: 1
