@@ -5,7 +5,7 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 1
+  - enabled: 0
     path: Assets/MainScenes/MainMenu.unity
     guid: 521026d1c3e298642ad2b43a938b5c19
   - enabled: 1
@@ -63,7 +63,7 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/Photon/PhotonUnityNetworking/Demos/DemoSlotRacer/SlotCar-Scene.unity
     guid: 711b38c07f2cf904f81b3422c67f1825
-  - enabled: 1
+  - enabled: 0
     path: Assets/MainScenes/VRFPS test.unity
     guid: 62efca09f9dac6e439dec1cb3b484110
   - enabled: 0

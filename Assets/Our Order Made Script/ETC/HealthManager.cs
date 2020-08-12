@@ -11,6 +11,7 @@ public class HealthManager : MonoBehaviour
         hitPoint -= damage;
         if (hitPoint <= 0)
         {
+            GameControl.instance.SlayTarget(); // 표적증가 추가 코드
             Destroy(gameObject);
         }
     }

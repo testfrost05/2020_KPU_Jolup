@@ -57,7 +57,7 @@ public class EnemyComtroller : MonoBehaviourPunCallbacks
             switch (curState)
             {
                 case CurrentState.idle:
-                    nvAgent.Stop();
+                    //nvAgent.Stop(); 
                     _animator.SetBool("isTrace", false);
                     break;
                 case CurrentState.trace:
