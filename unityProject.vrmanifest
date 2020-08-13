@@ -5,7 +5,7 @@
       "app_key": "application.generated.unity.local.exe",
       "launch_type": "url",
       "url": "steam://launch/",
-      "action_manifest_path": "C:\\Users\\tjddy\\Downloads\\JolUp\\Assets\\StreamingAssets\\SteamVR\\actions.json",
+      "action_manifest_path": "D:\\endgame\\2020_KPU_Jolup2\\Assets\\StreamingAssets\\SteamVR\\actions.json",
       "strings": {
         "en_us": {
           "name": "local [Testing]"
