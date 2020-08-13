@@ -8,8 +8,9 @@ public class GameControl : MonoBehaviour
 {
     public static GameControl instance;
 
-    public GameObject TargetContainer, hudContainer;
+    public GameObject TargetContainer, hudContainer, gameOverPanel;
     public Text TargetCounter, TimeCounter;
+    public bool gamePlaying { get; private set; }
 
     private int numTotalTargets, numSlayedTargets;
 
@@ -28,18 +29,61 @@ public class GameControl : MonoBehaviour
     {
         numTotalTargets = TargetContainer.transform.childCount;
         numSlayedTargets = 0;
-        TargetCounter.text = "표적 : 0 / " + numTotalTargets;
+        TargetCounter.text = "Target : 0 / " + numTotalTargets;
+        gamePlaying = false;
+
+        BeginGame();
 
     }
     public void SlayTarget()
     {
         numSlayedTargets++;
 
-        string targetCounterStr = "표적 : " + numSlayedTargets + " / " + numTotalTargets;
+        string targetCounterStr = "Target : " + numSlayedTargets + " / " + numTotalTargets;
         TargetCounter.text = targetCounterStr;
+
+        if (numSlayedTargets >= numTotalTargets)
+        {
+            EndGame();
+        
+        }
     
     }
 
-     
+    private void BeginGame()
+    {
+        gamePlaying = true;
+        startTime = Time.time;
+    
+    }
+
+    private void Update()
+    {
+        if (gamePlaying)
+        {
+
+            elapesedTime = Time.time - startTime;
+            timePlaying = TimeSpan.FromSeconds(elapesedTime);
+
+            string timePlayingStr = "Time : " + timePlaying.ToString("mm' : 'ss' : 'ff");
+            TimeCounter.text = timePlayingStr;
+       
+        }
+
+    }
+
+
+
+
+    private void EndGame()
+    {
+
+        gamePlaying = false;
+        gameOverPanel.SetActive(true);
+        hudContainer.SetActive(false);
+        string timePlayingStr = "Time : " + timePlaying.ToString("mm' : 'ss' : 'ff");
+        gameOverPanel.transform.Find("Time").GetComponent<Text>().text = timePlayingStr;
+    }
+
 
 }
