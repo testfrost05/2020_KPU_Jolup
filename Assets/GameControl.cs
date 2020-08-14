@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 using UnityEngine.UI;
-
+using UnityEngine.SceneManagement;
 public class GameControl : MonoBehaviour
 {
     public static GameControl instance;
@@ -69,8 +69,25 @@ public class GameControl : MonoBehaviour
 
             string timePlayingStr = "Time:" + timePlaying.ToString("mm':'ss':'ff");
             TimeCounter.text = timePlayingStr;
-       
+
         }
+
+        bool pause = Input.GetKeyDown(KeyCode.Escape);
+        bool retry = Input.GetKeyDown(KeyCode.R);
+
+        if (pause)
+        {
+            SceneManager.LoadScene(0);
+
+        }
+        if (retry)
+        {
+            SceneManager.LoadScene(1);
+        
+        }
+
+       
+
 
     }
 
@@ -85,6 +102,7 @@ public class GameControl : MonoBehaviour
         hudContainer.SetActive(false);
         string timePlayingStr = "Time:" + timePlaying.ToString("mm':'ss':'ff");
         gameOverPanel.transform.Find("Time").GetComponent<Text>().text = timePlayingStr;
+       
     }
 
     IEnumerator CountdownToStart()
@@ -104,6 +122,8 @@ public class GameControl : MonoBehaviour
         countdownText.gameObject.SetActive(false);
     
     }
+
+  
 
 
 }
