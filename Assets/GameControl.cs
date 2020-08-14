@@ -9,8 +9,9 @@ public class GameControl : MonoBehaviour
     public static GameControl instance;
 
     public GameObject TargetContainer, hudContainer, gameOverPanel;
-    public Text TargetCounter, TimeCounter;
+    public Text TargetCounter, TimeCounter, countdownText;
     public bool gamePlaying { get; private set; }
+    public int countdownTime;
 
     private int numTotalTargets, numSlayedTargets;
 
@@ -29,17 +30,18 @@ public class GameControl : MonoBehaviour
     {
         numTotalTargets = TargetContainer.transform.childCount;
         numSlayedTargets = 0;
-        TargetCounter.text = "Target : 0 / " + numTotalTargets;
+        TargetCounter.text = "Target:0/"+numTotalTargets;
+        TimeCounter.text = "Time:00:00:00";
         gamePlaying = false;
 
-        BeginGame();
+        StartCoroutine(CountdownToStart());
 
     }
     public void SlayTarget()
     {
         numSlayedTargets++;
 
-        string targetCounterStr = "Target : " + numSlayedTargets + " / " + numTotalTargets;
+        string targetCounterStr = "Target:" + numSlayedTargets + "/" + numTotalTargets;
         TargetCounter.text = targetCounterStr;
 
         if (numSlayedTargets >= numTotalTargets)
@@ -65,7 +67,7 @@ public class GameControl : MonoBehaviour
             elapesedTime = Time.time - startTime;
             timePlaying = TimeSpan.FromSeconds(elapesedTime);
 
-            string timePlayingStr = "Time : " + timePlaying.ToString("mm' : 'ss' : 'ff");
+            string timePlayingStr = "Time:" + timePlaying.ToString("mm':'ss':'ff");
             TimeCounter.text = timePlayingStr;
        
         }
@@ -81,8 +83,26 @@ public class GameControl : MonoBehaviour
         gamePlaying = false;
         gameOverPanel.SetActive(true);
         hudContainer.SetActive(false);
-        string timePlayingStr = "Time : " + timePlaying.ToString("mm' : 'ss' : 'ff");
+        string timePlayingStr = "Time:" + timePlaying.ToString("mm':'ss':'ff");
         gameOverPanel.transform.Find("Time").GetComponent<Text>().text = timePlayingStr;
+    }
+
+    IEnumerator CountdownToStart()
+    {
+        while (countdownTime > 0)
+        {
+            countdownText.text = countdownTime.ToString();
+            yield return new WaitForSeconds(1f);
+            countdownTime--;
+        }
+
+        BeginGame();
+        countdownText.text = "GO!";
+
+        yield return new WaitForSeconds(1f);
+
+        countdownText.gameObject.SetActive(false);
+    
     }
 
 
