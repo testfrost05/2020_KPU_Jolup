@@ -1,101 +1,90 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using Photon.Pun;
 
 namespace VrFps
 {
-    [PunRPC]
-    public class Bullet : Item //총알은 아이템
+    public class Bullet : Item
     {
         [SerializeField] protected bool spent;
-        public bool Spent
-        {
-            get
-            {
-                return spent;
-            }
-        }
+        public bool Spent { get { return spent; } }
 
-        [SerializeField] protected Mesh casingMesh; 
+        [SerializeField] private MeshRenderer meshRenderer;
+
+        [SerializeField] protected Mesh casingMesh;
         [SerializeField] protected Mesh cartridgeMesh;
+        [SerializeField] protected GameObject bulletMesh;
 
         protected MeshFilter meshFltr;
 
-        [SerializeField] protected Projectile projectile; //총쏘는 스크립트
+        [SerializeField] protected Projectile projectile;
 
         [HideInInspector] public bool chambered;
         [HideInInspector] public bool held;
-        [PunRPC]
-        public bool Held
-        {
-            get
-            {
-                return held;
-            }
-        }
 
-        [PunRPC]
-        public Projectile Projectile
-        {
-            get
-            {
-                return projectile;
-            }
-        }
-        [PunRPC]
-        //총알 잡는 것은 아이템에서 상속해서 오버라이드
+        public bool Held { get { return held; } }
+
+        public Projectile Projectile { get { return projectile; } }
+
+        public MeshRenderer MeshRenderer { get => meshRenderer; set => meshRenderer = value; }
+
         protected override void PrimaryDrop()
         {
             base.PrimaryDrop();
             held = SecondaryHand;
+
         }
-        [PunRPC]
+
         protected override void PrimaryGrasp()
         {
             base.PrimaryGrasp();
             held = true;
         }
-        [PunRPC]
+
         protected override void SecondaryDrop()
         {
             base.SecondaryDrop();
             held = PrimaryHand;
         }
-        [PunRPC]
+
         protected override void SecondaryGrasp()
         {
             base.SecondaryGrasp();
             held = true;
         }
-        [PunRPC]
+
         protected override void Awake()
         {
-            meshFltr = GetComponent<MeshFilter>();
+            if (!meshFltr) meshFltr = GetComponent<MeshFilter>();
+            if (!meshRenderer) meshRenderer = GetComponentInChildren<MeshRenderer>();
 
-            if (meshFltr == null)
+            if (meshFltr == null) meshFltr = GetComponentInChildren<MeshFilter>();
+
+            if (!projectile) projectile = GetComponentInChildren<Projectile>(true);
+
+            if (spent)
             {
-                meshFltr = GetComponentInChildren<MeshFilter>();
+                if (meshFltr && casingMesh) meshFltr.mesh = casingMesh;
+
+                if (bulletMesh) bulletMesh.SetActive(false);
             }
-
-            if (!projectile)
+            else
             {
-                projectile = GetComponentInChildren<Projectile>(true);
+                if (meshFltr && cartridgeMesh) meshFltr.mesh = cartridgeMesh;
+
+                if (bulletMesh) bulletMesh.SetActive(true);
             }
 
             base.Awake();
         }
 
-
-        [PunRPC]
-        public void Fire(Transform muzzle) //총을 쏘면 머즐 위치에 생성
+        public void Fire(Transform muzzle)
         {
             spent = true;
 
-            if (meshFltr && casingMesh)
-            {
-                meshFltr.mesh = casingMesh;
-            }
+            if (meshFltr && casingMesh) meshFltr.mesh = casingMesh;
+
+            if (bulletMesh) bulletMesh.SetActive(false);
 
             if (projectile)
             {
@@ -106,15 +95,14 @@ namespace VrFps
                 projectile.Fire();
             }
         }
-        [PunRPC]
-        public void Fire(Transform muzzle, float muzzleVelocity, float spread) //탄퍼짐 적용
+
+        public void Fire(Transform muzzle, float muzzleVelocity, float spread)
         {
             spent = true;
 
-            if (meshFltr && casingMesh)
-            {
-                meshFltr.mesh = casingMesh;
-            }
+            if (meshFltr && casingMesh) meshFltr.mesh = casingMesh;
+
+            if (bulletMesh) bulletMesh.SetActive(false);
 
             if (projectile)
             {

@@ -260,7 +260,8 @@ namespace VrFps
         [PunRPC]
         protected virtual void TouchpadUpInput()
         {
-            TouchPadInput(EjectMagazine, magWell.EjectTouchpadDirection);
+            if (magWell)
+                TouchPadInput(EjectMagazine, magWell.EjectTouchpadDirection);
         }
 
         Magazine ejectMag;

@@ -1,28 +1,20 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using Photon.Pun;
 
 namespace VrFps
 {
-    [PunRPC]
-    public class Chamber : MonoBehaviourPunCallbacks
+    public class Chamber : MonoBehaviour
     {
         public delegate void ChamberEvent(Chamber chamber);
         public ChamberEvent _LoadBullet;
 
-        [SerializeField] protected List<AudioClip> ejectBulletSounds = new List<AudioClip>(); //쏜 탄 배출할때 소리
-        [SerializeField] protected List<AudioClip> loadBulletSounds = new List<AudioClip>(); //탄약실에 총알 장전 되는 소리
+        [SerializeField] protected List<AudioClip> ejectBulletSounds = new List<AudioClip>();
+        [SerializeField] protected List<AudioClip> loadBulletSounds = new List<AudioClip>();
 
-        [ReadOnly] [SerializeField] protected Bullet bullet; //총알객체
-        public Bullet Bullet
-        {
-            get
-            {
-                return bullet;
-            }
-        }
-        [SerializeField] protected string bulletTag;
+        [ReadOnly] [SerializeField] protected Bullet bullet;
+        public Bullet Bullet { get { return bullet; } }
+        [SerializeField] protected string[] bulletTags;
 
         protected Bullet potentialBullet;
         [SerializeField] protected float loadBulletDistance = 0.15f;
@@ -30,15 +22,18 @@ namespace VrFps
 
         [SerializeField] protected bool requireHeldBullets = true;
 
-        [SerializeField] protected float ejectForce; //탄피가 나가는 방향과 속도
-        [SerializeField] protected float ejectTorque; 
+        [SerializeField] protected float ejectForce;
+        [SerializeField] protected float ejectTorque;
 
-        [SerializeField] protected Transform eject; //탄피가 배출되는 위치
+        [SerializeField] protected Transform eject;
 
         [SerializeField] protected DotAxis chamberDotAxis;
         [SerializeField] protected DotAxis bulletDotAxis;
 
-        public enum DotAxis 
+        [SerializeField] protected InteractionVolume interactionVolume;
+        public InteractionVolume IV { get { return interactionVolume; } }
+
+        public enum DotAxis
         {
             right,
             left,
@@ -69,14 +64,30 @@ namespace VrFps
             return Vector3.zero;
         }
 
+        void RestrainChamber()
+        {
+            if (interactionVolume)
+                interactionVolume.restrained = true;
+        }
+
+        void UnrestrainChamber()
+        {
+            if (interactionVolume)
+                interactionVolume.restrained = false;
+        }
+
         void Start()
         {
-            gameObject.layer = LayerMask.NameToLayer("ItemDetection"); //레이어마스크 설정
 
-            if (eject == null)//이젝트가 없을경우 이젝트를 챔버 위치로
-            {
+            interactionVolume = GetComponent<InteractionVolume>();
+
+            if (interactionVolume)
+                interactionVolume._StartInteraction += GrabBullet;
+
+            gameObject.layer = LayerMask.NameToLayer("ItemDetection");
+
+            if (eject == null)
                 eject = transform;
-            }
 
             if (bullet)
             {
@@ -85,25 +96,38 @@ namespace VrFps
                 return;
             }
 
-            Bullet tempBullet = GetComponentInChildren<Bullet>(); //총알객체
+            Bullet tempBullet = GetComponentInChildren<Bullet>();
 
             if (!tempBullet)
-            {
                 return;
-            }
+
             ChamberBullet(tempBullet);
         }
 
-        public virtual void ChamberBullet(Bullet bullet) //약실에 총알 
+        void GrabBullet()
         {
-            if (!bullet)
-            {
-                return;
-            }
-            if (bullet.Spent)
-            {
-                return;
-            }
+
+            if (!bullet) return;
+
+            Hand tempHand = interactionVolume.Hand;
+
+            Bullet tempBullet = bullet;
+
+
+            interactionVolume.StopInteraction();
+
+            EjectBullet();
+
+            tempBullet.Restrained = false;
+            tempBullet.Attach(tempHand);
+
+        }
+
+        public virtual void ChamberBullet(Bullet bullet)
+        {
+            if (!bullet) return;
+
+            if (bullet.Spent) return;
 
             Hand bulletHand = bullet.PrimaryHand;
 
@@ -118,7 +142,7 @@ namespace VrFps
             bullet.transform.localPosition = Vector3.zero;
             bullet.transform.localEulerAngles = Vector3.zero;
 
-            bullet.GetComponentInChildren<MeshRenderer>().enabled = true;
+            bullet.MeshRenderer.enabled = true;
 
             this.bullet = bullet;
             potentialBullet = null;
@@ -126,27 +150,26 @@ namespace VrFps
             bullet.chambered = true;
 
             if (bulletHand)
-            {
                 if (bulletHand.GetType() == typeof(Hand))
-                {
                     (bulletHand as Hand).GrabFromStack();
-                }
-            }
 
             TwitchExtension.PlayRandomAudioClip(loadBulletSounds, transform.position);
+
+            UnrestrainChamber();
         }
 
         [SerializeField] protected DotAxis ejectDirection;
         [SerializeField] protected DotAxis torqueDirection;
 
-        public virtual void EjectBullet() { EjectBullet(Vector3.zero); } 
+        public virtual void EjectBullet() { EjectBullet(Vector3.zero); }
 
-        public virtual void EjectBullet(Vector3 additionalVelocity) //총알 배출
+        public virtual void EjectBullet(Vector3 additionalVelocity)
         {
             if (!bullet)
-            {
                 return;
-            }
+
+            if (!bullet.Rb)
+                bullet.rb = bullet.gameObject.AddComponent<Rigidbody>();
 
             bullet.transform.SetParent(null, true);
             bullet.transform.position = eject.position;
@@ -154,55 +177,44 @@ namespace VrFps
 
             bullet.Restrained = bullet.Spent;
 
-            //총알이 배출되는 방향, 힘 설정
             bullet.Rb.AddForce((ReturnAxis(ejectDirection, eject) * ejectForce) + additionalVelocity, ForceMode.Impulse);
             bullet.Rb.maxAngularVelocity = ejectTorque;
             bullet.Rb.AddTorque(ReturnAxis(torqueDirection, eject) * ejectTorque, ForceMode.VelocityChange);
-           
 
             bullet.chambered = false;
 
-            //배출된 총알 일정시간후 삭제
             if (bullet.Spent)
-            {
                 Destroy(bullet.gameObject, 5f);
-            }
-            
 
             bullet = null;
 
             TwitchExtension.PlayRandomAudioClip(ejectBulletSounds, transform.position);
+            RestrainChamber();
         }
 
 
         public virtual void EjectBulletLight()
         {
-            if (!bullet)
-            {
-                return;
-            }
+            if (!bullet) return;
+
             bullet.chambered = false;
             bullet = null;
+
+            RestrainChamber();
         }
 
-        //약실로 총알 장전
-        protected virtual void OnTriggerEnter(Collider _potentialBullet) 
+        protected virtual void OnTriggerEnter(Collider _potentialBullet)
         {
             if (bullet)
-            {
                 return;
-            }
 
             if (_potentialBullet.gameObject.tag != "Interactable")
-            {
                 return;
-            }
 
             Bullet tempBullet = _potentialBullet.GetComponent<Bullet>();
 
             if (tempBullet)
-            {
-                if (tempBullet.HasTag(bulletTag))
+                if (ItemHasAcceptedTag(tempBullet))
                 {
                     bool tempHeld = requireHeldBullets ? (tempBullet.PrimaryHand ?? tempBullet.SecondaryHand) || tempBullet.Held : true;
 
@@ -211,48 +223,42 @@ namespace VrFps
                         potentialBullet = tempBullet;
                     }
                 }
-            }
+        }
+
+        bool ItemHasAcceptedTag(Item item)
+        {
+            foreach (string tag in bulletTags)
+                if (item.HasTag(tag)) return true;
+
+            return false;
         }
 
         void FixedUpdate()
         {
             if (potentialBullet)
-            {
                 _LoadBullet(this);
-            }
         }
 
-       
         public virtual void LoadPotentialBullet()
         {
             if (bullet || !potentialBullet)
-            {
                 return;
-            }
 
             if (potentialBullet.chambered)
-            {
                 return;
-            }
 
             if (requireHeldBullets)
-            {
                 if (!(potentialBullet.PrimaryHand ^ potentialBullet.SecondaryHand) && !potentialBullet.Held)
-                {
                     return;
-                }
-            }
+
             if (Vector3.Distance(potentialBullet.transform.position, transform.position) > loadBulletDistance)
-            {
                 return;
-            }
+
             Vector3 chamberAxis = ReturnAxis(chamberDotAxis, transform);
             Vector3 bulletAxis = ReturnAxis(bulletDotAxis, potentialBullet.transform);
 
             if (Vector3.Dot(chamberAxis, bulletAxis) < loadBulletDot)
-            {
                 return;
-            }
 
             ChamberBullet(potentialBullet);
         }
@@ -260,12 +266,8 @@ namespace VrFps
         protected virtual void OnTriggerExit(Collider _potentialBullet)
         {
             if (potentialBullet)
-            {
                 if (potentialBullet.transform == _potentialBullet.transform)
-                {
                     potentialBullet = null;
-                }
-            }
         }
     }
 }
