@@ -10,7 +10,8 @@ GameObject:
   m_Component:
   - component: {fileID: 499550}
   - component: {fileID: 9586132}
-  - component: {fileID: 6189041150500106961}
+  - component: {fileID: 4042230699200026874}
+  - component: {fileID: 8220339679902146385}
   m_Layer: 0
   m_Name: target
   m_TagString: Untagged
@@ -44,7 +45,7 @@ Animator:
   m_GameObject: {fileID: 100964}
   m_Enabled: 1
   m_Avatar: {fileID: 9000000, guid: f8aba1c27a5530a4dbdf4e3d614911f0, type: 3}
-  m_Controller: {fileID: 9100000, guid: d8fdd744fe62b0240a809ede1f8ec909, type: 2}
+  m_Controller: {fileID: 9100000, guid: a66b951271478ec4aaae7c86c57bad44, type: 2}
   m_CullingMode: 1
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -53,7 +54,20 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!136 &6189041150500106961
+--- !u!114 &4042230699200026874
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 100964}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 164fed3121a56ad4da05fa3d54be38b5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hitPoint: 10
+--- !u!136 &8220339679902146385
 CapsuleCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -62,11 +76,11 @@ CapsuleCollider:
   m_GameObject: {fileID: 100964}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 0
-  m_Radius: 0.3273072
-  m_Height: 2.349835
+  m_Enabled: 1
+  m_Radius: 0.2678442
+  m_Height: 1.5807366
   m_Direction: 1
-  m_Center: {x: -0.009172469, y: 0.58434343, z: 0.0009776056}
+  m_Center: {x: 0.00066518784, y: 0.93256116, z: 0}
 --- !u!1 &115004
 GameObject:
   m_ObjectHideFlags: 0
