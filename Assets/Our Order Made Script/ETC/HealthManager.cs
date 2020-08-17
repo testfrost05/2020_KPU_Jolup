@@ -6,8 +6,17 @@ public class HealthManager : MonoBehaviour
 {
     public float hitPoint = 100f;
 
+    private Animator target;
 
-    
+    private void Start()
+    {
+
+        target = GetComponent<Animator>();
+
+       
+    }
+
+
 
 
 
@@ -16,9 +25,17 @@ public class HealthManager : MonoBehaviour
         hitPoint -= damage;
         if (hitPoint <= 0)
         {
-            GameControl.instance.SlayTarget(); // 표적증가 추가 코드           
-            Destroy(gameObject);
+            GameControl.instance.SlayTarget(); // 표적증가 추가 코드       
+            hit();
+            //Destroy(gameObject);
         }
+    }
+
+    public void hit()
+    {
+
+        target.SetBool("hit", true);
+    
     }
 
    
