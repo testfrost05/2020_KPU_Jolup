@@ -3,13 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor;
 using Valve.VR;
-using System;
-using Photon.Pun;
 
 namespace VrFps
 {
-    [PunRPC]
-    public class InteractionVolume : MonoBehaviourPunCallbacks
+    public class InteractionVolume : MonoBehaviour
     {
         [ReadOnly] [SerializeField] protected Hand hand;
         public Hand Hand { get { return hand; } }
@@ -366,7 +363,7 @@ namespace VrFps
 
         protected void StartInteraction(Hand newHand)
         {
-           
+            //Debug.Log("Start Interaction" + name + " : " + hand.name);
 
             handInTrigger = true;
 
@@ -408,6 +405,7 @@ namespace VrFps
 
         public void StopInteraction()
         {
+            //Debug.Log("End Interaction " + name + " : " + hand.name);	
 
             handInTrigger = false;
 
@@ -472,7 +470,5 @@ namespace VrFps
                 if (other.gameObject == hand.gameObject)
                     handInTrigger = false;
         }
-
-      
     }
 }

@@ -71,8 +71,12 @@ namespace VrFps
                 child.parent = null;
             }
 
-            col.gameObject.SendMessage("Damage", 3f, SendMessageOptions.DontRequireReceiver); //3f 이상으로하면 벽 파괴된다.
-            
+            if (col.gameObject.CompareTag("Glass")) //벽까지 파괴할거면 이걸로 수정 -> if (col.gameObject.CompareTag("Wall") || col.gameObject.CompareTag("Glass"))
+            {
+              
+                col.gameObject.SendMessage("Damage", 3f, SendMessageOptions.DontRequireReceiver); //3f 이상으로하면 벽 파괴된다.
+          
+            }
             
 
             HealthManager healthManager = col.transform.GetComponent<HealthManager>();
