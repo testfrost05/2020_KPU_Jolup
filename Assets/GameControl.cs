@@ -77,12 +77,12 @@ public class GameControl : MonoBehaviour
 
         if (pause)
         {
-            SceneManager.LoadScene(0);
+            SceneManager.LoadScene(1);
 
         }
         if (retry)
         {
-            SceneManager.LoadScene(1);
+            SceneManager.LoadScene(0);
         
         }
 
