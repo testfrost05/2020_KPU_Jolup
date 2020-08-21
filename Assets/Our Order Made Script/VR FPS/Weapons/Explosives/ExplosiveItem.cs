@@ -18,7 +18,7 @@ namespace VrFps
         }
         [SerializeField] protected float armDelay;
         [SerializeField] protected float delay;
-
+        [SerializeField] protected float volume = 100.0f;
         [SerializeField] protected AudioClip explosionSFX; //폭발소리
 
         protected override void Start()
@@ -75,7 +75,7 @@ namespace VrFps
 
             if (explosionSFX)
             {
-                AudioSource.PlayClipAtPoint(explosionSFX, transform.position);
+                AudioSource.PlayClipAtPoint(explosionSFX, transform.position, volume);
             }
             yield return new WaitForEndOfFrame();
 

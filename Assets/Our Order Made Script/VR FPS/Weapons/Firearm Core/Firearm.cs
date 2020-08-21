@@ -1,11 +1,10 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using Photon.Pun;
+
 
 namespace VrFps
 {
-    [PunRPC]
     public class Firearm : Item
     {
         //각종 파츠
@@ -33,7 +32,7 @@ namespace VrFps
 
         protected bool enableSlideAudio = true;
 
-        [PunRPC]
+
         protected override void Start()
         {
             base.Start();
@@ -161,7 +160,7 @@ namespace VrFps
                 firearmAudioManager.PlayRandomAudioClip(firearmAudioManager.actionFowardSounds, slide.transform.position);
             }
         }
-        [PunRPC]
+
         protected virtual void SlideBackAudio()
         {
             if (!enableSlideAudio)
@@ -175,7 +174,7 @@ namespace VrFps
         }
 
         bool magOnPressDown;
-        [PunRPC]
+
         protected override void Update()
         {
             base.Update();
@@ -201,7 +200,7 @@ namespace VrFps
             LocalSlideStopInput();
             
         }
-        [PunRPC]
+
         protected virtual void LocalFireSelectorInput() //조정간 객체에서 정보 받아와서 총쏠수있는지 아닌지 
         {
             if (fireSelector)
@@ -221,7 +220,7 @@ namespace VrFps
                 }
             }
         }
-        [PunRPC]
+
         protected virtual void LocalSlideStopInput() //세이프 모드이면 슬라이드 총을 못쏘니 자동 장전도 안함
         {
             if (slide)
@@ -244,7 +243,7 @@ namespace VrFps
                 }
             }
         }
-        [PunRPC]
+
         protected virtual void LocalEjectMagInput() //탄창빼는거
         {
             if (magWell)
@@ -257,7 +256,7 @@ namespace VrFps
                     LocalInputUp(EjectMagazine, magWell.EjectInput);
                 }
         }
-        [PunRPC]
+
         protected virtual void TouchpadUpInput()
         {
             if (magWell)
@@ -265,7 +264,7 @@ namespace VrFps
         }
 
         Magazine ejectMag;
-        [PunRPC]
+
         void EjectMagazine() //버튼으로 탄창 빼기
         {
             if (magWell && magOnPressDown)
@@ -278,14 +277,14 @@ namespace VrFps
 
             magOnPressDown = false;
         }
-        [PunRPC]
+
         protected override void FixedUpdate()
         {
             base.FixedUpdate();
         }
 
         bool releasedTriggerAfterPickUp = true;
-        [PunRPC]
+
         protected override void PrimaryGrasp() //총 잡는거 설정
         {
             if (trigger)
@@ -325,13 +324,13 @@ namespace VrFps
             PrimaryHand.audioSourceContainer.transform.parent = muzzle;
             PrimaryHand.audioSourceContainer.transform.localPosition = Vector3.zero;
         }
-        [PunRPC]
+
         public override void StartVirutalStock()
         {
             base.StartVirutalStock();
             transform.SetParent(recoilManager.recoilPositionOffset, true);
         }
-        [PunRPC]
+
         protected override void PrimaryDrop() //총 떨구는거 설정
         {
 
@@ -352,13 +351,13 @@ namespace VrFps
 
             recoilManager.ClearRecoil();
         }
-        [PunRPC]
+
         public override void StopVirtualStock()
         {
             base.StopVirtualStock();
             transform.SetParent(recoilManager.recoilPositionOffset, true);
         }
-        [PunRPC]
+
         protected override void SecondaryGrasp() // 총을 잡고 다른 한손으로 총의 다른 부분을 또 잡을수 있게
         {
             base.SecondaryGrasp();
@@ -366,7 +365,7 @@ namespace VrFps
             SecondaryHand.audioSourceContainer.transform.parent = muzzle;
             SecondaryHand.audioSourceContainer.transform.localPosition = Vector3.zero;
         }
-        [PunRPC]
+
         protected override void SecondaryDrop() //2번째로 잡은걸 놓기
         {
             SecondaryHand.audioSourceContainer.transform.parent = SecondaryHand.transform;
@@ -374,7 +373,7 @@ namespace VrFps
 
             base.SecondaryDrop();
         }
-        [PunRPC]
+
         protected virtual void TouchpadDownInput() // 컨트롤러 입력
         {
             magOnPressDown = magazine;
@@ -401,7 +400,7 @@ namespace VrFps
         }
 
         protected int burstCount;
-        [PunRPC]
+
         protected virtual void PullTrigger() //한번 눌러 총을 쏠때
         {
             if (!releasedTriggerAfterPickUp)
@@ -435,7 +434,7 @@ namespace VrFps
                     break;
             }
         }
-        [PunRPC]
+
         void DryFireSounds()
         {
             if (firearmAudioManager)
@@ -443,7 +442,7 @@ namespace VrFps
                 firearmAudioManager.PlayRandomAudioClip(firearmAudioManager.dryFireSounds, chambers[0].transform.position);
             }
         }
-        [PunRPC]
+
         protected virtual void HoldTrigger() //꾹 누르고 총을 쏠때
         {
             if (!releasedTriggerAfterPickUp)
@@ -471,18 +470,18 @@ namespace VrFps
                     break;
             }
         }
-        [PunRPC]
+
         protected virtual void ReleaseTrigger()
         {
             burstCount = 0;
             pulledTriggerWhileSlideWasBack = false;
         }
-        [PunRPC]
+
         protected virtual void EjectCartridge()
         {
             EjectCartridge(selectedChamberIndex);
         }
-        [PunRPC]
+
         protected virtual void EjectCartridge(int i) //탄피 빼기
         {
             Chamber tempChamber = chambers[i];
@@ -514,7 +513,7 @@ namespace VrFps
 
             tempChamber.EjectBullet(velocityHistory._ReleaseVelocity);
         }
-        [PunRPC]
+
         protected virtual void SlideStop() 
         {
             if (!slideStopOnEmptyMag)
@@ -531,7 +530,7 @@ namespace VrFps
                 enableSlideAudio = true;
             }
         }
-        [PunRPC]
+
         protected virtual void RestOnSlideStop()
         {
             if (firearmAudioManager)
@@ -541,12 +540,12 @@ namespace VrFps
         }
 
         protected bool caughtRoundFromMagazine;
-        [PunRPC]
+
         protected virtual void CatchBullet()
         {
             caughtRoundFromMagazine = magazine ? !magazine.Empty : false;
         }
-        [PunRPC]
+
         protected virtual void ChamberRoundFromMagazine()
         {
             if (!caughtRoundFromMagazine)
@@ -575,9 +574,9 @@ namespace VrFps
 
             IgnoreCollision(chambers[0].Bullet.Projectile.Col, true);
         }
-        [PunRPC]
+
         protected virtual void ChamberBullet(Chamber chamber) { chamber.LoadPotentialBullet(); }
-        [PunRPC]
+
         protected virtual void LoadMag(Item item) //탄창 결합
         {
             Magazine tempMag = item as Magazine;
@@ -587,7 +586,7 @@ namespace VrFps
                 LoadMag(tempMag);
             }
         }
-        [PunRPC]
+
         protected virtual void LoadMag(Magazine magazine)
         {
             if (!magazine)
@@ -601,7 +600,7 @@ namespace VrFps
                 firearmAudioManager.PlayRandomAudioClip(firearmAudioManager.loadMagazineSounds, magazine.transform.position);
             }
         }
-        [PunRPC]
+
         protected virtual void RemoveMag() //탄창 빼기
         {
             if (ejectMag)
@@ -624,7 +623,7 @@ namespace VrFps
             magazine = null;
             caughtRoundFromMagazine = false;
         }
-        [PunRPC]
+
         protected virtual void RestrainTapedMag(Item mag) // 탄창 결합한 상태로 묶기
         {
             Magazine tapedMag = mag as Magazine;
@@ -650,13 +649,13 @@ namespace VrFps
 
             tapedMag.Restrained = true;
         }
-        [PunRPC]
+
         IEnumerator DelayIgnorePhysics(Collider colliderOne, Collider colliderTwo, bool ignore, float delay)
         {
             yield return new WaitForSeconds(delay);
             Physics.IgnoreCollision(colliderOne, colliderTwo, ignore);
         }
-        [PunRPC]
+
         protected virtual void DetachMagSFX()
         {
             if (firearmAudioManager)
@@ -666,12 +665,12 @@ namespace VrFps
         }
         protected bool pulledTriggerWhileSlideWasBack;
 
-        [PunRPC]
+
         protected virtual bool FirePreconditions()
         {
             return FirePreconditions(selectedChamberIndex);
         }
-        [PunRPC]
+
         protected virtual bool FirePreconditions(int i)
         {
             if (slide)
@@ -699,12 +698,12 @@ namespace VrFps
             }
             return false;
         }
-        [PunRPC]
+
         protected virtual void Fire()
         {
             Fire(selectedChamberIndex);
         }
-        [PunRPC]
+
         protected virtual bool Fire(int i) // 총 쏘기
         {
             if (!FirePreconditions(i))
@@ -742,7 +741,7 @@ namespace VrFps
             }
             return true;
         }
-        [PunRPC]
+
         protected virtual void MuzzleFlash() //총 쏠때 나는 빛과 연기
         {
             if (muzzleFlash)
@@ -759,7 +758,7 @@ namespace VrFps
                 Destroy(clone.gameObject, 0.5f);
             }
         }
-        [PunRPC]
+
         protected virtual void AdvanceChamberIndex()
         {
             if (selectedChamberIndex == chambers.Count - 1)
@@ -773,7 +772,7 @@ namespace VrFps
         }
 
         protected bool suppressed;
-        [PunRPC]
+
         protected void AddAttachment(Attachment attachment) //부착품 끼기 ex 탄창, 사이트 , 손잡이 
         {
             attachment.gameObject.layer = gameObject.layer;
@@ -788,7 +787,7 @@ namespace VrFps
                 Suppressed = true;
             }
         }
-        [PunRPC]
+
         protected void RemoveAttachment(Attachment attachment) //부착품 해제
         {
             if (attachment.type == Attachment.Type.foregrip)
@@ -800,7 +799,7 @@ namespace VrFps
                 Suppressed = false;
             }
         }
-        [PunRPC]
+
         protected bool Suppressed
         {
             set
@@ -816,7 +815,7 @@ namespace VrFps
                 suppressed = value;
             }
         }
-        [PunRPC]
+
         protected bool Foregrip
         {
             set

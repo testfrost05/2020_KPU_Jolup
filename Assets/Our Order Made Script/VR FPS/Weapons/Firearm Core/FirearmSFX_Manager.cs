@@ -1,11 +1,10 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using Photon.Pun;
 
 namespace VrFps
 {
-    [PunRPC]
+
     public class FirearmSFX_Manager : ItemSFX_Manager //총기관련 사운드 매니저
     {
         public List<AudioClip> actionBackSounds = new List<AudioClip>();

@@ -303,7 +303,8 @@ MonoBehaviour:
   armed: 0
   armDelay: 0
   delay: 5
-  explosionSFX: {fileID: 8300000, guid: c483dabda353ff04da88e8de74fa8934, type: 3}
+  volume: 3
+  explosionSFX: {fileID: 8300000, guid: 8014326698a3b3b40a5feb09763898b5, type: 3}
   pinSlide: {fileID: 6151529389001209212}
   handleCol: {fileID: 6151093431382379224}
   handleRb: {fileID: 6151093431382379223}
