@@ -2644,6 +2644,7 @@ MonoBehaviour:
   sizeLimit: 0
   AcceptedTags:
   - M4 IronSight
+  - RedDot
   UnacceptedTags: []
   poseItem: 0
   stackedItems: []
