@@ -2,11 +2,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 using Valve.VR;
-using Photon.Pun;
+
 namespace VrFps
 {
-    [PunRPC]   
-    public class Item : MonoBehaviourPunCallbacks
+
+    public class Item : MonoBehaviour
     {
         public List<string> tags = new List<string>();
 

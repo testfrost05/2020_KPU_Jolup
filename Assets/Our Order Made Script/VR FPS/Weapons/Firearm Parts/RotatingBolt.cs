@@ -1,11 +1,11 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using Photon.Pun;
+
 
 namespace VrFps
 {
-    [PunRPC]
+
     public class RotatingBolt : Hinge //저격총 볼트 액션 할때 장전손잡이 회전
     {
         public delegate void HingeEvent();

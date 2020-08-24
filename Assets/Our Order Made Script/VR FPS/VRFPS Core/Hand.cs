@@ -2,11 +2,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 using Valve.VR;
-using Photon.Pun;
+
 
 namespace VrFps
 {
-    [PunRPC]
+
     public class Hand : Slot
     {
         protected Transform handSkeletonRoot;

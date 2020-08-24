@@ -2,12 +2,12 @@
 using System.Collections.Generic;
 using UnityEngine;
 using Valve.VR;
-using Photon.Pun;
+
 namespace VrFps
 {
-    public class CharacterControllerMovement : MonoBehaviourPunCallbacks
+    public class CharacterControllerMovement : MonoBehaviour
     {
-        [PunRPC]
+ 
         [SerializeField] protected SteamVR_Action_Vector2 movementAxis;
 
         public bool linearMovement = false;
