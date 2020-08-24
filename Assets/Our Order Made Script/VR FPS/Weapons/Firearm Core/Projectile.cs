@@ -1,11 +1,10 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using Photon.Pun;
+
 namespace VrFps
 {
-    [PunRPC]
-    public class Projectile : MonoBehaviourPunCallbacks //총알을 쏠 때
+    public class Projectile : MonoBehaviour //총알을 쏠 때
     {
         [SerializeField] protected Rigidbody rb;
         [SerializeField] protected Collider col;
@@ -48,7 +47,7 @@ namespace VrFps
         }
 
         [SerializeField] protected List<BulletImpactEffect> impactEffects;
-        [PunRPC]
+
         void Start()
         {
             Destroy(gameObject, 7.5f);
@@ -56,7 +55,7 @@ namespace VrFps
 
       
 
-        [PunRPC]
+
         void OnCollisionEnter(Collision col) //충돌 진입
         {
             Effect(col, true);
@@ -97,7 +96,7 @@ namespace VrFps
                 }
             }
         }
-        [PunRPC]
+
         public void Fire() //총을 쐈을 때 
         {
             rb.AddForce(transform.forward * muzzleVelocity, ForceMode.Impulse);
@@ -112,7 +111,7 @@ namespace VrFps
             }
         }
 
-        [PunRPC]
+
         public void Fire(float muzzleVelocity, float spread) //총을 쐇을 때 탄 퍼짐 적용
         {
             rb.AddForce(transform.forward * muzzleVelocity, ForceMode.Impulse);
@@ -131,7 +130,7 @@ namespace VrFps
                 Destroy(clone, 7.5f);
             }
         }
-        [PunRPC]
+
         void Effect(Collision col, bool ENTEREXIT) //임펙트관련
         {
             for (int i = 0; i < impactEffects.Count; i++)

@@ -1,11 +1,11 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using Photon.Pun;
+
 
 namespace VrFps
 {
-    [PunRPC]
+
     public class Magazine : Item
     {
         [SerializeField] protected List<AudioClip> loadBulletSound = new List<AudioClip>();
@@ -78,7 +78,6 @@ namespace VrFps
 
         Vector2 initialPress;
 
-        [PunRPC]
         protected override void Update()
         {
             base.Update();
@@ -101,7 +100,7 @@ namespace VrFps
 
         }
 
-        [PunRPC]
+
 
         void EnableBullets()
         {
@@ -109,31 +108,31 @@ namespace VrFps
                 savedBullets[i].enabled = true;
         }
 
-        [PunRPC]
+
         void EnableBullets(bool enable)
         {
             for (int i = 0; i < savedBullets.Count; i++)
                 savedBullets[i].enabled = enable;
         }
-        [PunRPC]
+
         void EnableBulletRenderers()
         {
             for (int i = 0; i < bullets.Count; i++)
                 bullets[i].enabled = true;
         }
-        [PunRPC]
+
         void EnableBulletRenderers(bool enable)
         {
             for (int i = 0; i < bullets.Count; i++)
                 bullets[i].enabled = enable;
         }
-        [PunRPC]
+
         public void UpdateBulletRenderers()
         {
             for (int i = 0; i < bullets.Count; i++)
                 bullets[i].enabled = i < currentRounds;
         }
-        [PunRPC]
+
 
         public void LoadBullet(Item round)
         {
@@ -147,7 +146,7 @@ namespace VrFps
 
             LoadBullet(tempRound);
         }
-        [PunRPC]
+
 
         public void LoadBullet(Bullet bullet) //총알 오브젝트를 탄창에 넣기
         {
@@ -179,7 +178,7 @@ namespace VrFps
                 bullet.dropStack = true;
             }
         }
-        [PunRPC]
+
         void EjectBullet() //총알 빼내기 총알을빼네면 총알 오브젝트를 만들기
         {
             if (Empty)
@@ -205,7 +204,7 @@ namespace VrFps
             if (PrimaryHand.Sibling.StackableStoredItem)
                 PrimaryHand.Sibling.AddToStack(bullet);
         }
-        [PunRPC]
+
         void OnTriggerEnter(Collider other)
         {
             if (!PrimaryHand && !SecondaryHand)
@@ -239,7 +238,7 @@ namespace VrFps
         [SerializeField] protected Magazine tapedMagazine;
 
         public Magazine TapedMagazine { get { return tapedMagazine; } }
-        [PunRPC]
+
 
         protected override void PrimaryGrasp()
         {
@@ -256,7 +255,7 @@ namespace VrFps
                 EnableBullets();
             }
         }
-        [PunRPC]
+
 
         protected override void PrimaryDrop()
         {
