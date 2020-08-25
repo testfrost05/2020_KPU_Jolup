@@ -141,7 +141,8 @@ namespace VrFps
                 {
                     GameObject clone = null;
                     GameObject particleEffect = ENTEREXIT ? impactEffect.impactParticle : impactEffect.exitParticle;
-                    
+                    AudioClip audioEffect = ENTEREXIT ? impactEffect.impactAudio[Random.Range(0, impactEffect.impactAudio.Length - 1)] : impactEffect.exitAudio[Random.Range(0, impactEffect.exitAudio.Length - 1)];
+
                     if (particleEffect) //파티클 임펙트
                     {
                         clone = Instantiate(particleEffect,
@@ -160,6 +161,9 @@ namespace VrFps
                                 Destroy(decal.gameObject, 5f);
                             }
                         }
+
+                        if (audioEffect)
+                        	AudioSource.PlayClipAtPoint(audioEffect, col.contacts[0].point);
                     }
                 }
             }

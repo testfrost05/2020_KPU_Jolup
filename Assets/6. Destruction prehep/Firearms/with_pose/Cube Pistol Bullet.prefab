@@ -387,30 +387,28 @@ MonoBehaviour:
   destroyOnImpact: 1
   destroyDelay: 0
   impactEffects:
-  - hitObjectTag: Red
-    impactParticle: {fileID: 1368347327041122, guid: a12a2b769b3c7ad47b7c3d76d4c2898e,
-      type: 3}
-    impactAudio: []
-    exitParticle: {fileID: 1368347327041122, guid: a12a2b769b3c7ad47b7c3d76d4c2898e,
-      type: 3}
+  - hitObjectTag: Wall
+    impactParticle: {fileID: 100006, guid: 9e95c7b2183a4f345aaf86846f8f1918, type: 3}
+    impactAudio:
+    - {fileID: 8300000, guid: 4c822bef9461ae344bf31e6dabc06038, type: 3}
+    exitParticle: {fileID: 0}
     exitAudio: []
-    scale: 0
-  - hitObjectTag: Green
-    impactParticle: {fileID: 1431086575392588, guid: 0bea531b4de58174b817e69326204ff3,
+    scale: 1
+  - hitObjectTag: Glass
+    impactParticle: {fileID: 7067020511857950332, guid: 912af941f8cd9324ea44a64157a98289,
       type: 3}
-    impactAudio: []
-    exitParticle: {fileID: 1431086575392588, guid: 0bea531b4de58174b817e69326204ff3,
-      type: 3}
+    impactAudio:
+    - {fileID: 8300000, guid: 4ca38653b31832c4e944308e7fdca6cb, type: 3}
+    exitParticle: {fileID: 0}
     exitAudio: []
-    scale: 0
-  - hitObjectTag: Blue
-    impactParticle: {fileID: 1129256726875550, guid: 7b3274542f0000f4993c8cc1d781a1e1,
-      type: 3}
-    impactAudio: []
-    exitParticle: {fileID: 1129256726875550, guid: 7b3274542f0000f4993c8cc1d781a1e1,
-      type: 3}
+    scale: 1
+  - hitObjectTag: Enemy
+    impactParticle: {fileID: 100002, guid: 00fedc70b62a31e448e8ccc298257b56, type: 3}
+    impactAudio:
+    - {fileID: 8300000, guid: 990c49c0123894849aa75b0318d5a407, type: 3}
+    exitParticle: {fileID: 0}
     exitAudio: []
-    scale: 0
+    scale: 1
 --- !u!1 &1854711544463380
 GameObject:
   m_ObjectHideFlags: 0
@@ -590,8 +588,10 @@ MonoBehaviour:
     actionPath: 
     needsReinit: 0
   spent: 0
+  meshRenderer: {fileID: 0}
   casingMesh: {fileID: 10208, guid: 0000000000000000e000000000000000, type: 0}
   cartridgeMesh: {fileID: 10208, guid: 0000000000000000e000000000000000, type: 0}
+  bulletMesh: {fileID: 0}
   projectile: {fileID: 114311604091937606}
   chambered: 0
   held: 0

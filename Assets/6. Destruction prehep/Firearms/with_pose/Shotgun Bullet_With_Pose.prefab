@@ -627,10 +627,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rb: {fileID: 3924308574743664477}
-  col: {fileID: 0}
+  col: {fileID: 3924308574743664478}
   muzzleVelocity: 50
   forceDamp: 10
-  baseDamage: 100
+  baseDamage: 80
   maxDistance: 100
   explosive: {fileID: 0}
   extraForce: 0
@@ -638,5 +638,27 @@ MonoBehaviour:
   unchildOnCollision: []
   pellets: 0
   destroyOnImpact: 1
-  destroyDelay: 0.05
-  impactEffects: []
+  destroyDelay: 0
+  impactEffects:
+  - hitObjectTag: Wall
+    impactParticle: {fileID: 100006, guid: 9e95c7b2183a4f345aaf86846f8f1918, type: 3}
+    impactAudio:
+    - {fileID: 8300000, guid: 4c822bef9461ae344bf31e6dabc06038, type: 3}
+    exitParticle: {fileID: 0}
+    exitAudio: []
+    scale: 1
+  - hitObjectTag: Glass
+    impactParticle: {fileID: 7067020511857950332, guid: 912af941f8cd9324ea44a64157a98289,
+      type: 3}
+    impactAudio:
+    - {fileID: 8300000, guid: 4ca38653b31832c4e944308e7fdca6cb, type: 3}
+    exitParticle: {fileID: 0}
+    exitAudio: []
+    scale: 1
+  - hitObjectTag: Enemy
+    impactParticle: {fileID: 100002, guid: 00fedc70b62a31e448e8ccc298257b56, type: 3}
+    impactAudio:
+    - {fileID: 8300000, guid: 990c49c0123894849aa75b0318d5a407, type: 3}
+    exitParticle: {fileID: 0}
+    exitAudio: []
+    scale: 1

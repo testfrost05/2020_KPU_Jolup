@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 23072399529127122}
   m_Layer: 0
   m_Name: Classic_Door_01_snaps001_frag_051
-  m_TagString: Glass
+  m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -146,7 +146,7 @@ GameObject:
   - component: {fileID: 58348444136799228}
   m_Layer: 0
   m_Name: Classic_Door_01_snaps001_frag_057
-  m_TagString: Glass
+  m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -276,7 +276,7 @@ GameObject:
   - component: {fileID: 93491081449101045}
   m_Layer: 0
   m_Name: Classic_Door_01_snaps001_frag_029
-  m_TagString: Glass
+  m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -406,7 +406,7 @@ GameObject:
   - component: {fileID: 116282857776629442}
   m_Layer: 0
   m_Name: Classic_Door_01_snaps001_frag_016
-  m_TagString: Glass
+  m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -535,7 +535,7 @@ GameObject:
   - component: {fileID: 291764409625579772}
   m_Layer: 0
   m_Name: Classic_Door_01_snaps001_frag_030
-  m_TagString: Glass
+  m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -665,7 +665,7 @@ GameObject:
   - component: {fileID: 408638574638611278}
   m_Layer: 0
   m_Name: Classic_Door_01_snaps001_frag_031
-  m_TagString: Glass
+  m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -795,7 +795,7 @@ GameObject:
   - component: {fileID: 615364716795629242}
   m_Layer: 0
   m_Name: Classic_Door_01_snaps001_frag_049
-  m_TagString: Glass
+  m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -925,7 +925,7 @@ GameObject:
   - component: {fileID: 879344386628784130}
   m_Layer: 0
   m_Name: Classic_Door_01_snaps001_frag_002
-  m_TagString: Glass
+  m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1055,7 +1055,7 @@ GameObject:
   - component: {fileID: 908571858370621155}
   m_Layer: 0
   m_Name: Classic_Door_01_snaps001_frag_023
-  m_TagString: Glass
+  m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1185,7 +1185,7 @@ GameObject:
   - component: {fileID: 1034331784518606760}
   m_Layer: 0
   m_Name: Classic_Door_01_snaps001_frag_003
-  m_TagString: Glass
+  m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1315,7 +1315,7 @@ GameObject:
   - component: {fileID: 1061430315779696992}
   m_Layer: 0
   m_Name: Classic_Door_01_snaps001_frag_055
-  m_TagString: Glass
+  m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1445,7 +1445,7 @@ GameObject:
   - component: {fileID: 1257469823487021942}
   m_Layer: 0
   m_Name: Classic_Door_01_snaps001_frag_021
-  m_TagString: Glass
+  m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1575,7 +1575,7 @@ GameObject:
   - component: {fileID: 1277349751588095207}
   m_Layer: 0
   m_Name: Classic_Door_01_snaps001_frag_034
-  m_TagString: Glass
+  m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1705,7 +1705,7 @@ GameObject:
   - component: {fileID: 1319060684772586900}
   m_Layer: 0
   m_Name: Classic_Door_01_snaps001_frag_036
-  m_TagString: Glass
+  m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1835,7 +1835,7 @@ GameObject:
   - component: {fileID: 1707940996296293177}
   m_Layer: 0
   m_Name: Classic_Door_01_snaps001_frag_028
-  m_TagString: Glass
+  m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1965,7 +1965,7 @@ GameObject:
   - component: {fileID: 1997251473524506105}
   m_Layer: 0
   m_Name: Classic_Door_01_snaps001_frag_022
-  m_TagString: Glass
+  m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2095,7 +2095,7 @@ GameObject:
   - component: {fileID: 2320695061512114982}
   m_Layer: 0
   m_Name: Classic_Door_01_snaps001_frag_037
-  m_TagString: Glass
+  m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2225,7 +2225,7 @@ GameObject:
   - component: {fileID: 2397993758838477466}
   m_Layer: 0
   m_Name: Classic_Door_01_snaps001_frag_012
-  m_TagString: Glass
+  m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2355,7 +2355,7 @@ GameObject:
   - component: {fileID: 2429160131664062094}
   m_Layer: 0
   m_Name: Classic_Door_01_snaps001_frag_014
-  m_TagString: Glass
+  m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2485,7 +2485,7 @@ GameObject:
   - component: {fileID: 2464318448261466824}
   m_Layer: 0
   m_Name: Classic_Door_01_snaps001_frag_048
-  m_TagString: Glass
+  m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2615,7 +2615,7 @@ GameObject:
   - component: {fileID: 2508853512695596814}
   m_Layer: 0
   m_Name: Classic_Door_01_snaps001_frag_056
-  m_TagString: Glass
+  m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2745,7 +2745,7 @@ GameObject:
   - component: {fileID: 2626218936049081770}
   m_Layer: 0
   m_Name: Classic_Door_01_snaps001_frag_045
-  m_TagString: Glass
+  m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2875,7 +2875,7 @@ GameObject:
   - component: {fileID: 2634778789776173927}
   m_Layer: 0
   m_Name: Classic_Door_01_snaps001_frag_007
-  m_TagString: Glass
+  m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3107,7 +3107,7 @@ GameObject:
   - component: {fileID: 2796906063799050018}
   m_Layer: 0
   m_Name: Classic_Door_01_snaps001_frag_053
-  m_TagString: Glass
+  m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3237,7 +3237,7 @@ GameObject:
   - component: {fileID: 2842181295187906771}
   m_Layer: 0
   m_Name: Classic_Door_01_snaps001_frag_019
-  m_TagString: Glass
+  m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3367,7 +3367,7 @@ GameObject:
   - component: {fileID: 2989160258102371989}
   m_Layer: 0
   m_Name: Classic_Door_01_snaps001_frag_050
-  m_TagString: Glass
+  m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3497,7 +3497,7 @@ GameObject:
   - component: {fileID: 3127378016397158450}
   m_Layer: 0
   m_Name: Classic_Door_01_snaps001_frag_026
-  m_TagString: Glass
+  m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3627,7 +3627,7 @@ GameObject:
   - component: {fileID: 3305179139204044493}
   m_Layer: 0
   m_Name: Classic_Door_01_snaps001_frag_039
-  m_TagString: Glass
+  m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3757,7 +3757,7 @@ GameObject:
   - component: {fileID: 3627198634033636941}
   m_Layer: 0
   m_Name: Classic_Door_01_snaps001_frag_017
-  m_TagString: Glass
+  m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3887,7 +3887,7 @@ GameObject:
   - component: {fileID: 3661293373612395036}
   m_Layer: 0
   m_Name: Classic_Door_01_snaps001_frag_009
-  m_TagString: Glass
+  m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -4017,7 +4017,7 @@ GameObject:
   - component: {fileID: 3682434331692534746}
   m_Layer: 0
   m_Name: Classic_Door_01_snaps001_frag_052
-  m_TagString: Glass
+  m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -4147,7 +4147,7 @@ GameObject:
   - component: {fileID: 3827363413670390648}
   m_Layer: 0
   m_Name: Classic_Door_01_snaps001_frag_006
-  m_TagString: Glass
+  m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -4277,7 +4277,7 @@ GameObject:
   - component: {fileID: 3891463412207055031}
   m_Layer: 0
   m_Name: Classic_Door_01_snaps001_frag_042
-  m_TagString: Glass
+  m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -4407,7 +4407,7 @@ GameObject:
   - component: {fileID: 4053581019994903403}
   m_Layer: 0
   m_Name: Classic_Door_01_snaps001_frag_047
-  m_TagString: Glass
+  m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -4537,7 +4537,7 @@ GameObject:
   - component: {fileID: 4230929771507814346}
   m_Layer: 0
   m_Name: Classic_Door_01_snaps001_frag_044
-  m_TagString: Glass
+  m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -4667,7 +4667,7 @@ GameObject:
   - component: {fileID: 4311972284814125833}
   m_Layer: 0
   m_Name: Classic_Door_01_snaps001_frag_018
-  m_TagString: Glass
+  m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -4797,7 +4797,7 @@ GameObject:
   - component: {fileID: 4346614456103570640}
   m_Layer: 0
   m_Name: Classic_Door_01_snaps001_frag_032
-  m_TagString: Glass
+  m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -4927,7 +4927,7 @@ GameObject:
   - component: {fileID: 4424086698778314886}
   m_Layer: 0
   m_Name: Classic_Door_01_snaps001_frag_004
-  m_TagString: Glass
+  m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -5057,7 +5057,7 @@ GameObject:
   - component: {fileID: 4621627303395974986}
   m_Layer: 0
   m_Name: Classic_Door_01_snaps001_frag_005
-  m_TagString: Glass
+  m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -5187,7 +5187,7 @@ GameObject:
   - component: {fileID: 4729473641545218214}
   m_Layer: 0
   m_Name: Classic_Door_01_snaps001_frag_027
-  m_TagString: Glass
+  m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -5317,7 +5317,7 @@ GameObject:
   - component: {fileID: 5455114340475104648}
   m_Layer: 0
   m_Name: Classic_Door_01_snaps001_frag_024
-  m_TagString: Glass
+  m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -5447,7 +5447,7 @@ GameObject:
   - component: {fileID: 5713077971766345496}
   m_Layer: 0
   m_Name: Classic_Door_01_snaps001_frag_020
-  m_TagString: Glass
+  m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -5577,7 +5577,7 @@ GameObject:
   - component: {fileID: 5808731293604993695}
   m_Layer: 0
   m_Name: Classic_Door_01_snaps001_frag_043
-  m_TagString: Glass
+  m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -5707,7 +5707,7 @@ GameObject:
   - component: {fileID: 5847584145065587968}
   m_Layer: 0
   m_Name: Classic_Door_01_snaps001_frag_011
-  m_TagString: Glass
+  m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -5837,7 +5837,7 @@ GameObject:
   - component: {fileID: 5930733260376268336}
   m_Layer: 0
   m_Name: Classic_Door_01_snaps001_frag_025
-  m_TagString: Glass
+  m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -5967,7 +5967,7 @@ GameObject:
   - component: {fileID: 6165395046062577847}
   m_Layer: 0
   m_Name: Classic_Door_01_snaps001_frag_041
-  m_TagString: Glass
+  m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -15690,7 +15690,7 @@ GameObject:
   - component: {fileID: 6382841173938450507}
   m_Layer: 0
   m_Name: Classic_Door_01_snaps001_frag_008
-  m_TagString: Glass
+  m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -15820,7 +15820,7 @@ GameObject:
   - component: {fileID: 6466798830696141452}
   m_Layer: 0
   m_Name: Classic_Door_01_snaps001_frag_001
-  m_TagString: Glass
+  m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -15950,7 +15950,7 @@ GameObject:
   - component: {fileID: 6515368961213011112}
   m_Layer: 0
   m_Name: Classic_Door_01_snaps001_frag_038
-  m_TagString: Glass
+  m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -16080,7 +16080,7 @@ GameObject:
   - component: {fileID: 6738831536056975242}
   m_Layer: 0
   m_Name: Classic_Door_01_snaps001_frag_033
-  m_TagString: Glass
+  m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -16210,7 +16210,7 @@ GameObject:
   - component: {fileID: 7242643685116560689}
   m_Layer: 0
   m_Name: Classic_Door_01_snaps001_frag_040
-  m_TagString: Glass
+  m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -16340,7 +16340,7 @@ GameObject:
   - component: {fileID: 7508639169089684033}
   m_Layer: 0
   m_Name: Classic_Door_01_snaps001_frag_010
-  m_TagString: Glass
+  m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -16470,7 +16470,7 @@ GameObject:
   - component: {fileID: 7833263042818024697}
   m_Layer: 0
   m_Name: Classic_Door_01_snaps001_frag_013
-  m_TagString: Glass
+  m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -16680,7 +16680,7 @@ GameObject:
   - component: {fileID: 8257293479840223040}
   m_Layer: 0
   m_Name: Classic_Door_01_snaps001_frag_054
-  m_TagString: Glass
+  m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -16810,7 +16810,7 @@ GameObject:
   - component: {fileID: 8389171917675072824}
   m_Layer: 0
   m_Name: Classic_Door_01_snaps001_frag_046
-  m_TagString: Glass
+  m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -16940,7 +16940,7 @@ GameObject:
   - component: {fileID: 8539933933037720435}
   m_Layer: 0
   m_Name: Classic_Door_01_snaps001_frag_015
-  m_TagString: Glass
+  m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -17069,7 +17069,7 @@ GameObject:
   - component: {fileID: 9205478379584592078}
   m_Layer: 0
   m_Name: Classic_Door_01_snaps001_frag_035
-  m_TagString: Glass
+  m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

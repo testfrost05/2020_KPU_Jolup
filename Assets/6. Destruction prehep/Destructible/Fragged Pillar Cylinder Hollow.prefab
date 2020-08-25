@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 11400060}
   m_Layer: 0
   m_Name: Pillar_Cylinder_Hollow_34
-  m_TagString: Untagged
+  m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -146,7 +146,7 @@ GameObject:
   - component: {fileID: 11400062}
   m_Layer: 0
   m_Name: Pillar_Cylinder_Hollow_32
-  m_TagString: Untagged
+  m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -276,7 +276,7 @@ GameObject:
   - component: {fileID: 11400064}
   m_Layer: 0
   m_Name: Pillar_Cylinder_Hollow_31
-  m_TagString: Untagged
+  m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -406,7 +406,7 @@ GameObject:
   - component: {fileID: 11400048}
   m_Layer: 0
   m_Name: Pillar_Cylinder_Hollow_30
-  m_TagString: Untagged
+  m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -536,7 +536,7 @@ GameObject:
   - component: {fileID: 11400050}
   m_Layer: 0
   m_Name: Pillar_Cylinder_Hollow_29
-  m_TagString: Untagged
+  m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -666,7 +666,7 @@ GameObject:
   - component: {fileID: 11400052}
   m_Layer: 0
   m_Name: Pillar_Cylinder_Hollow_28
-  m_TagString: Untagged
+  m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -796,7 +796,7 @@ GameObject:
   - component: {fileID: 11400054}
   m_Layer: 0
   m_Name: Pillar_Cylinder_Hollow_27
-  m_TagString: Untagged
+  m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -926,7 +926,7 @@ GameObject:
   - component: {fileID: 11400056}
   m_Layer: 0
   m_Name: Pillar_Cylinder_Hollow_26
-  m_TagString: Untagged
+  m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1056,7 +1056,7 @@ GameObject:
   - component: {fileID: 11400058}
   m_Layer: 0
   m_Name: Pillar_Cylinder_Hollow_25
-  m_TagString: Untagged
+  m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1186,7 +1186,7 @@ GameObject:
   - component: {fileID: 11400014}
   m_Layer: 0
   m_Name: Pillar_Cylinder_Hollow_24
-  m_TagString: Untagged
+  m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1316,7 +1316,7 @@ GameObject:
   - component: {fileID: 11400016}
   m_Layer: 0
   m_Name: Pillar_Cylinder_Hollow_23
-  m_TagString: Untagged
+  m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1446,7 +1446,7 @@ GameObject:
   - component: {fileID: 11400018}
   m_Layer: 0
   m_Name: Pillar_Cylinder_Hollow_22
-  m_TagString: Untagged
+  m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1576,7 +1576,7 @@ GameObject:
   - component: {fileID: 11400020}
   m_Layer: 0
   m_Name: Pillar_Cylinder_Hollow_21
-  m_TagString: Untagged
+  m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1706,7 +1706,7 @@ GameObject:
   - component: {fileID: 11400022}
   m_Layer: 0
   m_Name: Pillar_Cylinder_Hollow_20
-  m_TagString: Untagged
+  m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1836,7 +1836,7 @@ GameObject:
   - component: {fileID: 11400024}
   m_Layer: 0
   m_Name: Pillar_Cylinder_Hollow_19
-  m_TagString: Untagged
+  m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1966,7 +1966,7 @@ GameObject:
   - component: {fileID: 11400026}
   m_Layer: 0
   m_Name: Pillar_Cylinder_Hollow_18
-  m_TagString: Untagged
+  m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2096,7 +2096,7 @@ GameObject:
   - component: {fileID: 11400028}
   m_Layer: 0
   m_Name: Pillar_Cylinder_Hollow_17
-  m_TagString: Untagged
+  m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2226,7 +2226,7 @@ GameObject:
   - component: {fileID: 11400000}
   m_Layer: 0
   m_Name: Pillar_Cylinder_Hollow_16
-  m_TagString: Untagged
+  m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2356,7 +2356,7 @@ GameObject:
   - component: {fileID: 11400002}
   m_Layer: 0
   m_Name: Pillar_Cylinder_Hollow_15
-  m_TagString: Untagged
+  m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2486,7 +2486,7 @@ GameObject:
   - component: {fileID: 11400004}
   m_Layer: 0
   m_Name: Pillar_Cylinder_Hollow_14
-  m_TagString: Untagged
+  m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2616,7 +2616,7 @@ GameObject:
   - component: {fileID: 11400006}
   m_Layer: 0
   m_Name: Pillar_Cylinder_Hollow_13
-  m_TagString: Untagged
+  m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2746,7 +2746,7 @@ GameObject:
   - component: {fileID: 11400008}
   m_Layer: 0
   m_Name: Pillar_Cylinder_Hollow_12
-  m_TagString: Untagged
+  m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2876,7 +2876,7 @@ GameObject:
   - component: {fileID: 11400010}
   m_Layer: 0
   m_Name: Pillar_Cylinder_Hollow_11
-  m_TagString: Untagged
+  m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3006,7 +3006,7 @@ GameObject:
   - component: {fileID: 11400012}
   m_Layer: 0
   m_Name: Pillar_Cylinder_Hollow_10
-  m_TagString: Untagged
+  m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3136,7 +3136,7 @@ GameObject:
   - component: {fileID: 11400030}
   m_Layer: 0
   m_Name: Pillar_Cylinder_Hollow_9
-  m_TagString: Untagged
+  m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3266,7 +3266,7 @@ GameObject:
   - component: {fileID: 11400032}
   m_Layer: 0
   m_Name: Pillar_Cylinder_Hollow_8
-  m_TagString: Untagged
+  m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3396,7 +3396,7 @@ GameObject:
   - component: {fileID: 11400034}
   m_Layer: 0
   m_Name: Pillar_Cylinder_Hollow_7
-  m_TagString: Untagged
+  m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3526,7 +3526,7 @@ GameObject:
   - component: {fileID: 11400036}
   m_Layer: 0
   m_Name: Pillar_Cylinder_Hollow_6
-  m_TagString: Untagged
+  m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3656,7 +3656,7 @@ GameObject:
   - component: {fileID: 11400038}
   m_Layer: 0
   m_Name: Pillar_Cylinder_Hollow_5
-  m_TagString: Untagged
+  m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3786,7 +3786,7 @@ GameObject:
   - component: {fileID: 11400040}
   m_Layer: 0
   m_Name: Pillar_Cylinder_Hollow_4
-  m_TagString: Untagged
+  m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3916,7 +3916,7 @@ GameObject:
   - component: {fileID: 11400042}
   m_Layer: 0
   m_Name: Pillar_Cylinder_Hollow_3
-  m_TagString: Untagged
+  m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -4046,7 +4046,7 @@ GameObject:
   - component: {fileID: 11400044}
   m_Layer: 0
   m_Name: Pillar_Cylinder_Hollow_2
-  m_TagString: Untagged
+  m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -4176,7 +4176,7 @@ GameObject:
   - component: {fileID: 11400046}
   m_Layer: 0
   m_Name: Pillar_Cylinder_Hollow_1
-  m_TagString: Untagged
+  m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

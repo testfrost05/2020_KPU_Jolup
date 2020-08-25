@@ -158,9 +158,10 @@ GameObject:
   - component: {fileID: 1411540336775735590}
   - component: {fileID: 4536075117400178970}
   - component: {fileID: 6255445586184841186}
+  - component: {fileID: 1148916076662975529}
   m_Layer: 0
   m_Name: target
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -222,11 +223,24 @@ CapsuleCollider:
   m_GameObject: {fileID: 1411540336768342764}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 1
+  m_Enabled: 0
   m_Radius: 0.27035522
   m_Height: 1.5976703
   m_Direction: 1
   m_Center: {x: -0.0005187988, y: 0.94516337, z: 0}
+--- !u!65 &1148916076662975529
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1411540336768342764}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.52197266, y: 1.5108292, z: 0.020446777}
+  m_Center: {x: 0.0006713867, y: 0.9477407, z: -0.0013427734}
 --- !u!1 &1411540336768342766
 GameObject:
   m_ObjectHideFlags: 0
