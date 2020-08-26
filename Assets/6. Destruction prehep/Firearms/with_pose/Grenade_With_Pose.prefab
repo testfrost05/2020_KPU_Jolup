@@ -357,7 +357,7 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  explosion: {fileID: 0}
+  explosion: {fileID: 400006, guid: a49596ebf788acd4ab1281bffea444b1, type: 3}
   explodeOnStart: 0
   destroyOnExplode: 1
   delay: 0
