@@ -552,7 +552,7 @@ MonoBehaviour:
   col: {fileID: 1255591998685642277}
   muzzleVelocity: 50
   forceDamp: 10
-  baseDamage: 100
+  baseDamage: 30
   maxDistance: 100
   explosive: {fileID: 0}
   extraForce: 0
