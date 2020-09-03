@@ -387,7 +387,7 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  baseDamage: 150
+  baseDamage: 30
 --- !u!114 &6151093428593215540
 MonoBehaviour:
   m_ObjectHideFlags: 0
